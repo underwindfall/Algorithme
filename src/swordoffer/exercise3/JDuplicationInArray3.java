@@ -11,8 +11,23 @@ import java.util.List;
  */
 public class JDuplicationInArray3 {
 
+    public static int findDuplicationArray(int[] matrix) {
+        int temp;
+        for (int i = 0; i < matrix.length; i++) {
+            while (matrix[i] != i) {
+                if (matrix[matrix[i]] == matrix[i]) {
+                    return matrix[i];
+                }
+                temp = matrix[i];
+                matrix[i] = matrix[matrix[i]];
+                matrix[temp] = temp;
+            }
+        }
+        return -1;
+    }
+
     //espace: O(n)
-    public List<Integer> findDuplicationArray(int[] inputArray) {
+    public List<Integer> findDuplicationArrayByHashMap(int[] inputArray) {
         List<Integer> output = new ArrayList<>();
         HashMap<Integer, Integer> hashMap = new HashMap<>();
         for (int i = 0; i < inputArray.length; i++) {
@@ -24,6 +39,6 @@ public class JDuplicationInArray3 {
         }
         return output;
     }
-}
 
+}
 
