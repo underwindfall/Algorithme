@@ -11,7 +11,7 @@ fun main(args: Array<String>) {
 //    findDuplicationArrayByHashMap(inputArray).forEach {
 //        print(it)
 //    }
-    print(findDuplicationArray(inputArray))
+    print(findDuplicationNoChangOrderWithOutHelpArray(inputArray))
 
 }
 
@@ -39,5 +39,53 @@ fun findDuplicationArray(inputArray: Array<Int>): Int {
             inputArray[index] = inputArray[inputArray[index]].also { inputArray[inputArray[index]] = inputArray[index] }
         }
     }
+    return -1
+}
+
+//2.不修改数组找出重复的数字
+//在一个长度为n+1的数组里的所有数字都在1~n的范围内，所以数组中至少有一个数字是重复的。请找出数组中任意一个重复的数字，但不能修改出入的数组。
+//例如，{2，3，5，4，3，2，6，7} ===>2 or 3
+//使用辅助数组，增加空间占用但节约时间）
+fun findDuplicationNoChangOrder(inputArray: Array<Int>): Int {
+    val helpArray = arrayOfNulls<Int>(inputArray.size + 1)
+    for (index in inputArray.indices) {
+        if (inputArray[index] == helpArray[inputArray[index]]) {
+            return inputArray[index]
+        }
+        helpArray[inputArray[index]] = inputArray[index]
+    }
+    return -1
+}
+
+//2.不修改数组找出重复的数字
+//在一个长度为n+1的数组里的所有数字都在1~n的范围内，所以数组中至少有一个数字是重复的。请找出数组中任意一个重复的数字，但不能修改出入的数组。
+//例如，{2，3，5，4，3，2，6，7} ===>2 or 3
+//利用二分法来进行解答
+//时间复杂度O(nlogn)
+//空间复杂度O(1)
+fun findDuplicationNoChangOrderWithOutHelpArray(inputArray: Array<Int>): Int {
+
+    fun countRange(numbers: Array<Int>, start: Int, end: Int): Int {
+        return numbers.filter {
+            it in start..end
+        }.size
+    }
+
+
+    var start = 1
+    var end = inputArray.size - 1
+    while (end >= start) {
+        val middle: Int = (end - start) / 2 + start
+        val count = countRange(inputArray, start, middle)
+        if (end == start) {
+            if (count > 1) return start else break
+        }
+        if (count > middle - start + 1)
+            end = middle
+        else
+            start = middle + 1
+
+    }
+
     return -1
 }

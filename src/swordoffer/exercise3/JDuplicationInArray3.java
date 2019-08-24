@@ -40,5 +40,44 @@ public class JDuplicationInArray3 {
         return output;
     }
 
+    //不能改变数组本身（使用辅助数组，增加空间占用但节约时间）
+    public static int findDuplicationNoChangOrder(int[] matrix) {
+        int[] a = new int[matrix.length + 1];
+        for (int value : matrix) {
+            if (a[value] == value) {
+                return value;
+            }
+            a[value] = value;
+        }
+        return -1;
+    }
+
+    //不能改变数组本身(二分查找)
+    public static int findDuplicationNoChangOrderWithOutHelpArray(int[] matrix) {
+        int high = matrix.length - 1;
+        int low = 1;
+        int count;
+        while (high >= low) {
+            int mid = (high - low) / 2 + low;
+            count = 0;
+            for (int value : matrix) {
+                if (value <= mid && value >= low) {
+                    count++;
+                }
+            }
+            if (count > mid - low + 1) {
+                if (low == mid) {
+                    return mid;
+                }
+                high = mid;
+            } else {
+                if (mid == high) {
+                    return mid;
+                }
+                low = mid + 1;
+            }
+        }
+        return -1;
+    }
 }
 
