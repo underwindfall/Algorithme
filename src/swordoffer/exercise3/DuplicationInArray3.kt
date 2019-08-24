@@ -7,11 +7,12 @@ package swordoffer.exercise3
  *
  */
 fun main(args: Array<String>) {
-    val inputArray = arrayOf(2, 3, 1, 0, 2, 5, 3)
+//    val inputArray = arrayOf(2, 3, 1, 0, 2, 5, 3)
 //    findDuplicationArrayByHashMap(inputArray).forEach {
 //        print(it)
 //    }
-    print(findDuplicationNoChangOrderWithOutHelpArray(inputArray))
+    val inputArray2 = arrayOf(2, 3, 5, 4, 3, 2, 6, 7)
+    print(findDuplicationNoChangOrderWithOutHelpArray(inputArray2))
 
 }
 
@@ -89,3 +90,47 @@ fun findDuplicationNoChangOrderWithOutHelpArray(inputArray: Array<Int>): Int {
 
     return -1
 }
+
+//补充二分算法的实现
+//给定一个包含n个带值的元素数组或序列A[0], ... A[n-1]，使A[0] <= ... <= A[n-1]，以及目标值Target.
+//
+//1、令 low = 0, high = n - 1
+//2、若low > high, 则表示查找失败结束
+//3、令mid(中间值元素)为 (low + high) / 2的值向下取整 (注意: 在具体实现中为了防止溢出，一般会采用 low + (high - low) / 2的值向下取整 或者直接采用位运算的移位运算来实现除2的操作。这个后面会有具体题目来说明)
+//4、若Target > A[mid], 令 low = mid + 1 (说明要查找的值在序列或数组后半部分(除去自身)，移动low游标，缩小查找范围)，并回到步骤2
+//
+//5、如果Target < A[mid], 令 high = mid - 1 (说明要查找的值在序列或数组前半部分(除去自身)，移动high游标，缩小查找范围)，并回到步骤2
+//
+//6、如果Target == A[mid], 查找成功并结束，返回mid下标值
+
+fun binarySearchWithLoop(numberArray: IntArray, targetNum: Int): Int {
+    var low = 0
+    var high = numberArray.size - 1
+
+    while (low <= high) {
+        val mid = (low + high) ushr 1
+        when {
+            targetNum == numberArray[mid] -> return mid
+            targetNum > numberArray[mid] -> low = mid + 1
+            else -> high = mid - 1
+        }
+    }
+    return -1
+}
+
+fun binarySearchWithRecursion(numberArray: IntArray, low: Int, high: Int, targetNum: Int): Int {
+    if (low < high) return -1
+    val mid = (low + high) ushr 1
+
+    if (targetNum == numberArray[mid]) {
+        return mid
+    }
+
+    return if (targetNum > numberArray[mid]) {
+        binarySearchWithRecursion(numberArray, mid + 1, high, targetNum)
+    } else {
+        binarySearchWithRecursion(numberArray, low, mid - 1, targetNum)
+    }
+}
+
+
