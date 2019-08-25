@@ -1,4 +1,4 @@
-package swordoffer.exercise6.linkedlist;
+package swordoffer.common.linkedlist;
 
 /**
  * 实现链表的功能，增删改查

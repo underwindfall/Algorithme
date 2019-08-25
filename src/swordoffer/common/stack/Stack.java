@@ -1,4 +1,4 @@
-package swordoffer.exercise6.stack;
+package swordoffer.common.stack;
 
 public interface Stack<T> {
 

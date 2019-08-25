@@ -1,4 +1,4 @@
-package swordoffer.exercise6.stack;
+package swordoffer.common.stack;
 
 import java.util.EmptyStackException;
 
