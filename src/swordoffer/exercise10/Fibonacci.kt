@@ -1,9 +1,12 @@
 package swordoffer.exercise10
 
+import kotlin.math.pow
+
 fun main(args: Array<String>) {
 //    println(fibonacci1().take(10).toList())
 //    print(fibonacci2(100))
 //    print(fibonacci3(100))
+    print(frogStep3(4))
 }
 
 
@@ -55,3 +58,46 @@ fun fibonacci3(n: Int): Long {
 //    val matrix: Array<IntArray> = arrayOf(intArrayOf())
 //
 //}
+
+////补充
+//假设你正在爬楼梯。需要 n 阶你才能到达楼顶。
+//每次你可以爬 1 或 2 个台阶。你有多少种不同的方法可以爬到楼顶呢？
+//注意：给定 n 是一个正整数。
+
+//可以把爬楼梯当作是一个function，
+//第一次爬1次楼梯的话，那剩下跳法的数目就是function（N—1）
+//第一次爬2次楼梯的话，那剩下跳法的数目就是function（N—2）
+// f(n) = f(n-1)+f(n-2)
+fun frogStep1(n: Int): Int {
+    return when (n) {
+        1, 2 -> n
+        else -> frogStep1(n - 1) + frogStep1(n - 2)
+    }
+}
+
+
+fun frogStep2(n: Int): Int {
+    var firstNumber = 1
+    var secondNumber = 2
+    var targetNumber = n
+    when (n) {
+        1, 2 -> return targetNumber
+        else -> for (i in 3..n) {
+            targetNumber = firstNumber + secondNumber
+            firstNumber = secondNumber
+            secondNumber = targetNumber
+        }
+    }
+    return targetNumber
+}
+
+
+//拓展
+//可以跳1节台阶
+//可以跳2节台阶
+//可以跳n节台阶
+// f(n)= 2^(n-1)
+
+fun frogStep3(n: Int): Int {
+    return 2.0f.pow(n.toFloat() - 1).toInt()
+}
