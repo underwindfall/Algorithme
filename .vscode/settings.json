@@ -1,0 +1,12 @@
+{
+    "files.exclude": {
+        "**/.classpath": true,
+        "**/.project": true,
+        "**/.settings": true,
+        "**/.factorypath": true
+    },
+
+    "code-runner.executorMap": {
+        "java": "src=src && outDir=bin && source=$dirWithoutTrailingSlash && dest=${source/$src/$outDir} && mkdir -p $dest && cd $dir && javac -d $workspaceRoot/$outDir $fileName && packagePath=${dest##*$outDir/} && java -cp $workspaceRoot/$outDir $packagePath.$fileNameWithoutExt"
+    }
+}
