@@ -1,4 +1,4 @@
-package training;
+package training.array05;
 
 public class Array {
     //定义整型数据data保存数据
