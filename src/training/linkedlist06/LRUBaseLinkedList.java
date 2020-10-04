@@ -3,7 +3,8 @@ package training.linkedlist06;
 import java.util.Scanner;
 
 /**
- * 基于链表的LRU算法
+ * 基于单链表LRU算法（java）
+ *
  */
 public class LRUBaseLinkedList<T> {
 
@@ -13,7 +14,7 @@ public class LRUBaseLinkedList<T> {
     private final static Integer DEFAULT_CAPACITY = 10;
 
     /**
-     * 头节点
+     * 头结点
      */
     private SNode<T> headNode;
 
@@ -41,46 +42,49 @@ public class LRUBaseLinkedList<T> {
 
     public void add(T data) {
         SNode preNode = findPreNode(data);
+
         // 链表中存在，删除原数据，再插入到链表的头部
         if (preNode != null) {
-            deleteElemeOptim(preNode);
-            insertElemAtBegin(data);
+            deleteElemOptim(preNode);
+            intsertElemAtBegin(data);
         } else {
             if (length >= this.capacity) {
+                // 删除尾结点
                 deleteElemAtEnd();
             }
-            insertElemAtBegin(data);
+            intsertElemAtBegin(data);
         }
     }
 
-    private void deleteElemAtEnd() {
-        SNode ptr = headNode;
-        if (ptr.getNext() == null) {
-            return;
-        }
-        while (ptr.getNext().getNext() != null) {
-            ptr = ptr.getNext();
-        }
-
-        SNode tmp = ptr.getNext();
-        ptr.setNext(null);
-        tmp = null ;
-        length-- ;
-    }
-
-    private void insertElemAtBegin(T data) {
-        SNode next = headNode.getNext();
-        headNode.setNext(new SNode(data, next));
-        length++;
-    }
-
-    private void deleteElemeOptim(SNode preNode) {
+    /**
+     * 删除preNode结点下一个元素
+     *
+     * @param preNode
+     */
+    private void deleteElemOptim(SNode preNode) {
         SNode temp = preNode.getNext();
         preNode.setNext(temp.getNext());
         temp = null;
         length--;
     }
 
+    /**
+     * 链表头部插入节点
+     *
+     * @param data
+     */
+    private void intsertElemAtBegin(T data) {
+        SNode next = headNode.getNext();
+        headNode.setNext(new SNode(data, next));
+        length++;
+    }
+
+    /**
+     * 获取查找到元素的前一个结点
+     *
+     * @param data
+     * @return
+     */
     private SNode findPreNode(T data) {
         SNode node = headNode;
         while (node.getNext() != null) {
@@ -90,6 +94,27 @@ public class LRUBaseLinkedList<T> {
             node = node.getNext();
         }
         return null;
+    }
+
+    /**
+     * 删除尾结点
+     */
+    private void deleteElemAtEnd() {
+        SNode ptr = headNode;
+        // 空链表直接返回
+        if (ptr.getNext() == null) {
+            return;
+        }
+
+        // 倒数第二个结点
+        while (ptr.getNext().getNext() != null) {
+            ptr = ptr.getNext();
+        }
+
+        SNode tmp = ptr.getNext();
+        ptr.setNext(null);
+        tmp = null;
+        length--;
     }
 
     private void printAll() {
@@ -102,15 +127,16 @@ public class LRUBaseLinkedList<T> {
     }
 
     public class SNode<T> {
+
         private T element;
-        
-        private SNode<T> next;
+
+        private SNode next;
 
         public SNode(T element) {
             this.element = element;
         }
 
-        public SNode(T element, SNode<T> next) {
+        public SNode(T element, SNode next) {
             this.element = element;
             this.next = next;
         }
@@ -123,15 +149,15 @@ public class LRUBaseLinkedList<T> {
             return element;
         }
 
-        public void setElement(T elemenet) {
-            this.element = elemenet;
+        public void setElement(T element) {
+            this.element = element;
         }
 
-        public SNode<T> getNext() {
+        public SNode getNext() {
             return next;
         }
 
-        public void setNext(SNode<T> next) {
+        public void setNext(SNode next) {
             this.next = next;
         }
     }
