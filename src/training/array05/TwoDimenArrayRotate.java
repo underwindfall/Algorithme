@@ -43,32 +43,49 @@ package training.array05;
  */
 
 public class TwoDimenArrayRotate {
-    // espace: O(N^2)
-    // time: O(N^2)
-    public static int[][] rotate(int[][] matrix) {
-        int N = matrix.length;
-        int[][] result = new int[N][N];
-        for (int i = 0; i < N; i++) {
-            for (int j = 0; j < N; j++) {
-                result[i][j] = matrix[N - 1 - j][i];
-            }
-        }
-        return result;
+  // espace: O(N^2)
+  // time: O(N^2)
+  public static int[][] rotate(int[][] matrix) {
+    int N = matrix.length;
+    int[][] result = new int[N][N];
+    for (int i = 0; i < N; i++) {
+      for (int j = 0; j < N; j++) {
+        result[i][j] = matrix[N - 1 - j][i];
+      }
     }
+    return result;
+  }
 
-    public static int[][] rotate1(int[][] matrix) {
-        return matrix;
+  public static int[][] rotate1(int[][] matrix) {
+    int N = matrix.length;
+    // 水平对称
+    for (int i = 0; i < N; i++) {
+      for (int j = 0; j < N; j++) {
+        int tmp = matrix[i][j];
+        matrix[i][j] = matrix[N - i - 1][j];
+        matrix[N - i - 1][j] = tmp;
+      }
     }
-
-    public static void main(String[] args) {
-        int[][] result = rotate(new int[][] { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } });
-
-        for (int i = 0; i < result.length; i++) {
-            StringBuilder stringBuilder = new StringBuilder("");
-            for (int j = 0; j < result[i].length; j++) {
-                stringBuilder.append(result[i][j] + ",");
-            }
-            System.out.println(stringBuilder + "\n");
-        }
+    // 对角线反转
+    for (int i = 0; i < N; i++) {
+      for (int j = 0; j < i; j++) {
+        int tmp = matrix[i][j];
+        matrix[i][j] = matrix[j][i];
+        matrix[j][i] = tmp;
+      }
     }
+    return matrix;
+  }
+
+  public static void main(String[] args) {
+    int[][] result = rotate(new int[][] { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } });
+
+    for (int i = 0; i < result.length; i++) {
+      StringBuilder stringBuilder = new StringBuilder("");
+      for (int j = 0; j < result[i].length; j++) {
+        stringBuilder.append(result[i][j] + ",");
+      }
+      System.out.println(stringBuilder + "\n");
+    }
+  }
 }
