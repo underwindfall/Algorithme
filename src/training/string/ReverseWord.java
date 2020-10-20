@@ -13,7 +13,7 @@ public class ReverseWord {
     }
 
     private StringBuilder trimSpaces(String s) {
-        
+                
     }
 
     public static void main(String[] args) {

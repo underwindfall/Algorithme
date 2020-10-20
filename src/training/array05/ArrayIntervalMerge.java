@@ -50,7 +50,12 @@ public class ArrayIntervalMerge {
     }
 
     public static void main(String[] args) {
-        int[][] result = merge(new int[][] { { 1, 3 }, { 2, 6 }, { 8, 10 }, { 15, 18 } });
+        int[][] result = merge(new int[][] { 
+            { 1, 3 }, 
+            { 2, 6 }, 
+            { 8, 10 },
+            { 15, 18 }
+     });
         for (int i = 0; i < result.length; i++) {
             StringBuilder stringBuilder = new StringBuilder("");
             for (int j = 0; j < result[i].length; j++) {
