@@ -1,4 +1,4 @@
-package training.array05;
+package training.array;
 
 /* 
 对角线遍历

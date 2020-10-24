@@ -1,4 +1,4 @@
-package training.array05;
+package training.array;
 
 //https://leetcode-cn.com/problems/reverse-string/
 /**

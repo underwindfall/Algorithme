@@ -1,4 +1,4 @@
-package training.array05;
+package training.array;
 
 //https://leetcode-cn.com/problems/two-sum-ii-input-array-is-sorted/
 /**

@@ -1,4 +1,4 @@
-package training.array05;
+package training.array;
 
 /**
  * 给定一个二进制数组， 计算其中最大连续1的个数。

@@ -1,4 +1,4 @@
-package training.linkedlist06;
+package training.linkedlist;
 
 /**
  * 

@@ -1,4 +1,4 @@
-package training.array05;
+package training.array;
 
 //https://leetcode-cn.com/problems/rotate-matrix-lcci/solution/xuan-zhuan-ju-zhen-by-leetcode-solution/
 /* 旋转矩阵

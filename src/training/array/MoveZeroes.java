@@ -1,4 +1,4 @@
-package training.array05;
+package training.array;
 
 //https://leetcode-cn.com/problems/move-zeroes
 //https://leetcode-cn.com/problems/move-zeroes/solution/dong-hua-yan-shi-283yi-dong-ling-by-wang_ni_ma/思路好

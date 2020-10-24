@@ -1,4 +1,4 @@
-package training.array05;
+package training.array;
 
 //https://leetcode-cn.com/leetbook/read/array-and-string/yf47s/
 // 搜索插入位置
