@@ -37,8 +37,8 @@ public class LinkedListRemoveNthFromEnd {
     }
 
     // 循环一次 双指针解决 first 节点比second 节点快N个
-    //time : O(N)
-    //espace :O(1)
+    // time : O(N)
+    // espace :O(1)
     public ListNode removeNthFromEnd2(ListNode head, int n) {
         ListNode dummy = new ListNode(0, head);
         ListNode first = head;
@@ -51,7 +51,7 @@ public class LinkedListRemoveNthFromEnd {
             second = second.next;
         }
 
-        second.next = second.next.next; 
+        second.next = second.next.next;
         ListNode ans = dummy.next;
         return ans;
     }
