@@ -20,16 +20,32 @@ public class ReverseLinkedList {
         }
     }
 
+    // 倒着迭代
+    // time : O(N)
+    // espace : O(1)
     public ListNode reverseList(ListNode head) {
         ListNode prev = null;
         ListNode curr = head;
         while (curr != null) {
-            ListNode nextTemp = curr.next;
+            ListNode nextTmp = curr.next;
             curr.next = prev;
             prev = curr;
-            curr = nextTemp;
+            curr = nextTmp;
         }
         return prev;
+    }
+
+    //递归
+    //time : O(N)
+    //espace: O(N)
+    public ListNode reverseList1(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode p = reverseList(head.next);
+        head.next.next = head;
+        head.next = null;
+        return p;
     }
 
 }
