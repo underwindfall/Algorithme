@@ -35,9 +35,9 @@ public class ReverseLinkedList {
         return prev;
     }
 
-    //递归
-    //time : O(N)
-    //espace: O(N)
+    // 递归
+    // time : O(N)
+    // espace: O(N)
     public ListNode reverseList1(ListNode head) {
         if (head == null || head.next == null) {
             return head;
