@@ -12,7 +12,7 @@ package training.linkedlist;
  * 
  * 
  */
-public class MergeTwoLists {
+public class MergeSortedTwoLists {
     public class ListNode {
         int val;
         ListNode next;
@@ -30,8 +30,8 @@ public class MergeTwoLists {
         }
 
         // 迭代的方式
-        // time:
-        // espace:
+        // time:O(M+N)
+        // espace:O(1)
         public ListNode mergeTwoLists1(ListNode l1, ListNode l2) {
             ListNode prehead = new ListNode(0);
             ListNode prev = prehead;
