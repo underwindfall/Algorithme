@@ -28,32 +28,37 @@ public class PreOrderTraversal {
         }
     }
 
+    // morris
+    //time : O(N)
+    //esapce : O(1)
+    // https://leetcode-cn.com/problems/binary-tree-preorder-traversal/solution/leetcodesuan-fa-xiu-lian-dong-hua-yan-shi-xbian-2/
     public List<Integer> preorderTraversal2(TreeNode root) {
         List<Integer> res = new ArrayList<Integer>();
         if (root == null) {
             return res;
         }
 
-        TreeNode p1 = root, p2 = null;
-
-        while (p1 != null) {
-            p2 = p1.left;
-            if (p2 != null) {
-                while (p2.right != null && p2.right != p1) {
-                    p2 = p2.right;
+        TreeNode cur1 = root;// 当前开始遍历的节点
+        TreeNode cur2 = null;// 记录当前结点的左子树
+        while (cur1 != null) {
+            cur2 = cur1.left;
+            if (cur2 != null) {
+                while (cur2.right != null && cur2.right != cur1) {// 找到当前左子树的最右侧节点，且这个节点应该在指向根结点之前，否则整个节点又回到了根结点。
+                    cur2 = cur2.right;
                 }
-                if (p2.right == null) {
-                    res.add(p1.val);
-                    p2.right = p1;
-                    p1 = p1.left;
+                if (cur2.right == null) {// 这个时候如果最右侧这个节点的右指针没有指向根结点，创建连接然后往下一个左子树的根结点进行连接操作。
+                    res.add(cur1.val);
+                    cur2.right = cur1;
+                    cur1 = cur1.left;
                     continue;
-                } else {
-                    p2.right = null;
+                } else {// 当左子树的最右侧节点有指向根结点，此时说明我们已经回到了根结点并重复了之前的操作，同时在回到根结点的时候我们应该已经处理完 左子树的最右侧节点
+                        // 了，把路断开。
+                    cur2.right = null;
                 }
             } else {
-                res.add(p1.val);
+                res.add(cur1.val);
             }
-            p1 = p1.right;
+            cur1 = cur1.right;// 一直往右边走，参考图
         }
         return res;
     }
