@@ -13,6 +13,7 @@ public class LRUBasedArray<T> {
         this(INITIAL_SIZE);
     }
 
+    @SuppressWarnings("unchecked")
     LRUBasedArray(int capacity) {
         this.capacity = capacity;
         this.value = (T[]) new Object[capacity];

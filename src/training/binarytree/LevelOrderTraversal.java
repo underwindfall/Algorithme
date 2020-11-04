@@ -1,6 +1,8 @@
 package training.binarytree;
 
 import java.util.List;
+import java.util.Queue;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
@@ -22,33 +24,30 @@ public class LevelOrderTraversal {
     // time O(N)
     // espace O(N)
     public List<List<Integer>> levelOrder1(TreeNode root) {
-        if (root == null) {
-            return new ArrayList<List<Integer>>();
+        List<List<Integer>> res = new ArrayList<>();
+
+        Queue<TreeNode> queue = new ArrayDeque<>();
+        if (root != null) {
+            queue.add(root);
         }
-        List<List<Integer>> res = new ArrayList<List<Integer>>();
-        LinkedList<TreeNode> queue = new LinkedList<>();
-        // 根节点进入循环
-        queue.add(root);
-        while (queue.size() > 0) {
-            // 获取当前队列的长度，这个长度相当于 当前这一层的节点个数
-            int size = queue.size();
-            ArrayList<Integer> tmp = new ArrayList<Integer>();
-            // 将队列中的元素都拿出来(也就是获取这一层的节点)，放到临时list中
-            // 如果节点的左/右子树不为空，也放入队列中
-            for (int i = 0; i < size; i++) {
-                TreeNode t = queue.remove();
-                tmp.add(t.val);
-                if (t.left != null) {
-                    queue.add(t.left);
+        while (!queue.isEmpty()) {
+            int n = queue.size();
+            List<Integer> level = new ArrayList<>();
+            for (int i = 0; i < n; i++) {
+                TreeNode node = queue.poll();
+                level.add(node.val);
+                if (node.left != null) {
+                    queue.add(node.left);
                 }
-                if (t.right != null) {
-                    queue.add(t.right);
+                if (node.right != null) {
+                    queue.add(node.right);
                 }
             }
-            res.add(tmp);
+            res.add(level);
         }
 
         return res;
+
     }
 
     // 递归搜素
@@ -77,4 +76,4 @@ public class LevelOrderTraversal {
         return levels;
     }
 
-}   
+}
