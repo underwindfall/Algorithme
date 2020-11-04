@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Queue;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 //https://leetcode-cn.com/problems/binary-tree-level-order-traversa
 public class LevelOrderTraversal {
