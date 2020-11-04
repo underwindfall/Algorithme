@@ -21,7 +21,7 @@ public class MaxDepths {
         if (root == null) {
             return;
         }
-        if (root.right == null && root.right == null) {
+        if (root.right == null && root.left == null) {
             answer = Math.max(depth, answer);
         }
         maximum_depth_from_top_to_bottom(root.right, depth + 1);

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Queue;
 
+//https://leetcode-cn.com/problems/symmetric-tree
 // 给定一个二叉树，检查它是否是镜像对称的。
 
 //  
@@ -26,7 +27,7 @@ import java.util.Queue;
 //    \   \
 //    3    3
 
-public class symmetricTree {
+public class SymmetricTree {
     public class TreeNode {
         int val;
         TreeNode left;
@@ -102,7 +103,7 @@ public class symmetricTree {
             if (left == null || right == null) {
                 return false;
             }
-            return left.val == right.val && check(left.left, right.right) && check(left.right, right.left);
+            return left.val == right.val && checkRecurisve(left.left, right.right) && checkRecurisve(left.right, right.left);
         }
 
         // 迭代
