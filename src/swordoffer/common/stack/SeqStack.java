@@ -2,9 +2,10 @@ package swordoffer.common.stack;
 
 import java.util.EmptyStackException;
 
+@SuppressWarnings("unchecked")
 public class SeqStack<T> implements Stack<T> {
 
-    private static final long serialVersionUID = -5413303117698554397L;
+    static final long serialVersionUID = -5413303117698554397L;
 
     /**
      * 栈顶指针,-1代表空栈
