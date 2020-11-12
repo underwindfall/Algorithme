@@ -15,8 +15,8 @@ public class LinkedList142 {
         }
     }
 
-    // time
-    // espace
+    // time O(N)
+    // espace O(1)
     class FastSlowIndex {
         public ListNode detectCycle(ListNode head) {
             ListNode fast = head, slow = head;
