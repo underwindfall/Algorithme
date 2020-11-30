@@ -1,7 +1,5 @@
 package leetcode.datastructure.array;
 
-import javax.swing.text.html.FormView;
-
 // https://leetcode-cn.com/problems/array-nesting/description/
 public class ArrayNesting565 {
 
