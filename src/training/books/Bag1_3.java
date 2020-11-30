@@ -1,8 +1,6 @@
 package training.books;
 
-import java.util.Arrays;
 import java.util.Iterator;
-import java.util.List;
 import java.util.NoSuchElementException;
 
 public class Bag1_3 {
@@ -89,7 +87,7 @@ public class Bag1_3 {
 
     public static void main(String[] args) {
         Bag1_3 nBag1_3 = new Bag1_3();
-        List<Double> in = Arrays.asList(1.0, 2.0, 3.0, 4.0, 5.0);
+        // List<Double> in = Arrays.asList(1.0, 2.0, 3.0, 4.0, 5.0);
         Bag<Double> numbers = nBag1_3.new Bag<Double>();
         for (Double double1 : numbers) {
             numbers.add(double1);
