@@ -29,6 +29,26 @@ public class ReverseFirstNList {
         return last;
     }
 
+    public ListNode reverseNIterative(ListNode head, int n) {
+        ListNode pre = null, cur = head, next = head;
+        int count = 0;
+        while (cur != null) {
+            if (count != n) {
+                next = cur.next;
+                cur.next = pre;
+                pre = cur;
+                cur = next;
+                count++;
+            } else {
+                break;
+            }
+        }
+
+        head.next = next;
+        return pre;
+
+    }
+
     public static void main(String[] args) {
         ReverseFirstNList rotateList61 = new ReverseFirstNList();
         ReverseFirstNList.ListNode head = rotateList61.new ListNode(1);
@@ -44,6 +64,21 @@ public class ReverseFirstNList {
         while (node != null) {
             System.out.println(node.val);
             node = node.next;
+        }
+        System.out.println("====================================");
+        ReverseFirstNList.ListNode head1= rotateList61.new ListNode(1);
+        ReverseFirstNList.ListNode node21 = rotateList61.new ListNode(2);
+        ReverseFirstNList.ListNode node31 = rotateList61.new ListNode(3);
+        ReverseFirstNList.ListNode node41 = rotateList61.new ListNode(4);
+        ReverseFirstNList.ListNode node51 = rotateList61.new ListNode(5);
+        head1.next = node21;
+        node21.next = node31;
+        node31.next = node41;
+        node41.next = node51;
+        ListNode node1 = rotateList61.reverseNIterative(head1, 4);
+        while (node1 != null) {
+            System.out.println(node1.val);
+            node1 = node1.next;
         }
     }
 }
