@@ -30,6 +30,8 @@ public class ReverseNodesInKGroup25 {
      */
     static class RecursiveSolution {
 
+        // time O(K^2)
+        // espace O(N/K)
         public ListNode reverseKGroup(ListNode head, int k) {
             if (head == null) {
                 return null;
@@ -48,6 +50,8 @@ public class ReverseNodesInKGroup25 {
         }
 
         // 翻转[a,b)区间的node
+        // time O(N) -> N=b-a
+        // espace O(1)
         private ListNode reverse(ListNode a, ListNode b) {
             ListNode pre = null, cur = a, next = a;
             while (cur != b) {
