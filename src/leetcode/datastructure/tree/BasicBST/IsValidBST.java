@@ -1,4 +1,4 @@
-package leetcode.datastructure.tree;
+package leetcode.datastructure.tree.BasicBST;
 
 // 判断一个tree是不是BST
 // 关键在于是否满足左子树的最大值<root.val<右子树的最小值

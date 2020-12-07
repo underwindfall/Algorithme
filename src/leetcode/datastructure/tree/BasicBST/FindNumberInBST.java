@@ -1,4 +1,4 @@
-package leetcode.datastructure.tree;
+package leetcode.datastructure.tree.BasicBST;
 
 public class FindNumberInBST {
     public class TreeNode {
