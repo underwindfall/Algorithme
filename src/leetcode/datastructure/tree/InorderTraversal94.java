@@ -1,4 +1,4 @@
-package training.binarytree;
+package leetcode.datastructure.tree;
 
 import java.util.ArrayList;
 import java.util.List;
