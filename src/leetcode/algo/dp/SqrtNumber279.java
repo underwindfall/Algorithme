@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Set;
 
+// https://leetcode-cn.com/problems/perfect-squares/
 // 数学规律
 // 最小平方数 = 前一位最小平方数+ 1^2 || 平方数
 // 即 dp[i] = MIN(dp[i], dp[i - j * j] + 1)
