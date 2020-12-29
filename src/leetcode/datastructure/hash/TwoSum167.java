@@ -1,4 +1,4 @@
-package leetcode.datastructure.array;
+package leetcode.datastructure.hash;
 // https://leetcode-cn.com/problems/two-sum-ii-input-array-is-sorted/
 public class TwoSum167 {
     // time O(N*logN)
