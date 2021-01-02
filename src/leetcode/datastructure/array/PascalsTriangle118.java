@@ -1,7 +1,9 @@
 package leetcode.datastructure.array;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * PascalsTriangle118
@@ -35,33 +37,33 @@ public class PascalsTriangle118 {
 
     class Recursive {
         // public List<List<Integer>> generate(int numRows) {
-        //     List<List<Integer>> result = new ArrayList<>();
-        //     for (int i = 0; i < numRows; i++) {
-        //         List<Integer> lineResult = new ArrayList<>();
-        //         for (int j = 0; j < i + 1; j++) {
-        //             lineResult.add(calculateNums(i, j));
-        //         }
-        //         result.add(lineResult);
-        //     }
-        //     return result;
+        // List<List<Integer>> result = new ArrayList<>();
+        // for (int i = 0; i < numRows; i++) {
+        // List<Integer> lineResult = new ArrayList<>();
+        // for (int j = 0; j < i + 1; j++) {
+        // lineResult.add(calculateNums(i, j));
+        // }
+        // result.add(lineResult);
+        // }
+        // return result;
         // }
 
         // int calculateNums(int row, int col) {
-        //     if (row == 0 && col == 0) {
-        //         return 1;
-        //     }
-        //     if (col == 0 && row >= 0) {
-        //         return 1;
-        //     }
-        //     if (col >= 0 && row >= 0 && col == row) {
-        //         return 1;
-        //     }
-        //     if (row < 0 || col < 0) {
-        //         return 0;
-        //     }
-        //     int a = calculateNums(row - 1, col - 1);
-        //     int b = calculateNums(row - 1, col);
-        //     return a + b;
+        // if (row == 0 && col == 0) {
+        // return 1;
+        // }
+        // if (col == 0 && row >= 0) {
+        // return 1;
+        // }
+        // if (col >= 0 && row >= 0 && col == row) {
+        // return 1;
+        // }
+        // if (row < 0 || col < 0) {
+        // return 0;
+        // }
+        // int a = calculateNums(row - 1, col - 1);
+        // int b = calculateNums(row - 1, col);
+        // return a + b;
         // }
 
         public List<List<Integer>> generate(int numRows) {
@@ -94,5 +96,42 @@ public class PascalsTriangle118 {
             allButLast.add(last);
             return allButLast;
         }
+    }
+
+    class RecursiveMemorize {
+
+        Map<List<Integer>, Integer> cache = new HashMap<List<Integer>, Integer>();
+
+        public List<List<Integer>> generate(int numRows) {
+            List<List<Integer>> pascalTriangle = new ArrayList<List<Integer>>();
+            List<Integer> row = new ArrayList<Integer>();
+
+            for (int i = 1; i <= numRows; i++) {
+                row = new ArrayList<Integer>();
+
+                for (int j = 1; j <= i; j++) {
+                    row.add(compute(i, j));
+                }
+
+                pascalTriangle.add(row);
+            }
+            return pascalTriangle;
+        }
+
+        private int compute(int i, int j) {
+            if (j == 1 || j == i)
+                return 1;
+            List<Integer> input = new ArrayList<Integer>();
+            input.add(i);
+            input.add(j);
+
+            if (cache.containsKey(input))
+                return cache.get(input);
+
+            int res = compute(i - 1, j - 1) + compute(i - 1, j);
+            cache.put(input, res);
+            return res;
+        }
+
     }
 }
