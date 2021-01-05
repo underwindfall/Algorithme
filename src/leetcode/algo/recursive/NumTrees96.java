@@ -1,7 +1,7 @@
 package leetcode.algo.recursive;
 
 // https://leetcode-cn.com/problems/unique-binary-search-trees/
-public class NumTrees95 {
+public class NumTrees96 {
 
     public int numTrees(int n) {
         int[] G = new int[n + 1];
