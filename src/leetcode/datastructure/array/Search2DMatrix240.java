@@ -20,8 +20,32 @@ public class Search2DMatrix240 {
         }
     }
 
-    //time O(lg(n!))
-    //espace O(1)
+    class DoubleIndex {
+        public boolean searchMatrix(int[][] matrix, int target) {
+            // an empty matrix obviously does not contain `target`
+            if (matrix == null || matrix.length == 0) {
+                return false;
+            }
+
+            int row = matrix.length - 1;
+            int col = matrix[0].length - 1;
+            int left = 0;
+            int right = col;
+            while (left <= row && right >= 0) {
+                if (matrix[left][right] > target) {
+                    right--;
+                } else if (matrix[left][right] < target) {
+                    left++;
+                } else {
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
+
+    // time O(lg(n!))
+    // espace O(1)
     class BinarySearch {
         public boolean searchMatrix(int[][] matrix, int target) {
             if (matrix == null || matrix.length == 0) {
