@@ -1,6 +1,7 @@
 package leetcode.algo.binarysearch;
 
 // https://leetcode-cn.com/problems/median-of-two-sorted-arrays/
+@SuppressWarnings("unused")
 public class FindMedianSortedArrays4 {
     class MergeArrayAndFind {
         public double findMedianSortedArrays(int[] nums1, int[] nums2) {
