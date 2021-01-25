@@ -30,4 +30,31 @@ public class FindMin154 {
         }
         return numbers[left];
     }
+
+    class LeftSolution {
+        public int findMin(int[] nums) {
+            int len = nums.length;
+            int l = 0, r = len - 1;
+
+            while (l < r) {
+                // 对于任何一个旋转数组，除非没有旋转，否则最左边必然大于等于最右边
+                if (nums[l] < nums[r])
+                    return nums[l];
+
+                int mid = l + (r - l) / 2;
+
+                if (nums[mid] > nums[l]) {
+                    // 左边有序，且排除顺序的情况，必然向右边搜索
+                    l = mid + 1;
+                } else if (nums[mid] < nums[l]) {
+                    // 右边有序,必然向左边搜索
+                    r = mid;
+                } // 如果nums[mid] == nums[l]并不能区分是左边都一样还是右边都一样，需要
+                else {
+                    l++;
+                }
+            }
+            return nums[l];
+        }
+    }
 }
