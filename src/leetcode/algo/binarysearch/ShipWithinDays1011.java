@@ -18,18 +18,30 @@ public class ShipWithinDays1011 {
         return left;
     }
 
+
     // 如果载重为 cap，是否能在 D 天内运完货物？
     boolean canFinish(int[] w, int D, int cap) {
-        int i = 0;
-        for (int day = 0; day < D; day++) {
-            int maxCap = cap;
-            while ((maxCap -= w[i]) >= 0) {
+        // int i = 0;
+        // for (int day = 0; day < D; day++) {
+        //     int maxCap = cap;
+        //     while ((maxCap -= w[i]) >= 0) {
+        //         i++;
+        //         if (i == w.length)
+        //             return true;
+        //     }
+        // }
+        // return false;
+        int i = 1;
+        int curIntervalSum = 0;
+        for (int num : w) {
+            // 尝试加上当前遍历的这个数，如果加上去超过了「子数组各自的和的最大值」，就不加这个数，另起炉灶
+            if (curIntervalSum + num > cap) {
+                curIntervalSum = 0;
                 i++;
-                if (i == w.length)
-                    return true;
             }
+            curIntervalSum += num;
         }
-        return false;
+        return i <= D;
     }
 
     int getMax(int[] weights) {
