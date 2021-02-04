@@ -1,9 +1,24 @@
-package leetcode.algo.dp.subsquence;
+package leetcode.algo.dp.subarray;
 
 // https://leetcode-cn.com/problems/maximum-subarray/
 public class MaxSubArray53 {
 
-    //思路 只要每个阶段的最大和和当前的数比较， 取两者之间较大的那个就好了。
+    // 暴力技法
+    class Loop {
+        public int maxSubArray(int[] nums) {
+            int max = Integer.MIN_VALUE;
+            for (int i = 0; i < nums.length; i++) {
+                int sum = 0;
+                for (int j = i; j < nums.length; j++) {
+                    sum += nums[j];
+                    max = Math.max(max, sum);
+                }
+            }
+            return max;
+        }
+    }
+
+    // 思路 只要每个阶段的最大和和当前的数比较， 取两者之间较大的那个就好了。
     class DPOptimizaation {
         public int maxSubArray(int[] nums) {
             int pre = 0, maxAns = nums[0];
@@ -35,6 +50,15 @@ public class MaxSubArray53 {
                 res = Math.max(res, dp[i]);
             }
             return res;
+
+            // int[] dp = new int[nums.length];
+            // dp[0] = nums[0];
+            // int max = nums[0];
+            // for (int i = 1; i < nums.length; i++) {
+            //     dp[i] = Math.max(nums[i], dp[i - 1] + nums[i]);
+            //     max = Math.max(max, dp[i]);
+            // }
+            // return max;
         }
     }
 }
