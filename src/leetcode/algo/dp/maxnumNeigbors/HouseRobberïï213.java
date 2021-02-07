@@ -1,4 +1,4 @@
-package leetcode.algo.dp;
+package leetcode.algo.dp.maxnumNeigbors;
 
 import java.util.Arrays;
 
