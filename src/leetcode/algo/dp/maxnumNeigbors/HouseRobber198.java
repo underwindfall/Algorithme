@@ -1,4 +1,4 @@
-package leetcode.algo.dp;
+package leetcode.algo.dp.maxnumNeigbors;
 
 // https://leetcode-cn.com/problems/house-robber/
 // time: O(N)
