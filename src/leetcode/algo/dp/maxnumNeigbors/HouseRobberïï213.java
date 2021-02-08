@@ -27,20 +27,15 @@ public class HouseRobberïï213 {
         // }
         // return money;
 
-        int len = nums.length;
-        if (len == 0)
-            return 0;
-        if (len == 1)
-            return nums[0];
-        if (len == 2)
-            return Math.max(nums[0], nums[1]);
-        int dp[] = new int[len];
-        dp[0] = nums[0];
-        dp[1] = Math.max(nums[0], nums[1]);
+        if (start == end)
+            return nums[start];
+        int[] dp = new int[nums.length];
+        dp[start] = nums[start];
+        dp[start + 1] = Math.max(nums[start], nums[start + 1]);
         for (int i = start + 2; i < end; i++) {
-            dp[i] = Math.max(dp[i - 1], dp[i - 2] + nums[i]);
+            dp[i] = Math.max(dp[i - 2] + nums[i], dp[i - 1]);
         }
-        return dp[len - 1];
+        return dp[end - 1];
     }
 
     class Solution {
