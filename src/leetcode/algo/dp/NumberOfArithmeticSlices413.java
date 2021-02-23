@@ -25,5 +25,53 @@ public class NumberOfArithmeticSlices413 {
         }
     }
 
-    
+    public class Recursive {
+        int sum = 0;
+
+        public int numberOfArithmeticSlices(int[] A) {
+            slices(A, A.length - 1);
+            return sum;
+        }
+
+        public int slices(int[] A, int i) {
+            if (i < 2)
+                return 0;
+            int ap = 0;
+            if (A[i] - A[i - 1] == A[i - 1] - A[i - 2]) {
+                ap = 1 + slices(A, i - 1);
+                sum += ap;
+            } else
+                slices(A, i - 1);
+            return ap;
+        }
+    }
+
+    // 双指针
+    // 右指针一直走
+    // 左指针再遇到右指针的前个值不相等的是否 移动到右指针的位置 同时归零当前的计数
+    class DoubleIndex {
+        public int numberOfArithmeticSlices(int[] A) {
+            if (A.length < 3) {
+                return 0;
+            }
+            int right = A[2], left = A[0];
+            int diff = right - A[1];
+            int count = 0;
+            int n = 0;
+            for (int i = 2; i <= A.length - 1; i++) {
+                right = A[i];
+                if (A[i] - A[i - 1] != diff) {
+                    left = A[i - 1];
+                    diff = right - left;
+                    n = 0;
+                    continue;
+                } else {
+                    n++;
+                }
+                count += n;
+            }
+            return count;
+
+        }
+    }
 }
