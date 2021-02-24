@@ -46,6 +46,24 @@ public class NumberOfArithmeticSlices413 {
         }
     }
 
+    // 和递归深思
+    // 递归的规律就是 dp[i] = dp[i - 1] + 1
+    class DP {
+        public int numberOfArithmeticSlices(int[] A) {
+            int dp[] = new int[A.length];
+            int count = 0;
+            for (int i = 2; i < A.length; i++) {
+                if (A[i] - A[i - 1] == A[i - 1] - A[i - 2]) {
+                    dp[i] = dp[i - 1] + 1;
+                    count += dp[i];
+                } else {
+                    continue;
+                }
+            }
+            return count;
+        }
+    }
+
     // 双指针
     // 右指针一直走
     // 左指针再遇到右指针的前个值不相等的是否 移动到右指针的位置 同时归零当前的计数
