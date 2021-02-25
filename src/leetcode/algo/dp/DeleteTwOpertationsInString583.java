@@ -74,4 +74,9 @@ public class DeleteTwOpertationsInString583 {
             return word1.length() + word2.length() - 2 * dp[word1.length()][word2.length()];
         }
     }
+
+    public static void main(String[] args) {
+        System.out.println("hello".substring(0, 2));
+        System.out.println("hello".substring(1, 2));
+    }
 }
