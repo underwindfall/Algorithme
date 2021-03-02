@@ -21,22 +21,37 @@ public class SuperEggDrop887 {
                 return cache.get(key);
 
             int low = 1, high = N;
-            while (low + 1 < high) {
+            int res = Integer.MAX_VALUE;
+            while (low <= high) {
                 int middle = (low + high) / 2;
-                int lowVal = superEggDrop(K - 1, middle - 1);
-                int highVal = superEggDrop(K, N - middle);
-
-                if (lowVal < highVal)
-                    low = middle;
-                else if (lowVal > highVal)
-                    high = middle;
-                else
-                    low = high = middle;
+                int broken = superEggDrop(K - 1, middle - 1);// 碎了
+                int unbroken = superEggDrop(K, N - middle);// 没碎
+                //res => min(max(broken, unbroken) + 1, res) 
+                if (broken > unbroken) {
+                    high = middle - 1;
+                    res = Math.min(res, broken + 1);
+                } else {
+                    low = middle + 1;
+                    res = Math.min(res, unbroken + 1);
+                }
             }
-            int minimum = 1 + Math.min(Math.max(superEggDrop(K - 1, low - 1), superEggDrop(K, N - low)),
-                    Math.max(superEggDrop(K - 1, high - 1), superEggDrop(K, N - high)));
+            // while (low + 1 < high) {
+            // int middle = (low + high) / 2;
+            // int lowVal = superEggDrop(K - 1, middle - 1);
+            // int highVal = superEggDrop(K, N - middle);
 
-            cache.put(key, minimum);
+            // if (lowVal < highVal)
+            // low = middle;
+            // else if (lowVal > highVal)
+            // high = middle;
+            // else
+            // low = high = middle;
+            // }
+            // int minimum = 1 + Math.min(Math.max(superEggDrop(K - 1, low - 1),
+            // superEggDrop(K, N - low)),
+            // Math.max(superEggDrop(K - 1, high - 1), superEggDrop(K, N - high)));
+
+            cache.put(key, res);
 
             return cache.get(key);
         }
