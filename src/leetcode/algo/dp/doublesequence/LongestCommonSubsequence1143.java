@@ -8,6 +8,7 @@ package leetcode.algo.dp.doublesequence;
 // 如果不同 应该选取的是之前前一位字符串的最大相同次数 去两者中间的最大值
 // 3. if (char(i) == char(j)) dp[i + 1][j + 1] = dp[i][j]
 //    else dp[i + 1][j + 1] = max(dp[i][j + 1], dp[i + 1][j])
+// text1(:i)  text2(:j)
 public class LongestCommonSubsequence1143 {
     public int longestCommonSubsequence(String text1, String text2) {
         int m = text1.length(), n = text2.length();
