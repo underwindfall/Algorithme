@@ -41,6 +41,6 @@ public class WildCardMatch44 {
                 }
             }
         }
-        return dp[m][n];
+        return dp[n][m];
     }        
 }
