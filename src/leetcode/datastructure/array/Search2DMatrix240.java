@@ -20,6 +20,28 @@ public class Search2DMatrix240 {
         }
     }
 
+    // 递归写法 想法一致
+    class RecursiveWay {
+        public boolean searchMatrix(int[][] matrix, int target) {
+            return search(matrix, target, matrix.length - 1, 0);
+        }
+
+        boolean search(int[][] matrix, int target, int row, int col) {
+            int r = matrix.length, c = matrix[0].length;
+            if (row < 0 || row >= r)
+                return false;
+            if (col < 0 || col >= c)
+                return false;
+            if (matrix[row][col] == target)
+                return true;
+            if (matrix[row][col] < target) {
+                return search(matrix, target, row, col + 1);
+            } else {
+                return search(matrix, target, row - 1, col);
+            }
+        }
+    }
+
     class DoubleIndex {
         public boolean searchMatrix(int[][] matrix, int target) {
             // an empty matrix obviously does not contain `target`
