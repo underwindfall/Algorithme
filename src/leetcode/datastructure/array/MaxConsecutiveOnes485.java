@@ -3,6 +3,7 @@ package leetcode.datastructure.array;
 /**
  * MaxConsecutiveOnes485
  */
+// https://leetcode-cn.com/problems/max-consecutive-ones/
 public class MaxConsecutiveOnes485 {
     //time O(N)
     //espace O(1)
