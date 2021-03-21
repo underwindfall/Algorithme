@@ -1,5 +1,6 @@
 package leetcode.datastructure.array;
 
+// 快慢指针
 /**
  * MaxConsecutiveOnes485
  */

@@ -3,7 +3,8 @@ package leetcode.datastructure.array;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-
+// https://leetcode-cn.com/problems/degree-of-an-array/description/
+// espace 
 public class FindShortestSubArray697 {
     // time O(N)
     // espace O(N)

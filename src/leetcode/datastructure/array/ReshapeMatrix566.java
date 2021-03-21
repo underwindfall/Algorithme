@@ -3,8 +3,10 @@ package leetcode.datastructure.array;
 import java.util.LinkedList;
 import java.util.Queue;
 
+// 数据结构 queue
 // https://leetcode-cn.com/problems/reshape-the-matrix/description/
 public class ReshapeMatrix566 {
+
 
     // time O(M*N)=> r*c
     // espace O(M*N)=> r*c

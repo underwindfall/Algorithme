@@ -2,8 +2,23 @@ package leetcode.datastructure.array;
 
 import java.util.ArrayList;
 
+// 数学
 // https://leetcode-cn.com/problems/beautiful-arrangement-ii/
 public class BeatifulArrangment667 {
+    public int[] constructArray(int n, int k) {
+        int[] ret = new int[n];
+        ret[0] = 1;
+        for (int i = 1, interval = k; i <= k; i++, interval--) {
+            if (i % 2 == 1)
+                ret[i] = ret[i - 1] + interval;
+            else
+                ret[i] = ret[i - 1] - interval;
+        }
+        for (int i = k + 1; i < n; i++) {
+            ret[i] = i + 1;
+        }
+        return ret;
+    }
 
     // https://leetcode-cn.com/problems/beautiful-arrangement-ii/solution/fan-jiu-wan-shi-liao-he-he-by-ri-mu-tu-yuan-12/
     // time O(N)

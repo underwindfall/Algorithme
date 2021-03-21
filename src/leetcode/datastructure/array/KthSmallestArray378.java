@@ -6,6 +6,8 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.PriorityQueue;
 
+// 二分法
+// https://leetcode-cn.com/problems/kth-smallest-element-in-a-sorted-matrix/description/
 public class KthSmallestArray378 {
     // time O(N*log(r-l))
     // espace O(1)

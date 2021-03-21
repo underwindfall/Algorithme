@@ -1,4 +1,6 @@
 package leetcode.datastructure.array;
+
+// 双指针 快慢指针
 // https://leetcode-cn.com/problems/move-zeroes
 public class MoveZeroes283 {
     // 快慢指针

@@ -3,6 +3,8 @@ package leetcode.datastructure.array;
 import java.util.HashMap;
 import java.util.Map;
 
+//找规律
+// https://leetcode-cn.com/problems/toeplitz-matrix/description/
 public class ToplitezMatrix766 {
 
     // 对于对角线上的元素来说，如果当前元素不是第一个出现的元素，那么它前面的元素一定在当前元素的左上角。可以推出，对于位于坐标 (r, c) 上的元素

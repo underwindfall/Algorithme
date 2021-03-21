@@ -1,5 +1,7 @@
 package leetcode.datastructure.array;
 
+// 双指针
+// https://leetcode-cn.com/problems/search-a-2d-matrix-ii/description/
 public class Search2DMatrix240 {
     // time O(M+N)
     // espace O(1)
