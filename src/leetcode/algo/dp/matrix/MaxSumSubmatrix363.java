@@ -1,8 +1,9 @@
-package leetcode.algo.dp.subarray;
+package leetcode.algo.dp.matrix;
 
 // https://leetcode-cn.com/problems/max-sum-of-rectangle-no-larger-than-k/
 public class MaxSumSubmatrix363 {
     //思路
+    //子问题 i2,j2 右下角节点的值 可被i1,j1,i2 - 1,j2 + 矩阵i1,j1,i2,j2 - 1 - 矩阵i1,j1,i2 - 1,j2 - 1+matrix[i2 - 1][j2 - 1]
     //dp(i1,j1,i2,j2) = dp(i1,j1,i2 - 1,j2) + dp(i1,j1,i2,j2 - 1) - dp(i1,j1,i2 - 1,j2 - 1) + matrix[i2 - 1][j2 - 1]
     // dp(i1,j1) = dp(i2-1,j2) + dp(i2,j2-1)-dp(i2-1)(j2-1)+matrix(i2-1)(j2-1)
     public int maxSumSubmatrix(int[][] matrix, int k) {
