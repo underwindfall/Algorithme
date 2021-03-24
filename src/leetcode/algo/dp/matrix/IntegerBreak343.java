@@ -14,7 +14,7 @@ public class IntegerBreak343 {
             for (int i = 3; i <= n; i++) {
                 dp[i] = 0;
                 // 对于数字 i，它可以分为两份：j 和 i-j，j 的范围是 1 到 i-j
-                for (int j = 1; j < i - j; j++) {
+                for (int j = 1; j <= i - j; j++) {
                     //dp[i - j] * j -> 拆分
                     // j * (i - j） 不拆分情况下的值
                     dp[i] = Math.max(dp[i], Math.max(dp[i - j] * j, j * (i - j)));
