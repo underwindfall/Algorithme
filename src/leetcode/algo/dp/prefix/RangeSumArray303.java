@@ -1,6 +1,6 @@
 package leetcode.algo.dp.prefix;
 
-// https://zhuanlan.zhihu.com/p/339237818
+//https://leetcode-cn.com/problems/range-sum-query-immutable
 public class RangeSumArray303 {
     // 前缀和 基本概念
     // [i, j] 的和 包含i，j 数学上的算法是 prefix(j + 1) - prefix(i)
