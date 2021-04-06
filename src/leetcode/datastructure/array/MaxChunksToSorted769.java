@@ -1,5 +1,7 @@
 package leetcode.datastructure.array;
 
+import java.util.Arrays;
+
 // 数学
 // https://leetcode-cn.com/problems/max-chunks-to-make-sorted/description/
 public class MaxChunksToSorted769 {
@@ -43,28 +45,38 @@ public class MaxChunksToSorted769 {
             return count;
         }
     }
-    class dp{
+
+    class dp {
         public int maxChunksToSorted(int[] arr) {
             int n = arr.length;
             int[] maxOfLeft = new int[n];
             int[] minOfRight = new int[n];
-    
+
             maxOfLeft[0] = arr[0];
             for (int i = 1; i < n; i++) {
-                maxOfLeft[i] = Math.max(maxOfLeft[i-1], arr[i]);
+                maxOfLeft[i] = Math.max(maxOfLeft[i - 1], arr[i]);
             }
-    
+
+            System.out.println(Arrays.toString(maxOfLeft));
+
             minOfRight[n - 1] = arr[n - 1];
             for (int i = n - 2; i >= 0; i--) {
                 minOfRight[i] = Math.min(minOfRight[i + 1], arr[i]);
             }
-    
+            System.out.println(Arrays.toString(minOfRight));
+
             int res = 0;
             for (int i = 0; i < n - 1; i++) {
-                if (maxOfLeft[i] <= minOfRight[i + 1]) res++;
+                if (maxOfLeft[i] <= minOfRight[i + 1])
+                    res++;
             }
-    
+
             return res + 1;
         }
+    }
+
+    public static void main(String[] args) {
+        int[] a = new int[] { 1, 0, 2, 3, 4 };
+        new MaxChunksToSorted769().new dp().maxChunksToSorted(a);
     }
 }

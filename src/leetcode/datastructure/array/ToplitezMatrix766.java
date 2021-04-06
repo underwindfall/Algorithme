@@ -47,12 +47,12 @@ public class ToplitezMatrix766 {
     class Recursive {
         public boolean isToeplitzMatrix(int[][] matrix) {
             for (int i = 0; i < matrix.length; i++) {
-                if (!isDiagonalEqual(matrix, i + 1, 0, matrix[i][0])) {
+                if (!isDiagonalEqual(matrix, i, 0, matrix[i][0])) {
                     return false;
                 }
             }
             for (int i = 0; i < matrix[0].length; i++) {
-                if (!isDiagonalEqual(matrix, 0, i + 1, matrix[0][i + 1])) {
+                if (!isDiagonalEqual(matrix, 0, i, matrix[0][i])) {
                     return false;
                 }
             }
