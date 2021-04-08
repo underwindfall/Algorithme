@@ -8,12 +8,16 @@ public class BeatifulArrangment667 {
     public int[] constructArray(int n, int k) {
         int[] ret = new int[n];
         ret[0] = 1;
-        for (int i = 1, interval = k; i <= k; i++, interval--) {
-            if (i % 2 == 1)
-                ret[i] = ret[i - 1] + interval;
-            else
-                ret[i] = ret[i - 1] - interval;
+        int numK = k + 1, numTemp = 1;
+        // 下标段[0, k]中，偶数下标填充[1,2,3..]
+        for (int i = 0; i <= k; i += 2) {
+            ret[i] = numTemp++;
         }
+        // 下标段[0, k]中，奇数下标填充[k + 1, k, k - 1...]
+        for (int i = 1; i <= k; i += 2) {
+            ret[i] = numK--;
+        }
+        // 下标段[k + 1, n - 1]都是顺序填充
         for (int i = k + 1; i < n; i++) {
             ret[i] = i + 1;
         }

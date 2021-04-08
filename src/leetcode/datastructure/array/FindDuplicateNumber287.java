@@ -14,14 +14,18 @@ public class FindDuplicateNumber287 {
     class OfficalFastSlowIndex {
         public int findDuplicate(int[] nums) {
             int slow = 0, fast = 0;
-            do {
+            while (true) {
                 slow = nums[slow];
                 fast = nums[nums[fast]];
-            } while (slow != fast);
-            slow = 0;
-            while (slow != fast) {
+                if (fast == slow)
+                    break;
+            }
+            int finder = 0;
+            while (true) {
+                finder = nums[finder];
                 slow = nums[slow];
-                fast = nums[fast];
+                if (slow == finder)
+                    break;
             }
             return slow;
         }
@@ -43,9 +47,11 @@ public class FindDuplicateNumber287 {
     }
 
     // 取出区间的mid
-    // 遍历nums 和 mid 进行比较 
+    // 遍历nums 和 mid 进行比较
     // 得到遍历中cnt 小于mid 的总数量值
-    // cnt <= mid 意味着左边部分正常不存在重复 
+    // cnt <= mid 意味着左边部分正常不存在重复
+    // time O(N * logN)
+    // espace O(1)
     class BinarySearch {
         public int findDuplicate(int[] nums) {
             int n = nums.length;
