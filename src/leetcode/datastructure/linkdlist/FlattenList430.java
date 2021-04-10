@@ -1,5 +1,6 @@
 package leetcode.datastructure.linkdlist;
 
+//https://leetcode-cn.com/problems/flatten-a-multilevel-doubly-linked-list/
 public class FlattenList430 {
     class Node {
         public int val;

@@ -76,11 +76,12 @@ public class ReverseNodesInKGroup25 {
     }
 
     public static ListNode reverseRecursive(ListNode head) {
-        if (head.next == null) {
+        if (head == null || head.next == null) {
             return head;
         }
         ListNode newHead = reverseRecursive(head.next);
-        head.next = newHead;
+        head.next.next = head;
+        head.next = null;
         return newHead;
     }
 

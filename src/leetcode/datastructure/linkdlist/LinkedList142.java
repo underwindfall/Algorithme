@@ -19,23 +19,36 @@ public class LinkedList142 {
     // espace O(1)
     class FastSlowIndex {
         public ListNode detectCycle(ListNode head) {
-            ListNode fast = head, slow = head;
-            while (true) {
+            if (head == null || head.next == null) {
+                return null;
+            }
+
+            ListNode slow = head, fast = head.next;
+
+            // cyclic -> fast == slow <==> （fast - slow） 路程 % cycle == 0 可以被整除
+            // a+(n+1)b+nc=2(a+b)⟹a=c+(n−1)(b+c)
+            // fast = m + (n + 1)a + nc
+            // slow = m + a
+            // fast == slow
+            // m + (n + 1)a +nc = 2(m+a) <==> m = (n - 1)a + nc
+            // start 在走a步骤 就可以整圈
+
+            while (slow != fast) {
                 if (fast == null || fast.next == null) {
                     return null;
                 }
+
+                slow = slow.next;
                 fast = fast.next.next;
-                slow = slow.next;
-                if (fast == slow) {
-                    break;
-                }
             }
-            fast = head;
-            while (slow != fast) {
+
+            ListNode start = head;
+            slow = slow.next;
+            while (slow != start) {
                 slow = slow.next;
-                fast = fast.next;
+                start = start.next;
             }
-            return fast;
+            return start;
         }
     }
 

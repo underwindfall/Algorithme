@@ -1,5 +1,7 @@
 package leetcode.algo.recursive;
 
+// https://leetcode-cn.com/problems/reverse-linked-list/
+//https://github.com/underwindfall/Algorithme/issues/35
 public class ReversList206 {
     public class ListNode {
         int val;
@@ -18,7 +20,7 @@ public class ReversList206 {
         }
     }
 
-    //递归的思路是滞后发育 每次都只管N+1后面节点的生活不管之前的
+    // 递归的思路是滞后发育 每次都只管N+1后面节点的生活不管之前的
 
     class Recursive {
         public ListNode reverseList(ListNode head) {
@@ -47,7 +49,7 @@ public class ReversList206 {
     }
 
     // 哨兵节点
-    //dummyNext 永远指的是前一个节点
+    // dummyNext 永远指的是前一个节点
     class DummyNode {
         public ListNode reverseList(ListNode head) {
             ListNode dummy = new ListNode();
