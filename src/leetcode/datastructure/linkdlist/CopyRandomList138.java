@@ -34,28 +34,42 @@ public class CopyRandomList138 {
         // time O(N)
         // espace O(N)
         public Node copyRandomList(Node head) {
-            Map<Node, Node> map = new HashMap<>();
             if (head == null) {
                 return null;
             }
+            // 创建一个哈希表，key是原节点，value是新节点
+            Map<Node, Node> map = new HashMap<Node, Node>();
             Node p = head;
+            // 将原节点和新节点放入哈希表中
             while (p != null) {
-                map.put(p, new Node(p.val));
+                Node newNode = new Node(p.val);
+                map.put(p, newNode);
                 p = p.next;
             }
             p = head;
+            // 遍历原链表，设置新节点的next和random
             while (p != null) {
-                map.get(p).next = map.get(p.next);
-                map.get(p).random = map.get(p.random);
+                Node newNode = map.get(p);
+                // p是原节点，map.get(p)是对应的新节点，p.next是原节点的下一个
+                // map.get(p.next)是原节点下一个对应的新节点
+                if (p.next != null) {
+                    newNode.next = map.get(p.next);
+                }
+                // p.random是原节点随机指向
+                // map.get(p.random)是原节点随机指向 对应的新节点
+                if (p.random != null) {
+                    newNode.random = map.get(p.random);
+                }
                 p = p.next;
             }
+            // 返回头结点，即原节点对应的value(新节点)
             return map.get(head);
         }
     }
 
     class Iteractive {
-        //time O(n)
-        //espace O(1)
+        // time O(n)
+        // espace O(1)
         public Node copyRandomList(Node head) {
             if (head == null) {
                 return null;
@@ -76,14 +90,13 @@ public class CopyRandomList138 {
                 p = p.next.next;
             }
 
-            //断开复制的节点
+            // 断开复制的节点
             p = head;
             Node cloneNode = p.next;
             Node clonedStart = cloneNode;
             while (cloneNode.next != null) {
                 p.next = p.next.next;
                 p = p.next;
-
 
                 cloneNode.next = cloneNode.next.next;
                 cloneNode = cloneNode.next;

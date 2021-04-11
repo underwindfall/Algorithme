@@ -19,11 +19,36 @@ public class FlattenList430 {
         }
     }
 
+    class SimpleWay {
+        public Node flatten(Node head) {
+            Node p = head;
+            while (p != null) {
+                if (p.child != null) {
+                    Node next = p.next;
+                    Node child = p.child;
+                    p.next = child;
+                    p.child = null;
+
+                    child.prev = p;
+                    while (child.next != null)
+                        child = child.next;
+                    child.next = next;
+
+                    if (next != null)
+                        next.prev = child;
+                }
+                p = p.next;
+            }
+            return head;
+        }
+
+    }
+
     class DFS {
 
-        //思路就是把这个链表的next当作右子树 child当作左子树 做前序遍历
-        //time O(N)
-        //espace O(N)
+        // 思路就是把这个链表的next当作右子树 child当作左子树 做前序遍历
+        // time O(N)
+        // espace O(N)
         public Node flatten(Node head) {
             if (head == null)
                 return head;
