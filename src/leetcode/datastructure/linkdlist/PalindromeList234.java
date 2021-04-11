@@ -1,5 +1,7 @@
 package leetcode.datastructure.linkdlist;
 
+import java.util.Stack;
+
 // https://leetcode-cn.com/problems/palindrome-linked-list/description/
 public class PalindromeList234 {
     public class ListNode {
@@ -45,6 +47,7 @@ public class PalindromeList234 {
                 fast = fast.next.next;
                 slow = slow.next;
             }
+
             // 如果fast不为空，说明链表的长度是奇数个
             if (fast != null) {
                 slow = slow.next;
@@ -75,5 +78,26 @@ public class PalindromeList234 {
             return prev;
         }
 
+    }
+
+    // time O(N)
+    // espace O(N)
+    class StackSolution {
+        public boolean isPalindrome(ListNode head) {
+            // reverse 一下 一个个比较
+            Stack<ListNode> stack = new Stack<>();
+            ListNode cur = head;
+            while (cur != null) {
+                stack.push(cur);
+                cur = cur.next;
+            }
+            while (!stack.isEmpty()) {
+                if (head.val != stack.pop().val) {
+                    return false;
+                }
+                head = head.next;
+            }
+            return true;
+        }
     }
 }

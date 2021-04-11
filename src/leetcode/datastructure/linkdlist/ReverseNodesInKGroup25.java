@@ -2,11 +2,12 @@ package leetcode.datastructure.linkdlist;
 
 public class ReverseNodesInKGroup25 {
 
-    public class ListNode {
+    static class ListNode {
         int val;
         ListNode next;
 
         ListNode() {
+            this(0);
         }
 
         ListNode(int val) {
@@ -19,8 +20,60 @@ public class ReverseNodesInKGroup25 {
         }
     }
 
+
+    // 普通的方法通过设置每次补全的方式进行操作
+    // [prev][1(start),2,3(end)][next] <->[prev] ->[3(end),2,1(start)]->[next]
+    // 通过更细记录prev end 遍历操作即可
+    class Solution {
+        public ListNode reverseKGroup(ListNode head, int k) {
+            ListNode dummy = new ListNode();
+            dummy.next = head;
+
+            ListNode prev = dummy;
+            ListNode end = dummy;
+            while (end.next != null) {
+                for (int i = 0; i < k && end != null; i++) {
+                    end = end.next;
+                }
+
+                // 不足k 不进行分组 直接返回
+                if (end == null)
+                    break;
+
+                ListNode start = prev.next;
+                ListNode next = end.next;
+
+                end.next = null;
+                prev.next = reverse(start);
+
+                // 更新操作
+                start.next = next;
+                prev = start;
+                end = prev;
+            }
+            return dummy.next;
+        }
+
+        // time O(N) -> N=b-a
+        // espace O(1)
+        private ListNode reverse(ListNode head) {
+            ListNode prev = null, curr = head, next = head;
+            while (curr != null) {
+                next = curr.next;
+                curr.next = prev;
+                prev = curr;
+                curr = next;
+            }
+            return prev;
+        }
+    }
+
     /**
-     * 解题方式 reverseKGroup 的 方法 简单来说可以考虑成
+     * https://leetcode-cn.com/problems/reverse-nodes-in-k-group/solution/di-gui-java-by-reedfan-2/
+     * 
+     * [1(head), 2,3(tail)] <==> [ 2(newHead), 1] [3,4] <==> [ 2(newHead), 1] ->
+     * [4,3]
+     * 
      * 
      * newHead =reverseKGroup(head,2)
      * 
@@ -28,39 +81,41 @@ public class ReverseNodesInKGroup25 {
      * 
      * 然后在当前newnewnewHead 为null 的时候返回
      */
-    static class RecursiveSolution {
+    class RecursiveSolution {
 
         // time O(K^2)
         // espace O(N/K)
         public ListNode reverseKGroup(ListNode head, int k) {
-            if (head == null) {
-                return null;
+            if (head == null || head.next == null) {
+                return head;
             }
-            ListNode a, b;
-            a = b = head;
+
+            ListNode tail = head;
             for (int i = 0; i < k; i++) {
-                // 不足 k 个，不需要反转，base case
-                if (b == null)
+                // 当不满足k个group的时候返回
+                if (tail == null)
                     return head;
-                b = b.next;
+                tail = tail.next;
             }
-            ListNode newHead = reverse(a, b);
-            a.next = reverseKGroup(b, k);
+            // 反转前 k 个元素
+            ListNode newHead = reverse(head, tail);
+
+            head.next = reverseKGroup(tail, k);
             return newHead;
         }
 
-        // 翻转[a,b)区间的node
-        // time O(N) -> N=b-a
-        // espace O(1)
-        private ListNode reverse(ListNode a, ListNode b) {
-            ListNode pre = null, cur = a, next = a;
-            while (cur != b) {
-                next = cur.next;
-                cur.next = pre;
-                pre = cur;
-                cur = next;
+        /*
+         * 左闭又开区间
+         */
+        ListNode reverse(ListNode head, ListNode tail) {
+            ListNode prev = null, next = null;
+            while (head != tail) {
+                next = head.next;
+                head.next = prev;
+                prev = head;
+                head = next;
             }
-            return pre;
+            return prev;
         }
     }
 

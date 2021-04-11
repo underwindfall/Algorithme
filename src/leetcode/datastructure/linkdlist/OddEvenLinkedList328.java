@@ -19,8 +19,8 @@ public class OddEvenLinkedList328 {
         }
     }
 
-    //time O(N)
-    //espace O(1)
+    // time O(N)
+    // espace O(1)
     public ListNode oddEvenList(ListNode head) {
         if (head == null) {
             return head;
@@ -38,5 +38,29 @@ public class OddEvenLinkedList328 {
         odd.next = evenHead;
         return head;
 
+    }
+
+    public ListNode oddEvenList1(ListNode head) {
+        ListNode oddHead = new ListNode();
+        ListNode oddTail = oddHead;
+        ListNode evenHead = new ListNode();
+        ListNode evenTail = evenHead;
+        // 遍历原链表，根据 isOdd 标识位决定将当前结点插入到奇链表还是偶链表（尾插法）
+        boolean isOdd = true;
+        while (head != null) {
+            if (isOdd) {
+                oddTail.next = head;
+                oddTail = oddTail.next;
+            } else {
+                evenTail.next = head;
+                evenTail = evenTail.next;
+            }
+            head = head.next;
+            isOdd = !isOdd;
+        }
+        // 将奇链表后面拼接上偶链表，并将偶链表的next设置为null
+        oddTail.next = evenHead.next;
+        evenTail.next = null;
+        return oddHead.next;
     }
 }

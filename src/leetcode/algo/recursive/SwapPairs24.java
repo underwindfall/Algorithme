@@ -37,4 +37,23 @@ public class SwapPairs24 {
         newHead.next = head;
         return newHead;
     }
+
+    // 哨兵解法
+    class Iterative {
+        public ListNode swapPairs(ListNode head) {
+            ListNode dummy = new ListNode();
+            dummy.next = head;
+            ListNode tmp = dummy;
+            while (tmp.next != null && tmp.next.next != null) {
+                ListNode node1 = tmp.next;
+                ListNode node2 = tmp.next.next;
+
+                tmp.next = node2;
+                node1.next = node2.next;
+                node2.next = node1;
+                tmp = node1;
+            }
+            return dummy.next;
+        }
+    }
 }

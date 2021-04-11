@@ -1,5 +1,8 @@
 package leetcode.datastructure.linkdlist;
 
+import java.util.HashSet;
+import java.util.Set;
+
 //https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list/
 public class DeleteDuplicates83 {
     public class ListNode {
@@ -8,6 +11,24 @@ public class DeleteDuplicates83 {
 
         ListNode(int x) {
             val = x;
+        }
+    }
+
+    class SetSolution {
+        public ListNode deleteDuplicates(ListNode head) {
+            Set<Integer> set = new HashSet<>();
+
+            ListNode prev = null, curr = head;
+            while (curr != null) {
+                if (set.contains(curr.val)) {
+                    prev.next = curr.next;
+                } else {
+                    set.add(curr.val);
+                    prev = curr;
+                }
+                curr = curr.next;
+            }
+            return head;
         }
     }
 

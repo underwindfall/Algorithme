@@ -13,8 +13,8 @@ public class AddTwoNumbers445 {
         }
     }
 
-    //time O(Max(M,N))
-    //espace O(M+N)
+    // time O(Max(M,N))
+    // espace O(M+N)
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         Stack<ListNode> stack1 = new Stack<>();
         Stack<ListNode> stack2 = new Stack<>();
@@ -45,9 +45,6 @@ public class AddTwoNumbers445 {
         return temp;
     }
 
-
-
-
     public static void main(String[] args) {
         AddTwoNumbers445 addTwoNumbers445 = new AddTwoNumbers445();
         AddTwoNumbers445.ListNode node = addTwoNumbers445.addTwoNumbers(addTwoNumbers445.new ListNode(5),
@@ -58,4 +55,38 @@ public class AddTwoNumbers445 {
         }
     }
 
+    // 题目的难点在于对于进位的把控，但是如果是按照数学逻辑运算的花，两数相加都是从低位到高位。 那我们翻转链表 然后计算， 最后结果翻转链表输出即可。
+    class Solution {
+        public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+            // reverse list
+            ListNode newL1 = reverse(l1);
+            ListNode newL2 = reverse(l2);
+
+            return reverse(recurisvie(newL1, newL2, 0));
+        }
+
+        ListNode recurisvie(ListNode l1, ListNode l2, int prefixPlus) {
+            if (l1 == null && l2 == null && prefixPlus == 0) {
+                return null;
+            }
+            int x = l1 == null ? 0 : l1.val;
+            int y = l2 == null ? 0 : l2.val;
+            int sum = x + y + prefixPlus;
+            int curr = sum % 10;
+            prefixPlus = sum / 10;
+            ListNode node = new ListNode(curr);
+            node.next = recurisvie(l1 == null ? null : l1.next, l2 == null ? null : l2.next, prefixPlus);
+            return node;
+        }
+
+        ListNode reverse(ListNode head) {
+            if (head == null || head.next == null) {
+                return head;
+            }
+            ListNode newHead = reverse(head.next);
+            head.next.next = head;
+            head.next = null;
+            return newHead;
+        }
+    }
 }
