@@ -23,7 +23,5 @@ public class PalindromicSubstrings647 {
         }
     }
 
-    class ExpandCenter {
-
-    }
+    
 }
