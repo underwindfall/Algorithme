@@ -1,4 +1,4 @@
-package leetcode.algo.dp.doublesequence;
+package leetcode.algo.dp.doublesequence.interval;
 
 //https://leetcode-cn.com/problems/minimum-score-triangulation-of-polygon/
 public class TriangulationOfPolygon1039 {

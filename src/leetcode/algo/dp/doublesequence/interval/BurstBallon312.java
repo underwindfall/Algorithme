@@ -1,4 +1,4 @@
-package leetcode.algo.dp.doublesequence;
+package leetcode.algo.dp.doublesequence.interval;
 
 import java.util.LinkedList;
 
