@@ -52,4 +52,37 @@ public class CountDiffPanlindromic730 {
             return m[i][j];
         }
     }
+
+    class DP {
+        
+        private static final int kMod = 1000000007;
+
+        public int countPalindromicSubsequences(String S) {
+            int n = S.length();
+            long dp[][] = new long[n][n];
+            for (int i = 0; i < n; i++) {
+                //只有一个字符串的解
+                dp[i][i] = 1;
+            }
+
+            for (int len = 1; len <= n; len++) {
+                for (int i = 0; i < n - len; i++) {
+                    int j = i + len;
+                    if (S.charAt(i) == S.charAt(j)) {
+                        int l = i + 1;
+                        int r = j - 1;
+                        while (l <= r && S.charAt(l) != S.charAt(i)) ++l;
+                        while (l <= r && S.charAt(r) != S.charAt(i)) --r;                    
+                        if (l == r) dp[i][j] = dp[i + 1][j - 1] * 2 + 1;
+                        else if (l > r) dp[i][j] = dp[i + 1][j - 1] * 2 + 2;
+                        else dp[i][j] = dp[i + 1][j - 1] * 2 - dp[l + 1][r - 1];
+                    } else {
+                        dp[i][j] = dp[i][j - 1] + dp[i + 1][j] - dp[i + 1][j - 1]; 
+                    }
+                    dp[i][j] = (long)((dp[i][j] + kMod) % kMod);
+                }
+            }
+            return (int)dp[0][n - 1];
+        }
+    }
 }
