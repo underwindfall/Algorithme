@@ -33,9 +33,9 @@ public class StrangePrinter664 {
     }
 
     // bottom up
-    // 1. s(i) != s(j)
+    // 1. s(i) != s(j) -> i, j 不存在j相同的字符
     // dp(i, j) = d (i, j - 1) + 1 -> 不相同的时候就是j单独打印 然后打印j-1之前的
-    // 2. s(i) == s(j)
+    // 2. s(i) == s(j) -> i, j 存在一个j相同的字符
     // dp(i, j) = min(dp(i, k) + dp( k + 1, j - 1))
     class DP {
         public int strangePrinter(String s) {
