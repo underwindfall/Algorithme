@@ -11,6 +11,9 @@ import java.util.Set;
 // 2. 计算海洋格子，找到相应的邻居是陆地的海洋格子
 // 3. 然后通过相邻的格子的合并就是最大的填海造陆面积
 public class MakeLargestIsland827 {
+
+    //time O(M*N*4)
+    //espace O(M*N)
     public int largestIsland(int[][] grid) {
         int res = 0;
 
