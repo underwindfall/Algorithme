@@ -12,8 +12,8 @@ import java.util.Set;
 // 3. 然后通过相邻的格子的合并就是最大的填海造陆面积
 public class MakeLargestIsland827 {
 
-    //time O(M*N*4)
-    //espace O(M*N)
+    // time O(M*N*4)
+    // espace O(M*N)
     public int largestIsland(int[][] grid) {
         int res = 0;
 
@@ -22,7 +22,7 @@ public class MakeLargestIsland827 {
             return 1;
         }
 
-        Map<Integer, Integer> areaMap = new HashMap<>();// 序号对应面积的一个映射，因为面积要最后结束才能计算出来，所以遍历过程中用index代替，放在映射中
+        Map<Integer, Integer> areaMap = new HashMap<>();// 序号对应面积的一个映射，因-为面积要最后结束才能计算出来，所以遍历过程中用index代替，放在映射中
         for (int r = 0; r < grid.length; r++) {
             for (int c = 0; c < grid[0].length; c++) {
                 if (grid[r][c] == 1) {
