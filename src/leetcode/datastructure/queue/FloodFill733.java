@@ -1,10 +1,12 @@
-package leetcode.datastructure.stack;
+package leetcode.datastructure.queue;
 
 import java.util.LinkedList;
 import java.util.Queue;
 
 // https://leetcode-cn.com/problems/flood-fill/
 public class FloodFill733 {
+    // time O(M*N)
+    // espace O(M*N)
     class DFS {
         public int[][] floodFill(int[][] image, int sr, int sc, int newColor) {
             // 岛屿问题
@@ -34,6 +36,8 @@ public class FloodFill733 {
         }
     }
 
+    // time O(M*N)
+    // espace O(M*N)
     class BFS {
 
         public int[][] floodFill(int[][] image, int sr, int sc, int newColor) {
