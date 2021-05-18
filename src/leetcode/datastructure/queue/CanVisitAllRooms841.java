@@ -1,4 +1,4 @@
-package leetcode.datastructure.stack;
+package leetcode.datastructure.queue;
 
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -8,6 +8,8 @@ import java.util.Set;
 
 // https://leetcode-cn.com/problems/keys-and-rooms/
 public class CanVisitAllRooms841 {
+    // time (M+N)
+    // espace O(N) 
     class BFS {
         public boolean canVisitAllRooms(List<List<Integer>> rooms) {
             // room size
@@ -32,6 +34,8 @@ public class CanVisitAllRooms841 {
         }
     }
 
+    // time O(M+N)
+    // espace O(M)
     class DFS {
 
         Set<Integer> visited = new HashSet<>();
