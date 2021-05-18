@@ -6,6 +6,8 @@ import java.util.Queue;
 //https://leetcode-cn.com/problems/HighestPeak1765
 //BFS see Leetcode 286
 public class HighestPeak1765 {
+    // time O(M*N)
+    // espace O(M*N)
     public int[][] highestPeak(int[][] isWater) {
         int M = isWater.length;
         int N = isWater[0].length;
