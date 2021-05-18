@@ -28,6 +28,8 @@ public class OpenLock752 {
         return new String(ch);
     }
 
+    //time O(N^2 * A^N +D) //A数子个数 N位数 D deadend大小
+    //espace O(A^N +D)
     // BFS
     public int openLock(String[] deadends, String target) {
         // 记录需要跳过的死亡密码
