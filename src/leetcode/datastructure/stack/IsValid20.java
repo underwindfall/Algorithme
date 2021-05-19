@@ -4,6 +4,8 @@ import java.util.Stack;
 
 // https://leetcode-cn.com/problems/valid-parentheses/
 public class IsValid20 {
+    //time O(N)
+    //espace O(N)
     public boolean isValid(String s) {
         if (s.isEmpty())
             return true;
