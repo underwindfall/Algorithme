@@ -10,33 +10,44 @@ import java.util.Set;
 // 最小平方数 = 前一位最小平方数+ 1^2 || 平方数
 // 即 dp[i] = MIN(dp[i], dp[i - j * j] + 1)
 public class SqrtNumber279 {
-    public int numSquares(int n) {
-        int count = 0;
-        Set<Integer> visited = new HashSet<>();
-        Queue<Integer> q = new LinkedList<>();
-        q.add(n);
-        visited.add(n);
-        while (!q.isEmpty()) {
-            int sz = q.size();
-            for (int i = 0; i < sz; i++) {
-                int number = q.poll();
-                for (int j = 1; j * j <= number; j++) {
-                    int temp = number - j * j;
-                    if (temp == 0) {
-                        return count + 1;
-                    }
-                    if (!visited.contains(temp)) {
-                        q.add(temp);
-                        visited.add(temp);
-                    }
-                }
-            }
-            count++;
+
+    class MemoRecursive {
+        // time O(N*sqrt(N))
+        // espace O(N)
+
+        int[] memo;
+        public int numSquares(int n) {
+            memo = new int[n + 1];
+            return recursive(n);
         }
-        return -1;
+
+        int recursive(int n) {
+            if (memo[n] != 0) {
+                return memo[n];
+            }
+
+            int val = (int) Math.sqrt(n);
+            if (val * val == n) {
+                memo[n] = 1;
+                return 1;
+            }
+
+            int res = Integer.MAX_VALUE;
+            for (int i = 1; i * i < n; i++) {
+                res = Math.min(res, recursive(n - i * i) + 1);
+            }
+            return memo[n] = res;
+        }
     }
 
-
+    /**
+     * 背包问题
+     * 
+     * 
+     * time O(N*sqrt(N))
+     * 
+     * espace O(N)
+     */
     class Dp {
         public int numSquares(int n) {
             int[] dp = new int[n + 1];
@@ -49,4 +60,38 @@ public class SqrtNumber279 {
             return dp[n];
         }
     }
+
+    /**
+     * 
+     * time O(N*sqrt(N)) espace O(N)
+     */
+    class BFS {
+        public int numSquares(int n) {
+            int count = 0;
+            Set<Integer> visited = new HashSet<>();
+            Queue<Integer> q = new LinkedList<>();
+            q.add(n);
+            visited.add(n);
+            while (!q.isEmpty()) {
+                int sz = q.size();
+                for (int i = 0; i < sz; i++) {
+                    int number = q.poll();
+                    for (int j = 1; j * j <= number; j++) {
+                        int temp = number - j * j;
+                        if (temp == 0) {
+                            return count + 1;
+                        }
+                        if (!visited.contains(temp)) {
+                            q.add(temp);
+                            visited.add(temp);
+                        }
+                    }
+                }
+                count++;
+            }
+            return -1;
+        }
+
+    }
+
 }
