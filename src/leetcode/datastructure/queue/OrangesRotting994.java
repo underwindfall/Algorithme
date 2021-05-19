@@ -6,6 +6,8 @@ import java.util.Queue;
 //https://leetcode-cn.com/problems/rotting-oranges/
 public class OrangesRotting994 {
 
+    // time O(N*M)
+    // espace O(N * M)
     // BFS
     // 0 -> 空
     // 1 -> 新鲜
@@ -35,34 +37,34 @@ public class OrangesRotting994 {
                 int[] orange = queue.poll();
                 int r = orange[0];
                 int c = orange[1];
-                //左
+                // 左
                 if (r - 1 >= 0 && grid[r - 1][c] == 1) {
                     grid[r - 1][c] = 2;
                     count--;
                     queue.add(new int[] { r - 1, c });
                 }
-                //右
+                // 右
                 if (r + 1 < M && grid[r + 1][c] == 1) {
                     grid[r + 1][c] = 2;
                     count--;
                     queue.add(new int[] { r + 1, c });
                 }
-                //下
-                if(c -  1 >= 0 && grid[r][c - 1] == 1) {
+                // 下
+                if (c - 1 >= 0 && grid[r][c - 1] == 1) {
                     grid[r][c - 1] = 2;
                     count--;
-                    queue.add(new int[]{r, c - 1});
+                    queue.add(new int[] { r, c - 1 });
                 }
-                //上
+                // 上
                 if (c + 1 < N && grid[r][c + 1] == 1) {
                     grid[r][c + 1] = 2;
                     count--;
-                    queue.add(new int[]{r, c + 1});
+                    queue.add(new int[] { r, c + 1 });
                 }
             }
         }
         if (count > 0) {
-            return - 1;
+            return -1;
         } else {
             return round;
         }
