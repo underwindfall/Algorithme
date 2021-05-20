@@ -2,7 +2,10 @@ package leetcode.datastructure.stack;
 
 import java.util.Stack;
 
+//https://leetcode-cn.com/problems/evaluate-reverse-polish-notation/
 public class EvalRPN150 {
+    //time O(N)
+    //espace O(N)
     public int evalRPN(String[] tokens) {
         Stack<Integer> stack = new Stack<>();
         for (int i = 0; i < tokens.length; i++) {
