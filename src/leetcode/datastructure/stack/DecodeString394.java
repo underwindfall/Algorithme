@@ -5,6 +5,8 @@ import java.util.Stack;
 // https://leetcode-cn.com/problems/decode-string/
 public class DecodeString394 {
 
+    //time O(N)
+    //espace O(N)
     //思路是用两个stack处理这个问题
     // 一个存放重复的数字
     //一个存放【 之前的字符
@@ -30,6 +32,7 @@ public class DecodeString394 {
                 }
                 res = new StringBuilder(stack_res.pop() + temp);
             } else if (c >= '0' && c <= '9') {
+                //针对的是100[leetcode]
                 multi = multi * 10 + Integer.parseInt(c.toString());
             } else {
                 res.append(c);
@@ -38,6 +41,8 @@ public class DecodeString394 {
         return res.toString();
     }
 
+    //time
+    //espace
     class Dfs {
 
         private int numIndex = 0;// 记录递归中 for循环中i的位置
