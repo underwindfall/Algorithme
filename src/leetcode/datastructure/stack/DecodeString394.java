@@ -5,13 +5,13 @@ import java.util.Stack;
 // https://leetcode-cn.com/problems/decode-string/
 public class DecodeString394 {
 
-    //time O(N)
-    //espace O(N)
-    //思路是用两个stack处理这个问题
+    // time O(N)
+    // espace O(N)
+    // 思路是用两个stack处理这个问题
     // 一个存放重复的数字
-    //一个存放【 之前的字符
-    //【 遇上这个意味着要把当前的res放进stack_res，multi 放进 stack_num， 因为开始了一个新的block
-    // 】 意味着之前的block结束 需要回收相对应的重复次数和当前这个block的重复字符 组合 
+    // 一个存放【 之前的字符
+    // 【 遇上这个意味着要把当前的res放进stack_res，multi 放进 stack_num， 因为开始了一个新的block
+    // 】 意味着之前的block结束 需要回收相对应的重复次数和当前这个block的重复字符 组合
     // 即 res = last_res + cur_multi * res
     public String decodeString(String s) {
         Stack<String> stack_res = new Stack<>();
@@ -32,7 +32,7 @@ public class DecodeString394 {
                 }
                 res = new StringBuilder(stack_res.pop() + temp);
             } else if (c >= '0' && c <= '9') {
-                //针对的是100[leetcode]
+                // 针对的是100[leetcode]
                 multi = multi * 10 + Integer.parseInt(c.toString());
             } else {
                 res.append(c);
@@ -41,8 +41,39 @@ public class DecodeString394 {
         return res.toString();
     }
 
-    //time
-    //espace
+    class DFS {
+        class Solution {
+            public String decodeString(String s) {
+                return dfs(s, 0)[0];
+            }
+
+            private String[] dfs(String s, int i) {
+                StringBuilder res = new StringBuilder();
+                int multi = 0;
+                while (i < s.length()) {
+                    if (s.charAt(i) >= '0' && s.charAt(i) <= '9')
+                        multi = multi * 10 + Integer.parseInt(String.valueOf(s.charAt(i)));
+                    else if (s.charAt(i) == '[') {
+                        String[] tmp = dfs(s, i + 1);
+                        i = Integer.parseInt(tmp[0]);
+                        while (multi > 0) {
+                            res.append(tmp[1]);
+                            multi--;
+                        }
+                    } else if (s.charAt(i) == ']')
+                        return new String[] { String.valueOf(i), res.toString() };
+                    else
+                        res.append(String.valueOf(s.charAt(i)));
+                    i++;
+                }
+                return new String[] { res.toString() };
+            }
+        }
+
+    }
+
+    // time O(N)
+    // espace O(N)
     class Dfs {
 
         private int numIndex = 0;// 记录递归中 for循环中i的位置
