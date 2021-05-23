@@ -4,7 +4,7 @@ import java.util.Stack;
 
 // https://leetcode-cn.com/problems/daily-temperatures/
 public class DailyTemperatures739 {
-
+    // 单调栈连接https://oi-wiki.org/ds/monotonous-stack/
     // 用单调栈的方式解决问题
     // 栈元素问递增排列，栈顶最小，栈地最大
     // 刚开始为空放入遍历元素A
