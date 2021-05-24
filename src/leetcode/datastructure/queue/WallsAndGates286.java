@@ -9,7 +9,7 @@ import java.util.Queue;
 public class WallsAndGates286 {
      // 每个格子 都有4中方向移动
     // BFS 明显的算法是先遍历其中node的邻居节点 然后把邻居节点加入进去 处理的时候因为是队列的处理方式 所以没差
-    // time O(M*N*N)
+    // time O(M*N)
     // espace O(mn)
      class BFS {
          private static final int EMPTY = Integer.MAX_VALUE;
