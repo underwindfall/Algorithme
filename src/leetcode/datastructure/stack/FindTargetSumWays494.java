@@ -6,6 +6,9 @@ import java.util.Queue;
 // https://leetcode-cn.com/problems/target-sum/
 public class FindTargetSumWays494 {
 
+    //time O(N*SUM)
+    //espace O(N*SUM)
+    //prefix sum理论
     // DP 问题首先找到公式 dp[i][j] = dp[i - 1][j - nums[i]]+ dp[i - 1][j + nums[i]]
     // 这个可以解释为 i 是当前的在数组重的index j是sum值 dp[i][j]是当前节点的target 为j的解
     // https://leetcode-cn.com/problems/target-sum/solution/dong-tai-gui-hua-si-kao-quan-guo-cheng-by-keepal/
@@ -44,6 +47,8 @@ public class FindTargetSumWays494 {
 
     }
 
+    //time O(2^N)
+    //espace O(N)
     // 思路是递归调用
     // 每一个节点的值对应 preSum +/- 当前这个节点
     // 当 nums 数组循环到底 并且剩余值等于S时候 记录++
@@ -69,6 +74,8 @@ public class FindTargetSumWays494 {
         }
     }
 
+    //time O(2^N)
+    //espace O(N)
     class BFS {
         public int findTargetSumWays(int[] nums, int S) {
             Queue<Integer> queue = new LinkedList<>();
