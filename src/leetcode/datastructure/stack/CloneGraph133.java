@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Queue;
 
 // https://leetcode-cn.com/problems/clone-graph/
 public class CloneGraph133 {
@@ -29,6 +28,8 @@ public class CloneGraph133 {
         }
     }
 
+    //time O(N)
+    //espace O(N)
     class DFS {
         public Node cloneGraph(Node node) {
             Map<Node, Node> visited = new HashMap<>();
@@ -58,31 +59,39 @@ public class CloneGraph133 {
 
     }
 
+    //time O(n)
+    //espace O(n)
     class BFS {
         public Node cloneGraph(Node node) {
-            return bfs(node);
-        }
-
-        private Node bfs(Node node) {
             if (node == null) {
                 return node;
             }
-            Map<Node, Node> visited = new HashMap<>();
-            Queue<Node> queue = new LinkedList<>();
-            Node cloneNode = new Node(node.val);
+    
+            HashMap<Node, Node> visited = new HashMap<>();
+    
+            // 将题目给定的节点添加到队列
+            LinkedList<Node> queue = new LinkedList<Node> ();
             queue.add(node);
-            visited.put(node, cloneNode);
+            // 克隆第一个节点并存储到哈希表中
+            visited.put(node, new Node(node.val, new ArrayList<>()));
+    
+            // 广度优先搜索
             while (!queue.isEmpty()) {
-                Node curr = queue.poll();
-                List<Node> neighbors = curr.neighbors;
-                for (Node neighbor : neighbors) {
-                    if (neighbor != null && !visited.containsKey(neighbor)) {
-                        queue.offer(neighbor);
-                        visited.put(neighbor, new Node(neighbor.val));
+                // 取出队列的头节点
+                Node n = queue.poll();
+                // 遍历该节点的邻居
+                for (Node neighbor: n.neighbors) {
+                    if (!visited.containsKey(neighbor)) {
+                        // 如果没有被访问过，就克隆并存储在哈希表中
+                        visited.put(neighbor, new Node(neighbor.val, new ArrayList<>()));
+                        // 将邻居节点加入队列中
+                        queue.add(neighbor);
                     }
-                    visited.get(curr).neighbors.add(visited.get(neighbor));
+                    // 更新当前节点的邻居列表
+                    visited.get(n).neighbors.add(visited.get(neighbor));
                 }
             }
+    
             return visited.get(node);
         }
     }
