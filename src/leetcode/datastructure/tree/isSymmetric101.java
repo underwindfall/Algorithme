@@ -1,8 +1,6 @@
 package leetcode.datastructure.tree;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Queue;
 
 // https://leetcode-cn.com/problems/symmetric-tree/description/
@@ -37,51 +35,43 @@ public class isSymmetric101 {
         }
     }
 
+    // bfs
+    //time O(N)
+    //espace O(H)
     class BFS {
         public boolean isSymmetric(TreeNode root) {
-            // bfs
-            Queue<TreeNode> queue = new LinkedList<>();
-            if (root == null) {
+            if(root==null || (root.left==null && root.right==null)) {
                 return true;
             }
-            queue.add(root);
-            while (!queue.isEmpty()) {
-                List<Integer> list = new ArrayList<>();
-                int count = queue.size();
-                for (int i = count; i > 0; i--) {
-                    TreeNode node = queue.poll();
-                    if (node.left != null) {
-                        list.add(node.left.val);
-                        queue.add(node.left);
-                    } else {
-                        list.add(-1);
-                    }
-                    if (node.right != null) {
-                        list.add(node.right.val);
-                        queue.add(node.right);
-                    } else {
-                        list.add(-1);
-                    }
-                    count--;
-                }
-
-                if (!isSymmetric(list)) {
-                    return false;
-                }
-            }
-            return true;
-        }
-
-        boolean isSymmetric(List<Integer> list) {
-            int size = list.size();
-            for (int i = 0; i < size / 2; i++) {
-                if (list.get(i) == list.get(size - 1 - i)) {
+            //用队列保存节点
+            Queue<TreeNode> queue = new LinkedList<TreeNode>();
+            //将根节点的左右孩子放到队列中
+            queue.add(root.left);
+            queue.add(root.right);
+            while(queue.size()>0) {
+                //从队列中取出两个节点，再比较这两个节点
+                TreeNode left = queue.poll();
+                TreeNode right = queue.poll();
+                //如果两个节点都为空就继续循环，两者有一个为空就返回false
+                if(left==null && right==null) {
                     continue;
-                } else {
+                }
+                if(left==null || right==null) {
                     return false;
                 }
+                if(left.val!=right.val) {
+                    return false;
+                }
+                //将左节点的左孩子， 右节点的右孩子放入队列
+                queue.add(left.left);
+                queue.add(right.right);
+                //将左节点的右孩子，右节点的左孩子放入队列
+                queue.add(left.right);
+                queue.add(right.left);
             }
+            
             return true;
         }
+
     }
 }
