@@ -12,8 +12,9 @@ public class In_Post_Order_BuildTree106 {
         }
     }
 
-    // O(N)
-    // O(N)
+    //105非常相似
+    //time O(N)
+    //espace O(N)
     public TreeNode buildTree(int[] inorder, int[] postorder) {
         return build(inorder, 0, inorder.length - 1, postorder, 0, postorder.length - 1);
     }
