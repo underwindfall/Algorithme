@@ -2,30 +2,32 @@ package leetcode.datastructure.tree;
 
 // https://leetcode-cn.com/problems/delete-node-in-a-bst
 public class DeleteNodeBST450 {
-    // 删除的思路= find+ replace
-    // 找到过程很简单 删除的时候比较复杂 要考虑种情况
-    // 1.targetNode 没有子节点 皆大欢喜 删就完了
-    // 2.targetNode 有一个子节点，那就需要让这个子即诶带你代替自己的位置
-    // 3.targetNode 有left right 两个节点，需要去right最小的点来代替 从而构成新的BST
     public class TreeNode {
         int val;
         TreeNode left;
         TreeNode right;
-
+        
         TreeNode() {
         }
-
+        
         TreeNode(int val) {
             this.val = val;
         }
-
+        
         TreeNode(int val, TreeNode left, TreeNode right) {
             this.val = val;
             this.left = left;
             this.right = right;
         }
     }
-
+    
+    //time O(logN)
+    //espace O(H)
+    // 删除的思路= find+ replace
+    // 找到过程很简单 删除的时候比较复杂 要考虑种情况
+    // 1.targetNode 没有子节点 皆大欢喜 删就完了
+    // 2.targetNode 有一个子节点，那就需要让这个子即诶带你代替自己的位置
+    // 3.targetNode 有left right 两个节点，需要去right最小的点来代替 从而构成新的BST
     TreeNode deleteNode(TreeNode root, int target) {
         if (root == null) {
             return null;
