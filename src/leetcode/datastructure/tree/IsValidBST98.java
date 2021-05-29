@@ -1,8 +1,9 @@
-package leetcode.datastructure.tree.BasicBST;
+package leetcode.datastructure.tree;
 
 // 判断一个tree是不是BST
 // 关键在于是否满足左子树的最大值<root.val<右子树的最小值
-public class IsValidBST {
+//https://leetcode-cn.com/problems/validate-binary-search-tree
+public class IsValidBST98 {
     public class TreeNode {
         int val;
         TreeNode left;
@@ -13,27 +14,21 @@ public class IsValidBST {
         }
     }
 
-    //time
-    //espace
+    //time O(N)
+    //espace O(N)
     // 如何判断一个tree 是不是BST
     public boolean isValidBST(TreeNode root) {
-        return isValidBST(root, null, null);
+        return isValidBST(root, Long.MIN_VALUE, Long.MAX_VALUE);
     }
 
-    private boolean isValidBST(TreeNode root, TreeNode min, TreeNode max) {
-        // base case
-        if (root == null) {
+    public boolean isValidBST(TreeNode node, long lower, long upper) {
+        if (node == null) {
             return true;
         }
-        // 若 root.val 不符合 max 和 min 的限制，说明不是合法 BST
-        if (min != null && root.val <= min.val) {
+        if (node.val <= lower || node.val >= upper) {
             return false;
         }
-        if (max != null && root.val >= max.val) {
-            return false;
-        }
-        // 限定左子树的最大值是 root.val，右子树的最小值是 root.val
-        return isValidBST(root.left, min, root) && isValidBST(root.right, root, max);
+        return isValidBST(node.left, lower, node.val) && isValidBST(node.right, node.val, upper);
     }
 
     // time O(N)
