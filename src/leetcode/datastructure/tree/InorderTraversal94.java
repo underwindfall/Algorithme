@@ -25,6 +25,8 @@ public class InorderTraversal94 {
         }
     }
 
+    // time O(N)
+    // espace O(N)
     class Recursive {
         List<Integer> result = new ArrayList<>();
 
@@ -42,6 +44,8 @@ public class InorderTraversal94 {
         }
     }
 
+    // time O(N)
+    // espace O(N)
     class Iterative {
         public List<Integer> inorderTraversal(TreeNode root) {
             List<Integer> result = new ArrayList<>();
@@ -52,7 +56,7 @@ public class InorderTraversal94 {
                     stack.push(cur);
                     cur = cur.left;
                 }
-                //回退这个有点精髓
+                // 回退这个有点精髓
                 TreeNode node = stack.pop();
                 result.add(node.val);
                 cur = node.right;
