@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
+//https://leetcode-cn.com/problems/binary-tree-preorder-traversal/
 public class PreorderTraversal144 {
     public class TreeNode {
         int val;
@@ -24,6 +25,8 @@ public class PreorderTraversal144 {
         }
     }
 
+    // time O(N) 所有的节点
+    // espace O(N) 树的高度最坏情况是高度和节点数相同
     class Recursive {
         List<Integer> result = new ArrayList<>();
 
@@ -42,6 +45,8 @@ public class PreorderTraversal144 {
         }
     }
 
+    // time O(N)
+    // espace O(N)
     class Iterative {
         public List<Integer> preorderTraversal(TreeNode root) {
             List<Integer> ret = new ArrayList<>();
