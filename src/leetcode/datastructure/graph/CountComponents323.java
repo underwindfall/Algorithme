@@ -1,6 +1,7 @@
 package leetcode.datastructure.graph;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -83,6 +84,31 @@ public class CountComponents323 {
                 }
             }
             return count;
+        }
+    }
+
+    // 并查集
+    class UnionFind {
+        public int countComponents(int n, int[][] edges) {
+            int[] parents = new int[n];
+            Arrays.fill(parents, -1);
+            for (int[] e : edges) {
+                int root1 = find(parents, e[0]);
+                int root2 = find(parents, e[1]);
+                if (root1 != root2) {
+                    parents[root1] = root2;
+                    n--;
+                }
+            }
+            return n;
+        }
+
+        int find(int[] parents, int x) {
+            int root = x;
+            while (parents[root] != -1) {
+                root = parents[root];
+            }
+            return root;
         }
     }
 }
