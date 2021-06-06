@@ -13,6 +13,25 @@ public class FindTargetSumWays494 {
     // 这个可以解释为 i 是当前的在数组重的index j是sum值 dp[i][j]是当前节点的target 为j的解
     // https://leetcode-cn.com/problems/target-sum/solution/dong-tai-gui-hua-si-kao-quan-guo-cheng-by-keepal/
     class DP {
+        // public int findTargetSumWays(int[] nums, int S) {
+        //     int sum = 0;
+        //     for (final int num : nums)
+        //       sum += num;
+        //     if (sum < S) return 0;
+        //     final int kOffset = sum;
+        //     final int kMaxN = sum * 2 + 1;
+        //     int[] ways = new int[kMaxN];
+        //     ways[kOffset] = 1;
+        //     for (final int num : nums) {      
+        //       int[] tmp = new int[kMaxN];      
+        //       for (int i = num; i < kMaxN - num; ++i) {
+        //         tmp[i + num] += ways[i];
+        //         tmp[i - num] += ways[i];
+        //       }
+        //       ways = tmp;
+        //     }
+        //     return ways[S + kOffset];
+        //   }
         public int findTargetSumWays(int[] nums, int s) {
             int sum = 0;
             for (int i = 0; i < nums.length; i++) {
