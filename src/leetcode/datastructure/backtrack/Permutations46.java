@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 //https://leetcode-cn.com/problems/permutations/
-public class Permutations49 {
+public class Permutations46 {
     // dfs
     // time O(N * N!)
     // espace O(N * N!)
@@ -34,7 +34,7 @@ public class Permutations49 {
             if (!used[i]) {
                 path.add(nums[i]);
                 used[i] = true;
-                System.out.println("before=====" + path);
+                System.out.println(" before=====" + path);
                 dfs(nums, len, depth + 1, path, used, res);
                 // 注意：下面这两行代码发生 「回溯」，回溯发生在从 深层结点 回到 浅层结点 的过程，代码在形式上和递归之前是对称的
                 used[i] = false;
@@ -46,7 +46,7 @@ public class Permutations49 {
 
     public static void main(String[] args) {
         int[] nums = { 1, 2, 3 };
-        Permutations49 solution = new Permutations49();
+        Permutations46 solution = new Permutations46();
         List<List<Integer>> lists = solution.permute(nums);
        System.out.println("result=====" + lists);
     }
