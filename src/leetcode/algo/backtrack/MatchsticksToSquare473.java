@@ -1,4 +1,4 @@
-package leetcode.datastructure.backtrack;
+package leetcode.algo.backtrack;
 
 //https://leetcode-cn.com/problems/matchsticks-to-square/
 public class MatchsticksToSquare473 {

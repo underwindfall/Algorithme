@@ -1,4 +1,4 @@
-package leetcode.datastructure.backtrack;
+package leetcode.algo.backtrack;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;

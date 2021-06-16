@@ -1,4 +1,4 @@
-package leetcode.datastructure.backtrack;
+package leetcode.algo.backtrack;
 
 //https://leetcode-cn.com/problems/sudoku-solver/
 //DFS + backtracking
