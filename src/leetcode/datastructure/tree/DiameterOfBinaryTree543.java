@@ -16,9 +16,9 @@ public class DiameterOfBinaryTree543 {
     // espace O(logN)
     // 由于递归函数在递归过程中需要为每一层递归函数分配栈空间，所以这里需要额外的空间且该空间取决于递归的深度，而递归的深度显然为二叉树的高度，并且每次递归调用的函数里又只用了常数个变量，
 
-    //这题官方题解解释为深度遍历
+    // 这题官方题解解释为深度遍历
     // 那其实你可以想像成从底到顶进行遍历工作
-     
+
     int max = 0;
 
     public int diameterOfBinaryTree(TreeNode root) {
