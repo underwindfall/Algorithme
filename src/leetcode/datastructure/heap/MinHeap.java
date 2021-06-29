@@ -1,5 +1,7 @@
 package leetcode.datastructure.heap;
 
+import java.util.PriorityQueue;
+
 //https://leetcode-cn.com/leetbook/read/heap/evmih5/
 public class MinHeap {
     // 使用数组创建完全二叉树的结构，然后使用二叉树构建一个「堆」
@@ -112,23 +114,57 @@ public class MinHeap {
 
     public static void main(String[] args) {
         // 测试用例
-        MinHeap minHeap = new MinHeap(3);
-        minHeap.add(3);
-        minHeap.add(1);
-        minHeap.add(2);
-        // [1,3,2]
-        System.out.println(minHeap.toString());
-        // 1
-        System.out.println(minHeap.peek());
-        // 1
-        System.out.println(minHeap.pop());
-        // [2, 3]
-        System.out.println(minHeap.toString());
-        minHeap.add(4);
-        // Add too mant elements
-        minHeap.add(5);
-        // [2,3,4]
-        System.out.println(minHeap.toString());
+        // MinHeap minHeap = new MinHeap(3);
+        // minHeap.add(3);
+        // minHeap.add(1);
+        // minHeap.add(2);
+        // // [1,3,2]
+        // System.out.println(minHeap.toString());
+        // // 1
+        // System.out.println(minHeap.peek());
+        // // 1
+        // System.out.println(minHeap.pop());
+        // // [2, 3]
+        // System.out.println(minHeap.toString());
+        // minHeap.add(4);
+        // // Add too mant elements
+        // minHeap.add(5);
+        // // [2,3,4]
+        // System.out.println(minHeap.toString());
+
+        // 利用java内置元素
+        // 创建最小堆
+        PriorityQueue<Integer> minHeapJava = new PriorityQueue<>();
+        // 分别想堆中添加3，1，2
+        minHeapJava.add(1);
+        minHeapJava.add(3);
+        minHeapJava.add(2);
+        // 查看最小堆的所有元素 结果是 【1，3，2】
+        System.out.println("minHeap:" + minHeapJava.toString());
+
+        // 查看最小堆的堆顶元素
+        int peekNum = minHeapJava.peek();
+        System.out.println("peek number" + peekNum);
+
+        // 删除最小堆的堆顶元素
+        int pollNum = minHeapJava.poll();
+        // 结果是1
+        System.out.println("poll number" + pollNum);
+        // 查看删除1后最小堆的堆顶元素，结果为：2
+        System.out.println("peek number: " + minHeapJava.peek());
+
+        // 查看新的最小堆的所有元素 结果是【2，3】
+        System.out.println("minHeap" + minHeapJava.toString());
+
+        //查看最小堆的元素个数 也是最小堆的长度
+        int heapSize = minHeapJava.size();
+        //结果是2
+        System.out.println("minHeap size" + heapSize);
+
+        //判断最小堆的是否有其他元素
+        boolean isEmpty = minHeapJava.isEmpty();
+
+        System.out.println("isEmpty" + isEmpty);
     }
 
 }
