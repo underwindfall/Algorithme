@@ -1,5 +1,8 @@
 package leetcode.datastructure.heap;
 
+import java.util.Collections;
+import java.util.PriorityQueue;
+
 //https://leetcode-cn.com/leetbook/read/heap/evmih5/
 public class MaxHeap {
     // 最大堆的实现
@@ -134,5 +137,42 @@ public class MaxHeap {
         maxheap.add(5);
         // [4,1,2]
         System.out.println(maxheap.toString());
+
+        // 创建java heap 最大堆实例
+        PriorityQueue<Integer> maxJavaHeap = new PriorityQueue<>(Collections.reverseOrder());
+
+        // 分别往最大堆中添加1，3，2
+        /**
+         * 值得注意的是 虽然站顶元素不会发生变化 但是左右节点会
+         */
+        maxJavaHeap.add(1);
+        maxJavaHeap.add(3);
+        maxJavaHeap.add(2);
+
+        System.out.println("maxHeap" + maxJavaHeap.toString());
+        // 获取最大堆的堆顶元素
+        int peekNum = maxJavaHeap.poll();
+        // 结果是3
+        System.out.println("peek number" + peekNum);
+
+        // 删除最大堆的堆顶元素
+        int pollNum = maxJavaHeap.poll();
+        // 结果是3
+        System.out.println("poll number" + pollNum);
+
+        // 查看删除3后最大堆的堆顶元素 结果是2
+        System.out.println("peek number" + maxJavaHeap.peek());
+
+        // 查看最大堆的所有元素 结果是【2，1】
+        System.out.println("maxHeap" + maxJavaHeap.toString());
+
+        // 获取最大堆的个数 长度
+        int heapSize = maxJavaHeap.size();
+        System.out.println("maxHeap size" + heapSize);
+
+        // 判断最大堆是否还有元素
+        boolean isEmpty = maxJavaHeap.isEmpty();
+        // 结果为：false
+        System.out.println("isEmpty: " + isEmpty);
     }
 }
