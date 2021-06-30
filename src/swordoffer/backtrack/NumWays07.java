@@ -38,4 +38,25 @@ public class NumWays07 {
             }
         }
     }
+
+    //time O(k *m)
+    //espace O(k*n)
+    // 转行成计数问题
+    // 通过dp(i, j) 第i轮 转递到j 的方案数
+    // dp(0, 0) = 1 第0轮 只有转递到0 方案数为1 其余为0
+    // dp(0, j) = 0
+    // dp(i + 1, dst) = dp(i, src') + dp(i, src'') +..... dp(i, src'''') // 所有的i之和
+    class DP {
+        public int numWays(int n, int[][] relation, int k) {
+            int[][] dp = new int[k + 1][n];
+            dp[0][0] = 1;
+            for (int i = 0; i < k; i++) {
+                for (int[] edge : relation) {
+                    int src = edge[0], dst = edge[1];
+                    dp[i + 1][dst] += dp[i][src];
+                }
+            }
+            return dp[k][n - 1];
+        }
+    }
 }
