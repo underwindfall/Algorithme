@@ -7,22 +7,27 @@ import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
 
+//https://leetcode-cn.com/problems/top-k-frequent-elements/
 @SuppressWarnings("unchecked")
 public class TopKFrequent347 {
-    class Hash {
+
+    // time O(N * logK)
+    // espace O(N)
+    class Heap {
         public int[] topKFrequent(int[] nums, int k) {
-            Map<Integer, Integer> occurrences = new HashMap<>();
+            Map<Integer, Integer> occurences = new HashMap<>();
             for (int num : nums) {
-                occurrences.put(num, occurrences.getOrDefault(num, 0) + 1);
+                occurences.put(num, occurences.getOrDefault(num, 0) + 1);
             }
 
-            // int[] 的第一个元素代表数组的值，第二个元素代表了该值出现的次数
-            PriorityQueue<int[]> queue = new PriorityQueue<int[]>(new Comparator<int[]>() {
-                public int compare(int[] m, int[] n) {
-                    return m[1] - n[1];
+            // int[] 第一个元素代表数组的值，第二个元素代表该值出现的次数
+            PriorityQueue<int[]> queue = new PriorityQueue<>(new Comparator<int[]>() {
+                @Override
+                public int compare(int[] o1, int[] o2) {
+                    return o1[1] - o2[1];
                 }
             });
-            for (Map.Entry<Integer, Integer> entry : occurrences.entrySet()) {
+            for (Map.Entry<Integer, Integer> entry : occurences.entrySet()) {
                 int num = entry.getKey(), count = entry.getValue();
                 if (queue.size() == k) {
                     if (queue.peek()[1] < count) {
@@ -34,13 +39,15 @@ public class TopKFrequent347 {
                 }
             }
             int[] ret = new int[k];
-            for (int i = 0; i < k; ++i) {
+            for (int i = 0; i < k; i++) {
                 ret[i] = queue.poll()[0];
             }
             return ret;
         }
     }
 
+    //time O(N)
+    //espace O(N)
     class Bucket {
         public int[] topKFrequent(int[] nums, int k) {
             Map<Integer, Integer> map = new HashMap<>();
@@ -55,7 +62,7 @@ public class TopKFrequent347 {
                 if (list[i] == null) {
                     list[i] = new ArrayList<>();
                 }
-                System.out.println("key " + key + "i" + i);
+                // System.out.println("key " + key + "i" + i);
                 list[i].add(key);
             }
             int[] result = new int[k];
