@@ -48,4 +48,46 @@ public class EventualSafeNodes802 {
         }
         return states[cur] = State.SAFE;
     }
+
+    // time O(V + E)
+    // espace O(V + E)
+    class DFS {
+        /**
+        * 使用 Boolean 利用了 null 表示还未计算出结果
+        * true 表示从当前顶点出发的所有路径有回路
+        * false 表示从当前顶点出发的所有路径没有回路
+        */
+        private Boolean[] visited;
+
+        public List<Integer> eventualSafeNodes(int[][] graph) {
+            // node  数量
+            int len = graph.length;
+            visited = new Boolean[len];
+            List<Integer> result = new ArrayList<>();
+            for (int i = 0; i < len; i++) {
+                if (dfs(i, graph)) {
+                    continue;
+                }
+                result.add(i);
+            }
+            return result;
+        }
+
+        boolean dfs(int source, int[][] graph) {
+            if (visited[source] != null) {
+                return visited[source];
+            }
+            // 所有的source 出发的路径有回路
+            visited[source] = true;
+            // 节点source的所有后继节点 都不能回到自己就是安全的
+            for (int successor : graph[source]) {
+                if (dfs(successor, graph)) {
+                    return true;
+                }
+            }
+            // 重置source
+            visited[source] = false;
+            return false;
+        }
+    }
 }
