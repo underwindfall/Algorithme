@@ -1,6 +1,25 @@
 package leetcode.algo.binarysearch;
 
 public class FindDuplicate287 {
+    // time O(N)
+    // espace O(1)
+    class FastSlow {
+        public int findDuplicate(int[] nums) {
+            int slow = 0, fast = 0;
+            do {
+                slow = nums[slow];
+                fast = nums[nums[fast]];
+            } while (slow != fast);
+
+            slow = 0;
+            while (slow != fast) {
+                slow = nums[slow];
+                fast = nums[fast];
+            }
+            return slow;
+        }
+    }
+
     // 本质是利用了1-N的属性。
     public int findDuplicate(int[] nums) {
         int n = nums.length;
