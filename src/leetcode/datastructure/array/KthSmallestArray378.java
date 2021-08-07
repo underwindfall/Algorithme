@@ -9,6 +9,24 @@ import java.util.PriorityQueue;
 // 二分法
 // https://leetcode-cn.com/problems/kth-smallest-element-in-a-sorted-matrix/description/
 public class KthSmallestArray378 {
+   // time O(k*logN)
+    // espace O(N)
+    class Heap {
+        public int kthSmallest(int[][] matrix, int k) {
+            PriorityQueue<Integer> queue = new PriorityQueue<>();
+
+            for (int i = 0; i < matrix.length; i++) {
+                for (int j = 0; j < matrix[0].length; j++) {
+                    queue.add(matrix[i][j]);
+                }
+            }
+            for (int i = 0; i < k - 1; i++) {
+                queue.poll();
+            }
+            return queue.peek();
+        }
+    }
+
     // time O(N*log(r-l))
     // espace O(1)
     class BinarySearch {
