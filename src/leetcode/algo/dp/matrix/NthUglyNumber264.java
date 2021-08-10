@@ -1,7 +1,8 @@
 package leetcode.algo.dp.matrix;
 
+import java.util.HashSet;
 import java.util.PriorityQueue;
-import java.util.Queue;
+import java.util.Set;
 
 // https://leetcode-cn.com/problems/ugly-number-ii/
 public class NthUglyNumber264 {
@@ -41,24 +42,28 @@ public class NthUglyNumber264 {
         }
     }
 
+    // 最小堆
+    // time O(N * logN)
+    // espace O(N)
     class Heap {
         public int nthUglyNumber(int n) {
-            Queue<Long> queue = new PriorityQueue<Long>();
-            int count = 0;
-            long result = 1;
-            queue.add(result);
-            while (count < n) {
-                result = queue.poll();
-                // 删除重复的
-                while (!queue.isEmpty() && result == queue.peek()) {
-                    queue.poll();
+            int[] factors = new int[] { 2, 3, 5 };
+            Set<Long> seen = new HashSet<>();
+            PriorityQueue<Long> heap = new PriorityQueue<>();
+            seen.add(1L);
+            heap.add(1L);
+            int ugly = 0;
+            for (int i = 0; i < n; i++) {
+                long curr = heap.poll();
+                ugly = (int) curr;
+                for (int factor : factors) {
+                    long next = curr * factor;
+                    if (seen.add(next)) {
+                        heap.offer(next);
+                    }
                 }
-                count++;
-                queue.offer(result * 2);
-                queue.offer(result * 3);
-                queue.offer(result * 5);
             }
-            return (int) result;
+            return ugly;
         }
 
     }
