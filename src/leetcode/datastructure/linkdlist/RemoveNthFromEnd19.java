@@ -17,6 +17,8 @@ public class RemoveNthFromEnd19 {
         }
     }
 
+    // time O(N)
+    // espace O(1)
     class FastSlowIndex {
         // 当fast 和 slow 之间相距N个距离
         // 这时候 fast移动至ListNode队尾 slow就是倒数N的前一个数字

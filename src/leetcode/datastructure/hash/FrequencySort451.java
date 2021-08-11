@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
+@SuppressWarnings("unchecked")
 //https://leetcode-cn.com/problems/sort-characters-by-frequency/
 public class FrequencySort451 {
     // time O(n+klogk)
