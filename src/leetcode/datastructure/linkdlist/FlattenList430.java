@@ -44,6 +44,46 @@ public class FlattenList430 {
 
     }
 
+    /*
+     * // Definition for a Node. class Node { public int val; public Node prev;
+     * public Node next; public Node child; };
+     */
+
+    class Solution {
+        private Node ans;
+        private Node cur;
+
+        public Node flatten(Node head) {
+            if (head == null) {
+                return null;
+            }
+            dfs(head);
+            return ans;
+        }
+
+        // 看成二叉树的前序遍历
+        private void dfs(Node node) {
+            if (node == null) {
+                return;
+            }
+            // 相当于前序遍历的主体，把遍历到的当前节点放入新的链表里
+            if (cur == null) {
+                ans = new Node();
+                ans.val = node.val;
+                cur = ans;
+            } else {
+                Node newNode = new Node();
+                newNode.val = node.val;
+                cur.next = newNode;
+                newNode.prev = cur;
+                cur = newNode;
+            }
+            // 优先迭代子节点，再迭代下一个节点
+            dfs(node.child);
+            dfs(node.next);
+        }
+    }
+
     class DFS {
 
         // 思路就是把这个链表的next当作右子树 child当作左子树 做前序遍历
