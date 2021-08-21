@@ -2,6 +2,8 @@ package leetcode.algo.dp.subsquence;
 
 // https://leetcode-cn.com/problems/longest-increasing-subsequence/
 public class LengthOfLIS300 {
+    // time O(n^2)
+    // espace O(N)
     class DP {
         public int lengthOfLIS(int[] nums) {
             if (nums.length == 0) {
@@ -23,7 +25,109 @@ public class LengthOfLIS300 {
         }
     }
 
-    //重复计算过多所以不适合
+    // time O(n^2)
+    // space O(N)
+    class DFSMEMO {
+        public int lengthOfLIS(int[] nums) {
+            int n = nums.length;
+            if (n <= 1) {
+                return n;
+            }
+            int[] memo = new int[n + 1];
+            int ans = 0;
+            for (int i = 0; i < n; i++) {
+                if (memo[i] == 0) {
+                    ans = Math.max(ans, dfs(nums, i, memo));
+                }
+
+            }
+            return ans;
+        }
+
+        int dfs(int[] nums, int index, int[] memo) {
+            if (memo[index] != 0) {
+                return memo[index];
+            }
+            int ans = 0;
+            for (int i = index + 1; i < nums.length; i++) {
+                if (nums[i] > nums[index]) {
+                    ans = Math.max(ans, dfs(nums, i, memo));
+                }
+            }
+            ans++;
+            memo[index] = ans;
+            return ans;
+        }
+    }
+
+    class HelpArray {
+        public int lengthOfLIS(int[] nums) {
+            int n = nums.length;
+            if (n <= 1) {
+                return n;
+            }
+            // 表示arr数组实际的大小
+            int size = 1;
+            // 一个数组
+            int[] arr = new int[n];
+            // 初始化第0个元素
+            arr[0] = nums[0];
+
+            //  遍历nums中元素
+            for (int i = 1; i < n; i++) {
+                // 如果比arr最后一个元素大，直接在后面累加
+                if (nums[i] > arr[size - 1]) {
+                    arr[size++] = nums[i];
+                } else {
+                    // 否则的话，在arr中寻找它应该在的位置
+                    // 即在arr中寻找大于等于它的元素的位置
+                    int right = size - 1;
+                    while (right >= 0 && arr[right] >= nums[i]) {
+                        right--;
+                    }
+                    // 上面多减了一次，要补回来
+                    arr[right + 1] = nums[i];
+                }
+            }
+            return size;
+        }
+    }
+
+    // bineary serach
+    public int lengthOfLIS(int[] nums) {
+        int n = nums.length;
+        if (n <= 1) {
+            return n;
+        }
+
+        // 表示最长的长度
+        int size = 1;
+        // 一个数组
+        int[] arr = new int[n];
+        arr[0] = nums[0];
+
+        for (int i = 1; i < n; i++) {
+            if (nums[i] > arr[size - 1]) {
+                arr[size++] = nums[i];
+            } else {
+                // 利用二分法查找nums[i]在数组arr中的大于等于它的元素的位置
+                int left = 0, right = size - 1;
+                while (left <= right) {
+                    int mid = (left + right) / 2;
+                    if (arr[mid] >= nums[i]) {
+                        right = mid - 1;
+                    } else {
+                        left = mid + 1;
+                    }
+                }
+                arr[right + 1] = nums[i];
+            }
+        }
+
+        return size;
+    }
+
+    // 重复计算过多所以不适合
     class Recursive {
         public int lengthOfLIS(int[] nums) {
             if (nums == null) {
