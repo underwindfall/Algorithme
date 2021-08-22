@@ -87,5 +87,4 @@ public class MatchsticksToSquare473 {
         }
     }
 
-
 }
