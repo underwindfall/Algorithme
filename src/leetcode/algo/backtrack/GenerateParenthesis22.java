@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 //https://leetcode-cn.com/problems/generate-parentheses
+//https://leetcode-cn.com/problems/generate-parentheses/solution/hui-su-suan-fa-by-liweiwei1419/
 public class GenerateParenthesis22 {
 
     // 找规律 递归
