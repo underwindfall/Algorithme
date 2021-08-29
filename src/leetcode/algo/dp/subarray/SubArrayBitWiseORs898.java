@@ -26,6 +26,11 @@ public class SubArrayBitWiseORs898 {
         return res.size();
     }
 
+    // [0, 1, 2, 4, 8]
+    // [0]
+    // [0|1]
+    // [0|1| 2, 2]
+    // [0|1| 2 | 3, 3 ]
 
     // time O(n * log(maxA))
     // space O(n * log(maxA))
@@ -36,13 +41,13 @@ public class SubArrayBitWiseORs898 {
             for (int a : A) {
                 Set<Integer> nxt = new HashSet<>();
                 nxt.add(a);
-                for (int b: cur) {
+                for (int b : cur) {
                     nxt.add(a | b);
                 }
                 res.addAll(nxt);
                 cur = nxt;
             }
-            return res.size();       
+            return res.size();
         }
     }
 }
