@@ -5,6 +5,8 @@ import java.util.Map;
 
 // https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/
 public class LengthOfLongestSubstring3 {
+    // time O(n)
+    // space O(n)
     // 题目可以解读为，s中存在一个字符串t，t是s排列的最小串
     // 思路是右边扩张，直至遇到重复的数字大于1，出现重复，左边收缩
     class Slidingwindow {
