@@ -6,7 +6,7 @@ public class Regex10 {
         public boolean isMatch(String s, String p) {
             int m = s.length();
             int n = p.length();
-    
+
             boolean[][] f = new boolean[m + 1][n + 1];
             f[0][0] = true;
             for (int i = 0; i <= m; ++i) {
@@ -18,12 +18,11 @@ public class Regex10 {
                     if (p.charAt(j - 1) == '*') {
                         if (matches(s, p, i, j - 1)) {
                             f[i][j] = f[i][j - 2] || f[i - 1][j];
-                        }
-                        else {
+                        } else {
                             f[i][j] = f[i][j - 2];
                         }
                     } else {
-                        //单个字符匹配的情况
+                        // 单个字符匹配的情况
                         if (matches(s, p, i, j)) {
                             f[i][j] = f[i - 1][j - 1];
                         }
@@ -32,7 +31,7 @@ public class Regex10 {
             }
             return f[m][n];
         }
-    
+
         public boolean matches(String s, String p, int i, int j) {
             if (i == 0) {
                 return false;
@@ -44,4 +43,36 @@ public class Regex10 {
         }
     }
 
+    /**
+     * s = "aab"
+     * p = "c*a*b"  
+     *       | ---> 可以把c干掉
+     * 
+     * s = "aab"
+     * p = "a*a*b"  
+     *       | ---> 可以把a干掉
+     * 
+     * s= "aab"
+     * p = ".*" ---- 可以匹配任何东西
+     */
+    // time O(n)
+    // space O(n)
+    class Recursive {
+        public boolean isMatch(String s, String p) {
+            if (p.isEmpty()) {
+                return s.isEmpty();
+            }
+            boolean isFirstMatch = !s.isEmpty() && (s.charAt(0) == p.charAt(0) || p.charAt(0) == '.');
+            // s = "aab"
+            // p = "c*a*b"  
+            //       | ---> 可以把c干掉
+            if (p.length() >= 2 && p.charAt(1) == '*') {
+                                        // * matches one or more     //* matches zero character
+                return isFirstMatch && isMatch(s.substring(1), p) || isMatch(s, p.substring(2));
+            } else {
+                return isFirstMatch && isMatch(s.substring(1), p.substring(1));
+            }
+
+        }
+    }
 }
