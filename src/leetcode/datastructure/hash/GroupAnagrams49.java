@@ -8,6 +8,9 @@ import java.util.Map;
 
 // https://leetcode-cn.com/problems/group-anagrams/
 public class GroupAnagrams49 {
+
+    // time O(n * logN* M)
+    // space O(m)
     class Sort {
         public List<List<String>> groupAnagrams(String[] strs) {
             Map<String, List<String>> map = new HashMap<String, List<String>>();
