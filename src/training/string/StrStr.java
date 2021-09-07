@@ -1,5 +1,6 @@
 package training.string;
 
+//https://leetcode-cn.com/problems/implement-strstr/
 public class StrStr {
 
     // 滑动窗口
