@@ -6,8 +6,8 @@ import java.util.Queue;
 //https://leetcode-cn.com/problems/best-meeting-point/
 public class BestMeetingPoint296 {
     // bfs
-    //time O()
-    //space O()
+    // time O(m^2 * n ^2)
+    // space O(m * n)
     public int minTotalDistance(int[][] grid) {
         int minDistance = Integer.MAX_VALUE;
         for (int row = 0; row < grid.length; row++) {
