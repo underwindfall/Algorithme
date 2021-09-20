@@ -6,7 +6,9 @@ import java.util.Arrays;
 //TODO 线段树写法
 public class LongestIncreasingCount673 {
     //思路首先和300 是一致的
-    //dp用来代表当前的最大的递增数列的的长度，
+    // dp用来代表当前的最大的递增数列的的长度，
+    // 以nums[i] 结尾 最长上升子序列的长度 = dp(i)
+    // count(i) 表示以 nums[i] 结尾的最长上升子序列的个数
     class DP {
         public int findNumberOfLIS(int[] nums) {
             if (nums.length <= 1) {
