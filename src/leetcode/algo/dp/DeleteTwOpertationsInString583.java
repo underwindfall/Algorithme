@@ -2,6 +2,36 @@ package leetcode.algo.dp;
 
 // https://leetcode-cn.com/problems/delete-operation-for-two-strings/
 public class DeleteTwOpertationsInString583 {
+
+    // 序列dp
+    // dp[i, j] 代表S1的前i个字符，S2的前j个字符 形成相同字符串的最小删除次数
+    // s1(i - 1) == s2(j - 1), dp[i][j] = dp[i - 1][j - 1]
+    // s1(i - 1) != s2(j - 1), dp[i][j] = Math.min(dp[i - 1][j] + 1 , dp[i][j - 1] + 1 )
+    class Dp {
+        public int minDistance(String word1, String word2) {
+            char[] cs1 = word1.toCharArray(), cs2 = word2.toCharArray();
+            int n = word1.length(), m = word2.length();
+            int[][] dp = new int[n + 1][m + 1];
+            for (int i = 0; i <= n; i++) {
+                dp[i][0] = i;
+            }
+            for (int j = 0; j <= m; j++) {
+                dp[0][j] = j;
+            }
+            for (int i = 1; i <= n; i++) {
+                for (int j = 1; j <= m; j++) {
+                    if (cs1[i - 1] == cs2[j - 1]) {
+                        dp[i][j] = dp[i - 1][j - 1];
+                    } else {
+                        dp[i][j] = Math.min(dp[i - 1][j] + 1, dp[i][j - 1] +1);
+                    }
+                }
+            }
+
+            return dp[n][m];
+        }
+    }
+
     // 思路
     // S1 S2 如果存在着相同的字符串 word1 + word2 - 2* LCS就是穿出字符穿的最小操作
     // 难点转换成 寻找相同的字符串
