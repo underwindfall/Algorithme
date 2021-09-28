@@ -2,6 +2,35 @@ package leetcode.algo.dp;
 
 // https://leetcode-cn.com/problems/decode-ways/
 public class Decode91 {
+    // i 单独考虑 a[1, 9]情况才行 dp(i) = dp(i - 1)
+    // i 和 i -1 组合 b[10,26] dp(i) = dp(i - 2)
+    // i 既可以单独也可组合 dp(i) = dp(i - 1) + dp(i -2) 1<=a<=9 10<=b<=26
+    // timeO(n)
+    // space O(n)
+    class DP {
+        public int numDecodings(String s) {
+            int n = s.length();
+            char[] arr = s.toCharArray();
+            int[] dp = new int[n + 1];
+            dp[0] = 1;
+            for (int i = 1; i < n; i++) {
+                // a : 代表「当前位置」单独形成 item
+                // b : 代表「当前位置」与「前一位置」共同形成 item
+                int a = arr[i] - '0', b = (arr[i - 1] - '0') * 10 + (arr[i - 2] - '0');
+                if (1 <= a && a <= 9) {
+                    dp[i] = dp[i - 1];
+                }
+                if (10 <= b && b <= 26) {
+                    dp[i] = dp[i - 2];
+                }
+                if (1 <= a && a <= 9 && 10 <= b && b <= 26) {
+                    dp[i] = dp[i - 1] + dp[i - 2];
+                }
+            }
+            return dp[n];
+        }
+    }
+
     // 思路
     // 可以看作是青蛙爬楼梯的典型
     // 不同的是 0 被当作了特殊情况处理
@@ -31,8 +60,8 @@ public class Decode91 {
                 } else {
                     dp[i] = dp[i - 1] + dp[i - 2];
                 }
-            } 
-            //102 如果是这样的那就 10，2 这两种方法
+            }
+            // 102 如果是这样的那就 10，2 这两种方法
             else {
                 dp[i] = dp[i - 1];
             }
