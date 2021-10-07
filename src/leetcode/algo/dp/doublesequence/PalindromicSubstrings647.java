@@ -3,6 +3,8 @@ package leetcode.algo.dp.doublesequence;
 //https://leetcode-cn.com/problems/palindromic-substrings/
 public class PalindromicSubstrings647 {
     //  思路跟LongestCommonString5 很像
+    // time O(n^2)
+    // space O(n^2)
     class Dp {
         public int countSubstrings(String s) {
             // dp
