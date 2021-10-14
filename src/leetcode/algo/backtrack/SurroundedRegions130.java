@@ -5,51 +5,68 @@ public class SurroundedRegions130 {
 
     // time O(row * col)
     // time O(row * col)
-    int[][] dirs = { { 1, 0 }, { -1, 0 }, { 0, 1 }, { 0, -1 } };
-
+    //dfs
+    // 1.边界附近mark所有跟O接触的 
+    // 2. loop整个图， mark过的标记为O，否则原来的O标记为X
     public void solve(char[][] board) {
-        if (board == null || board.length == 0 || board[0] == null || board[0].length == 0)
-            return;
-        int row = board.length;
-        int col = board[0].length;
-        for (int j = 0; j < col; j++) {
-            // 第一行
-            if (board[0][j] == 'O')
-                dfs(0, j, board, row, col);
-            // 最后一行
-            if (board[row - 1][j] == 'O')
-                dfs(row - 1, j, board, row, col);
+        //边界
+        for (int i = 0; i < board[0].length; i++) {
+            //第一行
+            if (board[0][i] == 'O') {
+                dfs(0, i, board);
+            }
+            //最后一行
+            if (board[board.length - 1][i] == 'O')  {
+                dfs(board.length - 1, i, board);
+            }
         }
-
-        for (int i = 0; i < row; i++) {
-            // 第一列
-            if (board[i][0] == 'O')
-                dfs(i, 0, board, row, col);
-            // 最后一列
-            if (board[i][col - 1] == 'O')
-                dfs(i, col - 1, board, row, col);
+        
+        
+        for (int i = 0; i < board.length; i++) {
+            //第一列
+            if (board[i][0] == 'O') {
+                dfs(i, 0, board);
+            }
+            //最后一列
+            if (board[i][board[0].length - 1] == 'O') {
+                dfs(i,board[0].length - 1, board);
+            }
         }
-
-        // 转变
-        for (int i = 0; i < row; i++) {
-            for (int j = 0; j < col; j++) {
-                if (board[i][j] == 'O')
-                    board[i][j] = 'X';
-                if (board[i][j] == 'B')
+        
+        
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[0].length; j++) {
+                if (board[i][j] == 'M') {
                     board[i][j] = 'O';
+                }
+                else if (board[i][j] == 'O') {
+                    board[i][j] = 'X';
+                }
             }
         }
 
     }
-
-    private void dfs(int i, int j, char[][] board, int row, int col) {
-        board[i][j] = 'B';
-        for (int[] dir : dirs) {
-            int tmp_i = dir[0] + i;
-            int tmp_j = dir[1] + j;
-            if (tmp_i < 0 || tmp_i >= row || tmp_j < 0 || tmp_j >= col || board[tmp_i][tmp_j] != 'O')
-                continue;
-            dfs(tmp_i, tmp_j, board, row, col);
+    
+    
+    //mark 标记
+    void dfs(int row, int col, char[][] board) {
+        if (!inArea(row, col, board)) {
+            return;
         }
+        
+        if (board[row][col] != 'O') {
+            return;
+        }
+        
+        board[row][col] = 'M';
+        dfs(row - 1, col, board);
+        dfs(row + 1, col, board);
+        dfs(row, col - 1, board);
+        dfs(row, col + 1, board);
+    }
+    
+    
+    boolean inArea(int row, int col, char[][] board) {
+        return row >= 0 && row < board.length && col >= 0 && col < board[0].length;
     }
 }
