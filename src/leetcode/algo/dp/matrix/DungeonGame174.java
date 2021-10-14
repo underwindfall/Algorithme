@@ -4,49 +4,57 @@ import java.util.Arrays;
 
 // https://leetcode-cn.com/problems/dungeon-game/
 public class DungeonGame174 {
-    class DP {
+
+    /**
+     * 题目描述：
+     * 存储着整数的二维数组grid,若grid[i][j]>0,经过它可增加生命值；grid[i][j]==0,经过它不会发生任何事；grid[i][j]<0,经过它会损失对应数值生命值。
+     * 最大化骑士生命值-->最大化骑士路径上的血瓶->求最大路径和 X不可取
+     *  最大化骑士生命值->损失最少的生命值 √
+     * 
+     * 通常的方法：dp[i][j]:从(0,0)到(i,j)的最小生命值
+     * 只能知道能够从左上角到达B的最小生命值，并不知道到达B时的生命值。信息量不足，算法无法做出正确状态转移。
+     * 
+     * 正确做法： 反向思考：dp[i][j]:从(i,j)到终点右下角，所需的最小生命值
+     * 
+     */
+    class DFS {
+        int[][] memo;
+
         public int calculateMinimumHP(int[][] dungeon) {
-            int n = dungeon.length, m = dungeon[0].length;
-            int[][] dp = new int[n + 1][m + 1];
-            for (int i = 0; i <= n; ++i) {
-                Arrays.fill(dp[i], Integer.MAX_VALUE);
-            }
-            dp[n][m - 1] = dp[n - 1][m] = 1;
-            for (int i = n - 1; i >= 0; --i) {
-                for (int j = m - 1; j >= 0; --j) {
-                    int minn = Math.min(dp[i + 1][j], dp[i][j + 1]);
-                    dp[i][j] = Math.max(minn - dungeon[i][j], 1);
-                }
-            }
-            return dp[0][0];
-        }
-    }
+            int m = dungeon.length;
+            int n = dungeon[0].length;
 
-    //
-    class Dfs {
-        public int calculateMinimumHP(int[][] dungeon) {
-            return dfs(dungeon, dungeon.length, dungeon[0].length, 0, 0);
+            memo = new int[m][n];
+            for (int[] row : memo) {
+                Arrays.fill(row, -1);
+            }
+
+            return dp(dungeon, 0, 0);
         }
 
-        int dfs(int[][] dungeon, int m, int n, int i, int j) {
-            // 到达🏁 递归地址
-            if (i == m - 1 && j == n - 1) {
-                return Math.max(1 - dungeon[i][j], 1);
-            }
-            // 最后一行，只能向右搜索。
-            if (i == m - 1) {
-                return Math.max(dfs(dungeon, m, n, i, j + 1) - dungeon[i][j], 1);
-            }
-            // 最后一列，只能向下搜索
-            if (j == n - 1) {
-                return Math.max(dfs(dungeon, m, n, i + 1, j) - dungeon[i][j], 1);
-            }
+        public int dp(int[][] grid, int i, int j) {
+            int m = grid.length;
+            int n = grid[0].length;
 
-            // 向下搜索 + 向右搜索，得到(i, j)点的后续路径所要求的最低血量 Math.min(dfs(i + 1, j), dfs(i, j + 1))，
-            // 又因为(i, j)点本身提供血量dungeon[i][j], 因此从(i, j)开始所需的最低血量为 Math.min(dfs(i + 1, j),
-            // dfs(i, j + 1)) - dungeon[i][j]
-            // 因为骑士的血量不能小于1，因此要和1取个max。
-            return Math.max(Math.min(dfs(dungeon, m, n, i + 1, j), dfs(dungeon, m, n, i, j + 1)) - dungeon[i][j], 1);
+            // 1、base case
+            if (i == m - 1 && j == n - 1) { // 从最末尾位置到最末尾位置，需要的生命值
+                return grid[i][j] >= 0 ? 1 : -grid[i][j] + 1;
+            }
+            if (i == m || j == n)
+                return Integer.MAX_VALUE; // 数组越界时，用来参与min比较的值
+
+            // 2、避免重复计算
+            if (memo[i][j] != -1)
+                return memo[i][j];
+
+            // 3、状态转移逻辑
+            int res = Math.min(dp(grid, i, j + 1), dp(grid, i + 1, j)) - grid[i][j];
+
+            // 4、骑士的生命值至少为1，如果相减下来是负数的话，赋值为1
+            memo[i][j] = res <= 0 ? 1 : res;
+
+            // 5、返回结果
+            return memo[i][j];
         }
     }
 }
