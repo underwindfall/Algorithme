@@ -1,26 +1,36 @@
 package leetcode.algo.dp.state;
 
 // https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/
+
 public class BuyStockCoolDown309 {
+    // https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/discuss/75931/Easiest-JAVA-solution-with-explanations
+    // time O(n)
+    // space O(1)
+
+    /*
+     * buy[i]: Max profit till index i. The series of transaction is ending with a
+     * buy.
+     * 
+     * sell[i]: Max profit till index i. The series of transaction is ending with a
+     * sell.
+     * 
+     */
     public int maxProfit(int[] prices) {
         int n = prices.length;
         if (n < 2)
             return 0;
-        int[][] dp = new int[n][2];
-        // O 卖出
-        // 1 买入
-        dp[0][0] = 0;
-        dp[0][1] = -prices[0];
-        // 第一天没有冷冻期
-        dp[1][0] = Math.max(dp[0][0], dp[0][1] + prices[1]);
-        dp[1][1] = Math.max(dp[0][1], dp[0][0] - prices[1]);
+        int[] sell = new int[n];
+        int[] buy = new int[n];
+
+        buy[0] = -prices[0];
+        buy[1] = -Math.min(prices[0], prices[1]);
+        sell[1] = Math.max(buy[0] + prices[1], 0);
 
         for (int i = 2; i < n; i++) {
-            // dp 卖出
-            dp[i][0] = Math.max(dp[i - 1][0], dp[i - 1][1] + prices[i]);
-            // dp 买入
-            dp[i][1] = Math.max(dp[i - 1][1], dp[i - 2][0] - prices[i]);
+            buy[i] = Math.max(buy[i - 1], sell[i - 2] - prices[i]);
+            sell[i] = Math.max(sell[i - 1], buy[i - 1] + prices[i]);
+            // 同一支股票 不能如此sell[i] = Math.max(sell[i], sell[i - 2] + prices[i]);
         }
-        return Math.max(dp[n - 1][0], dp[n - 1][1]);
+        return sell[n - 1];
     }
 }
