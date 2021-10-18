@@ -59,7 +59,7 @@ public class IsBipartite785 {
                     int v = queue.poll();
                     for (int w : graph[v]) {
                         // 如果当前顶点的某个邻接点已经被染过色了，且颜色和当前顶点相同，说明此无向图无法被正确染色，返回 false。
-                        if (visited[w] != visited[v]) {
+                        if (visited[w] == visited[v]) {
                             return false;
                         }
                         if (visited[w] == 0) {
