@@ -137,6 +137,38 @@ public class WordBreak139 {
         }
     }
 
+    //time O(wordDict * s.length)
+    //space O(wordDict * s.length)
+    class DFSOpti {
+        public boolean wordBreak(String s, List<String> wordDict) {
+            Map<String,Boolean> map = new HashMap<>();
+            for (String w : wordDict) {
+                map.put(w, true);
+            }
+            int[] memo = new int[s.length()];
+            Arrays.fill(memo, -1);
+            return canBreak(0, s, map, memo);
+        }
+
+    boolean canBreak(int start, String s, Map<String,Boolean> map, int[] memo) {
+            if (s.length() == start) {
+                return true;
+            }
+            if (memo[start] != -1) {
+                return memo[start] == 1 ? true : false;
+            }
+            for (int i = start ; i < s.length(); i++) {
+                String prefix = s.substring(start, i + 1);
+                if (map.containsKey(prefix) && canBreak(i + 1, s, map, memo)) {
+                    memo[start] = 1; 
+                    return true;
+                }
+            }
+            memo[start] = 0;
+            return false;
+        }
+    }
+
     class DFS {
         boolean[] mem;
 
