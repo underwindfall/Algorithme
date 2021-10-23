@@ -3,6 +3,7 @@ package leetcode.datastructure.tree;
 import java.util.ArrayList;
 import java.util.List;
 
+//https://leetcode-cn.com/problems/flatten-binary-tree-to-linked-list/
 public class FlattenTree114 {
     public class TreeNode {
         int val;
