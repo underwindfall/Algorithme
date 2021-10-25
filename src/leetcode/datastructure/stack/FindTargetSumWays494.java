@@ -1,14 +1,16 @@
 package leetcode.datastructure.stack;
 
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
 import java.util.Queue;
 
 // https://leetcode-cn.com/problems/target-sum/
 public class FindTargetSumWays494 {
 
-    //time O(N*SUM)
-    //espace O(N*SUM)
-    //prefix sum理论
+    // time O(N*SUM)
+    // espace O(N*SUM)
+    // prefix sum理论
     // DP 问题首先找到公式 dp[i][j] = dp[i - 1][j - nums[i]]+ dp[i - 1][j + nums[i]]
     // 这个可以解释为 i 是当前的在数组重的index j是sum值 dp[i][j]是当前节点的target 为j的解
     // https://leetcode-cn.com/problems/target-sum/solution/dong-tai-gui-hua-si-kao-quan-guo-cheng-by-keepal/
@@ -66,8 +68,29 @@ public class FindTargetSumWays494 {
 
     }
 
-    //time O(2^N)
-    //espace O(N)
+    class DFSMemo {
+        public int findTargetSumWays(int[] nums, int t) {
+            Map<String, Integer> map = new HashMap<>();
+            return dfs(nums, t, 0, 0, map);
+        }
+
+        int dfs(int[] nums, int i, int sum, int S, Map<String, Integer> memo) {
+            String key = i + "_" + sum;
+            if (memo.containsKey(key))
+                return memo.get(key);
+            if (i == nums.length) {
+                memo.put(key, sum == S ? 1 : 0);
+                return memo.get(key);
+            }
+            int left = dfs(nums, i + 1, sum - nums[i], S, memo);
+            int right = dfs(nums, i + 1, sum + nums[i], S, memo);
+            memo.put(key, left + right);
+            return memo.get(key);
+        }
+    }
+
+    // time O(2^N)
+    // espace O(N)
     // 思路是递归调用
     // 每一个节点的值对应 preSum +/- 当前这个节点
     // 当 nums 数组循环到底 并且剩余值等于S时候 记录++
@@ -93,8 +116,8 @@ public class FindTargetSumWays494 {
         }
     }
 
-    //time O(2^N)
-    //espace O(N)
+    // time O(2^N)
+    // espace O(N)
     class BFS {
         public int findTargetSumWays(int[] nums, int S) {
             Queue<Integer> queue = new LinkedList<>();
