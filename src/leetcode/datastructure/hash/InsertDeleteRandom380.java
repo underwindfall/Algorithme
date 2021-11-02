@@ -4,10 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 //https://leetcode-cn.com/problems/insert-delete-getrandom-o1/
 class InsertDeleteRandom380 {
- 
+
   //time O(1)
   //space O(n)
   Map<Integer, Integer> dict;
@@ -15,9 +16,9 @@ class InsertDeleteRandom380 {
   Random rand = new Random();
 
   /** Initialize your data structure here. */
-  public RandomizedSet() {
-    dict = new HashMap();
-    list = new ArrayList();
+  public InsertDeleteRandom380() {
+    dict = new HashMap<>();
+    list = new ArrayList<>();
   }
 
   /** Inserts a value to the set. Returns true if the set did not already contain the specified element. */
