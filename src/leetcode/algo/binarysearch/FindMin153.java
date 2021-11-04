@@ -11,11 +11,9 @@ public class FindMin153 {
             int mid = (high - low) / 2 + low;
             if (nums[high] < nums[mid]) {
                 low = mid + 1;
-            } else if (nums[high] > nums[mid]) {
-                high = mid;
             } else {
-                high--;
-            }
+                high = mid;
+            } 
         }
         return nums[low];
     }
