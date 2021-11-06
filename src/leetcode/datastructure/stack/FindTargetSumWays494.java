@@ -118,6 +118,41 @@ public class FindTargetSumWays494 {
 
     // time O(2^N)
     // espace O(N)
+    // 思路是递归调用
+    // 每一个节点的值对应 preSum +/- 当前这个节点
+    // 当 nums 数组循环到底 并且剩余值等于S时候 记录++
+    class DFSANother {
+        int count = 0;
+
+        public int findTargetSumWays(int[] nums, int target) {
+            int sum = 0;
+            for (int i : nums) {
+                sum += i;
+            }
+            if (target > sum || target < -sum) {
+                return 0;
+            }
+            dfs(0, nums, nums[0], target);
+            dfs(0, nums, -nums[0], target);
+            return count;
+        }
+
+        void dfs(int index, int[] nums, int currSum, int target) {
+            if (index >= nums.length - 1) {
+                if (currSum == target) {
+                    count++;
+                } else {
+                    return;
+                }
+                return;
+            }
+            dfs(index + 1, nums, currSum + nums[index + 1], target);
+            dfs(index + 1, nums, currSum - nums[index + 1], target);
+        }
+    }
+
+    // time O(2^N)
+    // espace O(N)
     class BFS {
         public int findTargetSumWays(int[] nums, int S) {
             Queue<Integer> queue = new LinkedList<>();
