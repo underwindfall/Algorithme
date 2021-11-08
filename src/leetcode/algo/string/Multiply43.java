@@ -4,55 +4,97 @@ package leetcode.algo.string;
 //space O(m + n)
 //https://leetcode-cn.com/problems/multiply-strings/
 public class Multiply43 {
+    /**
+    
+        1 2 3
+        4 5 6
+        
+        6  12  18
+    5  10  15
+4   8  12
+                
+4  13   28 27  18
+    **/
     public String multiply(String num1, String num2) {
-        if (num1.equals("0") || num2.equals("0")) {
-            return "0";
+        int n = num1.length(), m = num2.length();
+        int[] res = new int[m + n - 1];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                res[i + j] += Integer.parseInt(num1.charAt(i) + "") * Integer.parseInt(num2.charAt(j) + "");
+            }
         }
 
-        String ans = "0";
-
-        int m = num1.length(), n = num2.length();
-
-        for (int i = n - 1; i >= 0; i--) {
-            StringBuffer curr = new StringBuffer();
-            int add = 0;
-            for (int j = n - 1; j > i; j--) {
-                curr.append(0);
-            }
-            
-            int y = num2.charAt(i) - '0';
-            for (int j = m - 1; j >= 0; j--) {
-                int x = num1.charAt(j) - '0';
-
-                int product = x * y + add;
-                curr.append(product % 10);
-                add = product / 10;
-            }
-
-            if (add != 0) {
-                curr.append(add % 10);
-            }
-
-            ans = addStrings(ans, curr.reverse().toString());
-        }
-        return ans;
-    }   
-
-
-    String addStrings(String num1, String num2) {
-        int i = num1.length() - 1, j = num2.length() - 1;
         int add = 0;
-        StringBuffer sb = new StringBuffer();
-        while (i >= 0 || j >= 0 || add != 0) {
-            int x = i >= 0? num1.charAt(i) - '0' : 0;
-            int y = j >= 0? num2.charAt(j) - '0' : 0;
-            int res = x + y + add;
-            sb.append(res % 10);
-            add = res / 10;
-            i--;
-            j--;
+        int curr_sum = 0;
+        StringBuilder sb = new StringBuilder();
+        for (int i = res.length - 1; i >= 0; i--) {
+            curr_sum = res[i] + add;
+            add = curr_sum / 10;
+            sb.append(curr_sum % 10);
+
+        }
+        if (add != 0) {
+            sb.append(add);
         }
         sb.reverse();
+
+        if (sb.charAt(0) == '0') {
+            return "0";
+        }
         return sb.toString();
+    }
+
+    class Simulation {
+
+        public String multiply(String num1, String num2) {
+            if (num1.equals("0") || num2.equals("0")) {
+                return "0";
+            }
+
+            String ans = "0";
+
+            int m = num1.length(), n = num2.length();
+
+            for (int i = n - 1; i >= 0; i--) {
+                StringBuffer curr = new StringBuffer();
+                int add = 0;
+                for (int j = n - 1; j > i; j--) {
+                    curr.append(0);
+                }
+
+                int y = num2.charAt(i) - '0';
+                for (int j = m - 1; j >= 0; j--) {
+                    int x = num1.charAt(j) - '0';
+
+                    int product = x * y + add;
+                    curr.append(product % 10);
+                    add = product / 10;
+                }
+
+                if (add != 0) {
+                    curr.append(add % 10);
+                }
+
+                ans = addStrings(ans, curr.reverse().toString());
+            }
+            return ans;
+        }
+
+        String addStrings(String num1, String num2) {
+            int i = num1.length() - 1, j = num2.length() - 1;
+            int add = 0;
+            StringBuffer sb = new StringBuffer();
+            while (i >= 0 || j >= 0 || add != 0) {
+                int x = i >= 0 ? num1.charAt(i) - '0' : 0;
+                int y = j >= 0 ? num2.charAt(j) - '0' : 0;
+                int res = x + y + add;
+                sb.append(res % 10);
+                add = res / 10;
+                i--;
+                j--;
+            }
+            sb.reverse();
+            return sb.toString();
+        }
     }
 }
