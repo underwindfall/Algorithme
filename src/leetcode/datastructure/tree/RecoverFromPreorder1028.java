@@ -23,6 +23,65 @@ public class RecoverFromPreorder1028 {
         }
     }
 
+    class DFSSolution {
+        // 用来记录当前初始化到字符串的哪个位置
+        int currentIndex = 0;
+
+        public TreeNode recoverFromPreorder(String traversal) {
+            // 先生成树根
+            String rootval = "";
+            int i = 0;
+            for (; i < traversal.length() && traversal.charAt(i) != '-'; i++) {
+                rootval = rootval + traversal.charAt(i);
+            }
+            currentIndex = i;
+            TreeNode root = new TreeNode(Integer.parseInt(rootval));
+            // 生成树根的左子树
+            root.left = build(traversal, 0);
+            // 生成树根的右子树
+            root.right = build(traversal, 0);
+            return root;
+        }
+
+        public TreeNode build(String traversal, int preDepth) {
+            // 如果全部初始化完 终止
+            if (traversal.length() == currentIndex) {
+                return null;
+            }
+            // 如果没有初始化完
+            // 统计当前层数
+            int currentDepth = 0;
+            for (int i = currentIndex; i < traversal.length(); i++) {
+                if (traversal.charAt(i) != '-')
+                    break;
+                else
+                    currentDepth++;
+            }
+            // 判断当前层数 是否 大于前一层
+            if (currentDepth <= preDepth)
+                return null;
+            // 如果是该层的子节点 则先将该节点作为左子树创建
+            // 获取当前数据
+            String number = "";
+            int i = currentIndex + currentDepth;
+            for (; i < traversal.length(); i++) {
+                if (traversal.charAt(i) == '-')
+                    break;
+                else
+                    number = number + traversal.charAt(i);
+            }
+            currentIndex = i;
+            // 创建节点
+            TreeNode node = new TreeNode(Integer.parseInt(number));
+            // 获取左子树
+            node.left = build(traversal, currentDepth);
+            // 获取右子树
+            node.right = build(traversal, currentDepth);
+            return node;
+        }
+
+    }
+
     // time O(traversal.length)
     // espace O(H)
     class DFS {
@@ -45,7 +104,8 @@ public class RecoverFromPreorder1028 {
                     break;
                 }
                 // 获取节点值
-                int end = (index += currentDepth);
+                index += currentDepth;
+                int end = index;
                 while (end < S.length() && S.charAt(end) != '-') {
                     end++;
                 }
