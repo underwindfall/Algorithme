@@ -6,13 +6,16 @@ import java.util.Arrays;
 
 // https://leetcode-cn.com/problems/sum-of-distances-in-tree/
 public class SumOfDistancesInTree834 {
+    //https://leetcode-cn.com/problems/sum-of-distances-in-tree/solution/shou-hua-tu-jie-shu-zhong-ju-chi-zhi-he-shu-xing-d/
     //time O(n)
     //space O(n)
     private List<List<Integer>> graph = new ArrayList<>();//邻接表
     int[] distSum; //距离和
     int[] nodeNum; //子树节点个数（包括自己）
+    int N;
 
     public int[] sumOfDistancesInTree(int N, int[][] edges) {
+        this.N = N;
         for(int i = 0; i < N; i++) {
             graph.add(new ArrayList<Integer>());
         }
@@ -25,6 +28,7 @@ public class SumOfDistancesInTree834 {
         distSum = new int[N];
         nodeNum = new int[N];
         Arrays.fill(nodeNum, 1);
+        Arrays.fill(distSum, 0);
         postOrder(0, -1);
         preOrder(0, -1);
         return distSum;
@@ -50,7 +54,7 @@ public class SumOfDistancesInTree834 {
         for(Integer neighbor : neighbors) {
             if(neighbor == parent)
                 continue;
-            distSum[neighbor] = distSum[root] - nodeNum[neighbor] + (graph.size() - nodeNum[neighbor]);
+            distSum[neighbor] = distSum[root] - nodeNum[neighbor] + (N - nodeNum[neighbor]);
             preOrder(neighbor, root);
         }
     }
