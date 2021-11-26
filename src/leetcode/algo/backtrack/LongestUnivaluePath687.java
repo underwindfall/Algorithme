@@ -33,6 +33,31 @@ public class LongestUnivaluePath687 {
         return Math.max(pl, pr);
     }
 
+    // time O(n^2)
+    // space O(n^2)
+    class DoubleDfs {
+        public int longestUnivaluePath(TreeNode root) {
+            if (root == null) {
+                return 0;
+            }
+
+            int longestWithRoot = dfs(root.left, root.val) + dfs(root.right, root.val);
+            int longestWithoutRoot = Math.max(longestUnivaluePath(root.left), longestUnivaluePath(root.right));
+            return Math.max(longestWithoutRoot, longestWithRoot);
+        }
+
+        int dfs(TreeNode root, int val) {
+            if (root == null) {
+                return 0;
+            }
+
+            if (root.val != val) {
+                return 0;
+            }
+            return Math.max(dfs(root.left, val), dfs(root.right, val)) + 1;
+        }
+    }
+
     class TreeNode {
         int val;
         TreeNode left;
