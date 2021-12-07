@@ -1,5 +1,8 @@
 package leetcode.algo.string;
 
+import java.util.HashMap;
+import java.util.Map;
+
 //https://leetcode.com/problems/minimum-number-of-steps-to-make-two-strings-anagram/
 class MinStepAnagram1347 {
     //time O(n)

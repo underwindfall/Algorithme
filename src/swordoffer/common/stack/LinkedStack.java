@@ -1,7 +1,5 @@
 package swordoffer.common.stack;
 
-import swordoffer.common.Node;
-
 import java.util.EmptyStackException;
 
 public class LinkedStack<T> implements Stack<T> {
