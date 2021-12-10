@@ -33,12 +33,16 @@ public class LargestRectangleArea84 {
         return res;
     }
 
-    class IncreStack{
+    //time O(n)
+    //space O(n)
+    class IncreStack {
         public int largestRectangleArea(int[] heights) {
             int n = heights.length;
+            //left左边小于height【i】 最靠近的位置
             int[] left = new int[n];
+            //right右边小于height【i】 最靠近的位置
             int[] right = new int[n];
-            
+
             Stack<Integer> mono_stack = new Stack<Integer>();
             for (int i = 0; i < n; ++i) {
                 while (!mono_stack.isEmpty() && heights[mono_stack.peek()] >= heights[i]) {
@@ -47,7 +51,7 @@ public class LargestRectangleArea84 {
                 left[i] = (mono_stack.isEmpty() ? -1 : mono_stack.peek());
                 mono_stack.push(i);
             }
-    
+
             mono_stack.clear();
             for (int i = n - 1; i >= 0; --i) {
                 while (!mono_stack.isEmpty() && heights[mono_stack.peek()] >= heights[i]) {
@@ -56,12 +60,40 @@ public class LargestRectangleArea84 {
                 right[i] = (mono_stack.isEmpty() ? n : mono_stack.peek());
                 mono_stack.push(i);
             }
-            
+
             int ans = 0;
             for (int i = 0; i < n; ++i) {
                 ans = Math.max(ans, (right[i] - left[i] - 1) * heights[i]);
             }
             return ans;
+        }
+    }
+
+    // time O(n^2)
+    // space O(1)
+    class BruteForce {
+        public int largestRectangleArea(int[] heights) {
+            int len = heights.length;
+            if (len == 0)
+                return 0;
+            int res = 0;
+            for (int i = 0; i < len; i++) {
+                // 找左边最后 1 个大于等于 heights[i] 的下标
+                int left = i;
+                int currHeight = heights[i];
+                while (left > 0 && heights[left - 1] >= currHeight) {
+                    left--;
+                }
+
+                // 找右边最后 1 个大于等于 heights[i] 的索引
+                int right = i;
+                while (right < len - 1 && heights[right + 1] >= currHeight) {
+                    right++;
+                }
+                int width = right - left + 1;
+                res = Math.max(res, width * currHeight);
+            }
+            return res;
         }
     }
 }
