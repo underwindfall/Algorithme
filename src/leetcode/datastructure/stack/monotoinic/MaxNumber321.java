@@ -5,8 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 
 @SuppressWarnings("all")
-//time O(k * (m + n +k ^2))
-//space O(k)
+// time O(k * (m + n +k ^2))
+// space O(k)
 public class MaxNumber321 {
     public static int[] maxNumber(int[] nums1, int[] nums2, int k) {
         int len1 = nums1.length, len2 = nums2.length;
@@ -17,13 +17,11 @@ public class MaxNumber321 {
             int[] pick1 = pickKmaxNumber(nums1, i);
             int[] pick2 = pickKmaxNumber(nums2, k - i);
             int[] cur = merge(pick1, pick2);
-            for (int j = 0; j < k; j++) {
-                if (max[j] > cur[j]) {
-                    break;
-                } else {
-                    max = cur;
-                    break;
-                }
+
+            if (compare(max, 0, cur, 0)) {
+                max = max;
+            } else {
+                max = cur;
             }
         }
         return max;
