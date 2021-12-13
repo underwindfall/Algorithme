@@ -1,4 +1,4 @@
-package leetcode.datastructure.stack;
+package leetcode.datastructure.stack.monotoinic;
 
 import java.util.Stack;
 
@@ -35,6 +35,6 @@ public class RemoveDuplicateLetters316 {
         while(!stack.isEmpty()){
             sb.append(stack.pop());
         }
-        return sb.toString();
+        return sb.reverse().toString();
     }
 }
