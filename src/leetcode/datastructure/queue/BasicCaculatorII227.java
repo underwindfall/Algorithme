@@ -4,14 +4,58 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Stack;
 
 //https://leetcode-cn.com/problems/basic-calculator-ii/
 public class BasicCaculatorII227 {
-    //time O(n)
-    //space O(n)
+
+    // time O(n)
+    // space O(n)
+    class EasyWay {
+        public int calculate(String s) {
+            s = s + "+0";
+            char preOperation = '+';
+            int num = 0;
+            Stack<Integer> stack = new Stack<>();
+            for (char c : s.toCharArray()) {
+                if (c == ' ')
+                    continue;
+                if (Character.isDigit(c)) {
+                    num = num * 10 + (c - '0');
+                } else {
+                    switch (preOperation) {
+                        case '+':
+                            stack.push(num);
+                            break;
+                        case '-':
+                            stack.push(-1 * num);
+                            break;
+                        case '*':
+                            stack.push(stack.pop() * num);
+                            break;
+                        case '/':
+                            stack.push(stack.pop() / num);
+                            break;
+                        default:
+                            break;
+                    }
+                    preOperation = c;
+                    num = 0;
+                }
+            }
+            int sum = 0;
+            while (!stack.isEmpty()) {
+                sum += stack.pop();
+            }
+            return sum;
+        }
+    }
+
+    // time O(n)
+    // space O(n)
     // 使用 map 维护一个运算符优先级
     // 这里的优先级划分按照「数学」进行划分即可
-    Map<Character, Integer> map = new HashMap<>() {
+    Map<Character, Integer> map = new HashMap<Character, Integer>() {
         {
             put('-', 1);
             put('+', 1);
