@@ -8,16 +8,16 @@ public class FindHeaterRadius475 {
     public int findRadius(int[] houses, int[] heaters) {
         Arrays.sort(houses);
         Arrays.sort(heaters);
-        int l = 1, r = (int) (1e9);
+        int l = 0, r = (int) (1e9);
         while (l < r) {
             int mid = (r - l) / 2 + l;
             if (check(houses, heaters, mid)) {
-                r = mid - 1;
+                r = mid;
             } else {
                 l = mid + 1;
             }
         }
-        return l;
+        return r;
     }
 
     boolean check(int[] houses, int[] heaters, int radius) {
