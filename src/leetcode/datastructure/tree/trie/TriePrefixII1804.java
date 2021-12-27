@@ -13,7 +13,7 @@ public class TriePrefixII1804 {
         class TrieNode {
             boolean isEnd = false;
             TrieNode[] children = new TrieNode[26];
-            int count = 0;
+            int prefixCount = 0;
         }
 
         TrieNode root;
@@ -30,7 +30,7 @@ public class TriePrefixII1804 {
                     p.children[u] = new TrieNode();
                 }
                 p = p.children[u];
-                p.count++;
+                p.prefixCount++;
             }
             map.put(word, map.getOrDefault(word, 0) + 1);
         }
@@ -48,17 +48,21 @@ public class TriePrefixII1804 {
                 }
                 p = p.children[u];
             }
-            return p.count;
+            return p.prefixCount;
         }
 
         public void erase(String word) {
             TrieNode p = root;
             for (int i = 0; i < word.length(); i++) {
                 int u = word.charAt(i) - 'a';
-                if (p.children[u] != null) {
-                    p.children[u].count--;
+                if (p.children[u].prefixCount > 0) {
+                    p.children[u].prefixCount--;
+                    p = p.children[u];
+                } else {
+                    TrieNode tmp = p.children[u];
+                    p.children[u] = null;
+                    p = tmp;
                 }
-                p = p.children[u];
             }
 
             if (map.containsKey(word)) {
