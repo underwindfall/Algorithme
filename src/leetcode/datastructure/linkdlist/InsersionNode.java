@@ -73,7 +73,7 @@ public class InsersionNode {
     /**
      * 生成指定数量的节点链表-尾插法
      *
-     * @param count 链表节点数
+     * @param prefixCount 链表节点数
      * @return 链表节点
      */
     class TailInsert {
