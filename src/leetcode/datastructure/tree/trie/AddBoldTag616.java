@@ -3,7 +3,7 @@ package leetcode.datastructure.tree.trie;
 import java.util.HashMap;
 import java.util.Map;
 
-// https://leetcode.com/problems/add-bold-tag-in-string/
+// https://leetcode-cn.com/problems/add-bold-tag-in-string/
 public class AddBoldTag616 {
 
     // time O(n)
@@ -13,7 +13,7 @@ public class AddBoldTag616 {
         int end = 0;
         for (int i = 0; i < s.length(); i++) {
             for (String word : words) {
-                if (s.startsWith(word, i)) {
+                if (s.substring(i).startsWith(word)) {
                     end = Math.max(end, i + word.length());
                 }
             }
@@ -35,8 +35,8 @@ public class AddBoldTag616 {
         return stringBuilder.toString();
     }
 
-    // time
-    // space
+    // time O(n)
+    // space O(1)
     class TrieSolution {
 
         String prefix = "<b>";
