@@ -1,8 +1,12 @@
 package leetcode.datastructure.tree.trie;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 // https://leetcode-cn.com/problems/implement-magic-dictionary/
-// time O()
-// space O()
+// time O(n)
+// space O(1)
 public class MagicDictionary676 {
     TrieNode root;
 
@@ -59,5 +63,39 @@ public class MagicDictionary676 {
     class TrieNode {
         boolean isEnd;
         TrieNode[] children = new TrieNode[26];
+    }
+
+    // time O(n)
+    //space O(n)
+    class HammingDistance {
+        Map<Integer, ArrayList<String>> buckets;
+
+        HammingDistance() {
+            buckets = new HashMap<>();
+        }
+
+        void buildDict(String[] words) {
+            for (String word : words) {
+                buckets.computeIfAbsent(word.length(), x -> new ArrayList<>()).add(word);
+            }
+        }
+
+        boolean search(String word) {
+            if (!buckets.containsKey(word.length())) {
+                return false;
+            }
+            for (String candicate : buckets.get(word.length())) {
+                int misMatch = 0;
+                for (int i = 0; i < word.length(); i++) {
+                    if (word.charAt(i) != candicate.charAt(i)) {
+                        if (++misMatch > 1)
+                            break;
+                    }
+                }
+                if (misMatch == 1)
+                    return true;
+            }
+            return false;
+        }
     }
 }
