@@ -12,6 +12,7 @@ public class FindKthLargest215 {
             int heapSize = nums.length;
             buildMaxHeapSize(nums, heapSize);
 
+            //n - k + 1
             for (int i = nums.length - 1; i >= nums.length - k + 1; i--) {
                 swap(nums, 0, i);
                 heapSize--;
