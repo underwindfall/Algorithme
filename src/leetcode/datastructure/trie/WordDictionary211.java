@@ -1,4 +1,4 @@
-package leetcode.datastructure.tree.trie;
+package leetcode.datastructure.trie;
 
 import java.util.HashSet;
 import java.util.Set;

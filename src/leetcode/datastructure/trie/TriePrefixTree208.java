@@ -1,4 +1,4 @@
-package leetcode.datastructure.tree.trie;
+package leetcode.datastructure.trie;
 
 // https://leetcode-cn.com/problems/implement-trie-prefix-tree/
 public class TriePrefixTree208 {
