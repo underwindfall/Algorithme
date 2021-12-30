@@ -9,43 +9,48 @@ public class FindKthLargest215 {
     // 这个思路主要是推排序的 根本远离
     class HeapSort {
         public int findKthLargest(int[] nums, int k) {
-            int heapSize = nums.length;
-            buildMaxHeapSize(nums, heapSize);
-
-            //n - k + 1
-            for (int i = nums.length - 1; i >= nums.length - k + 1; i--) {
-                swap(nums, 0, i);
-                heapSize--;
-                maxHeapify(nums, 0, heapSize);
+            /*
+             * 第一步：将数组堆化 beginIndex = 第一个非叶子节点。 从第一个非叶子节点开始即可。无需从最后一个叶子节点开始。
+             * 叶子节点可以看作已符合堆要求的节点，根节点就是它自己且自己以下值为最大。
+             */
+            int len = nums.length - 1;
+            int beginIndex = (nums.length) / 2 - 1;
+            for (int i = beginIndex; i >= 0; i--) {
+                maxHeapify(nums, i, len);
             }
+            /*
+             *
+             * 第二步：对堆化数据排序 每次都是移出最顶层的根节点A[0]，与最尾部节点位置调换，同时遍历长度 - 1。
+             * 然后从新整理被换到根节点的末尾元素，使其符合堆的特性。 直至未排序的堆长度为 0。
+             */
+            for (int i = len; i > len - k + 1; i--) {
+                swap(nums, 0, i);
+                maxHeapify(nums, 0, i - 1);
+            }
+
             return nums[0];
         }
 
-        void buildMaxHeapSize(int[] nums, int heapSize) {
-            for (int i = heapSize / 2; i >= 0; i--) {
-                maxHeapify(nums, i, heapSize);
+        void maxHeapify(int[] arr, int index, int len) {
+            int left = index * 2 + 1;
+            int right = left + 1;
+            int cMax = left;
+            if (left > len) {
+                return;
+            }
+            if (right <= len && arr[right] > arr[left]) {
+                cMax = right;
+            }
+            if (arr[cMax] > arr[index]) {
+                swap(arr, cMax, index);
+                maxHeapify(arr, cMax, len);
             }
         }
 
-        void maxHeapify(int[] array, int index, int heapSize) {
-            int left = index * 2 + 1, right = index * 2 + 1 + 1;
-            int largest = index;
-            if (left < heapSize && array[left] > array[largest]) {
-                largest = left;
-            }
-            if (right < heapSize && array[right] > array[largest]) {
-                largest = right;
-            }
-            if (largest != index) {
-                swap(array, index, largest);
-                maxHeapify(array, largest, heapSize);
-            }
-        }
-
-        void swap(int[] a, int i, int j) {
-            int temp = a[i];
-            a[i] = a[j];
-            a[j] = temp;
+        void swap(int[] arr, int index1, int index2) {
+            int tmp = arr[index1];
+            arr[index1] = arr[index2];
+            arr[index2] = tmp;
         }
 
     }
