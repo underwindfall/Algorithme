@@ -47,12 +47,13 @@ public class KClosest973 {
         }
 
         private int partition(int[][] points, int lo, int hi) {
-            int[] v = points[lo];
-            int dist = v[0] * v[0] + v[1] * v[1];
+            int pivot = lo;
+            int[] pivotV = points[pivot];
+            int pivotDist = pivotV[0] * pivotV[0] + pivotV[1] * pivotV[1];
             int i = lo, j = hi + 1;
             while (true) {
-                while (++i <= hi && points[i][0] * points[i][0] + points[i][1] * points[i][1] < dist);
-                while (--j >= lo && points[j][0] * points[j][0] + points[j][1] * points[j][1] > dist);
+                while (++i <= hi && points[i][0] * points[i][0] + points[i][1] * points[i][1] < pivotDist);
+                while (--j >= lo && points[j][0] * points[j][0] + points[j][1] * points[j][1] > pivotDist);
                 if (i >= j) {
                     break;
                 }
@@ -61,7 +62,7 @@ public class KClosest973 {
                 points[j] = tmp;
             }
             points[lo] = points[j];
-            points[j] = v;
+            points[j] = pivotV;
             return j;
         }
     }
