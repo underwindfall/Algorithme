@@ -51,10 +51,8 @@ public class KClosest973 {
             int dist = v[0] * v[0] + v[1] * v[1];
             int i = lo, j = hi + 1;
             while (true) {
-                while (++i <= hi && points[i][0] * points[i][0] + points[i][1] * points[i][1] < dist)
-                    ;
-                while (--j >= lo && points[j][0] * points[j][0] + points[j][1] * points[j][1] > dist)
-                    ;
+                while (++i <= hi && points[i][0] * points[i][0] + points[i][1] * points[i][1] < dist);
+                while (--j >= lo && points[j][0] * points[j][0] + points[j][1] * points[j][1] > dist);
                 if (i >= j) {
                     break;
                 }
