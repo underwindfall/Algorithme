@@ -3,7 +3,7 @@ package leetcode.datastructure.heap;
 import java.util.Arrays;
 import java.util.PriorityQueue;
 
-// https://leetcode.com/problems/meeting-rooms-ii/
+// https://leetcode-cn.com/problems/meeting-rooms-ii/
 public class MinMeetingRoomsII253 {
     // time O(n * logn)
     // space O(n)
