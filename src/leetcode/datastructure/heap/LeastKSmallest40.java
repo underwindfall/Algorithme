@@ -1,7 +1,6 @@
 package leetcode.datastructure.heap;
 
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.PriorityQueue;
 
 //https://leetcode-cn.com/problems/zui-xiao-de-kge-shu-lcof/
@@ -11,32 +10,31 @@ public class LeastKSmallest40 {
     // 当「最大堆」的元素个数达到 K 时，将当前元素与堆顶元素进行对比
     // 如果当前元素大于堆顶元素，则放弃当前元素，继续进行下一个元素；
     // 如果当前元素小于堆顶元素，则删除堆顶元素，将当前元素加入到「最小堆」中。
-
+    //time  O(n * logN)
+    //space O(n)
     class Heap {
         public int[] getLeastNumbers(int[] arr, int k) {
-            int[] result = new int[k];
-            if (k == 0) {
-                return result;
-            }
-            PriorityQueue<Integer> queue = new PriorityQueue<>(new Comparator<Integer>() {
-                @Override
-                public int compare(Integer o1, Integer o2) {
-                    return o2 - o1;
+            PriorityQueue<Integer> pq = new PriorityQueue<>((a, b) -> (b - a));
+            for (int i = 0; i < arr.length; i++) {
+                if (k == 0) {
+                    break;
                 }
-            });
-            for (int i = 0; i < k; i++) {
-                queue.offer(arr[i]);
-            }
-            for (int i = k; i < arr.length; i++) {
-                if (queue.peek() > arr[i]) {
-                    queue.poll();
-                    queue.offer(arr[i]);
+                if (pq.size() < k) {
+                    pq.offer(arr[i]);
+                } else if (pq.peek() > arr[i]) {
+                    if (pq.size() == k) {
+                        pq.poll();
+                    }
+                    pq.offer(arr[i]);
                 }
             }
-            for (int i = 0; i < k; i++) {
-                result[i] = queue.poll();
+            // System.out.println(pq);
+            int[] res = new int[k];
+            int index = 0;
+            while (!pq.isEmpty()) {
+                res[index++] = pq.poll();
             }
-            return result;
+            return res;
         }
     }
 
