@@ -83,6 +83,29 @@ public class PopulatingNextRightPointersTree116 {
         }
     }
 
+    // time O(n)
+    // space O(1)
+    class BFSSolution {
+        public Node connect(Node root) {
+            if (root == null)
+                return root;
+            Node curr = root;
+            Node leftMost = curr.left;
+            while (leftMost != null) {
+                while (curr != null) {
+                    curr.left.next = curr.right;
+                    if (curr.next != null) {
+                        curr.right.next = curr.next.left;
+                    }
+                    curr = curr.next;
+                }
+                curr = leftMost;
+                leftMost = leftMost.left;
+            }
+            return root;
+        }
+    }
+
     // 1.广度遍历
     // 2. 然后把所有的存储的点在next一下
     class BFS {
