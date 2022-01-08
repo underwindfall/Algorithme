@@ -85,6 +85,9 @@ public class CoinChange322 {
 
     }
 
+    // dp(i, j) minCoins to make up j amount using first i types of coins
+    // dp(-1, 0) = 0 dp(-1, j) = inf
+    // dp(i,j) = min(dp(i, j), dp(i - 1, j - coin_i) + 1)
     // time O(s * n)
     // space O(s)
     class DP {

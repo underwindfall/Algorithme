@@ -1,5 +1,8 @@
 package leetcode.algo.dp.knapsack;
 
+import java.util.HashMap;
+import java.util.Map;
+
 //https://leetcode-cn.com/problems/coin-change-2/
 public class CoinChangeII518 {
     // dp(i,j)考虑前 i件物品，凑成总和为 j 的方案数量
@@ -30,4 +33,35 @@ public class CoinChangeII518 {
         return dp[len][amount];
     }
 
+    // time O(n * coins^2)
+    // space O(coins^2)
+    class DFS {
+        public int change(int amount, int[] coins) {
+            Map<String, Integer> cache = new HashMap<>();
+            return change(amount, 0, cache, coins);
+        }
+
+        public int change(int amount, int start, Map<String, Integer> cache, int[] coins) {
+            if (amount < 0) {
+                return 0;
+            }
+
+            if (amount == 0) {
+                return 1;
+            }
+
+            String key = amount + "," + start;
+            if (cache.containsKey(key)) {
+                return cache.get(key);
+            }
+
+            int count = 0;
+            for (int i = start; i < coins.length; ++i) {
+                count += change(amount - coins[i], i, cache, coins);
+            }
+
+            cache.put(key, count);
+            return count;
+        }
+    }
 }
