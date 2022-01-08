@@ -67,6 +67,9 @@ public class CoinChange322 {
             if (resMount == 0) {
                 return 0;
             }
+            if (memo[resMount] != 0) {
+                return memo[resMount];
+            }
             // 需要保存最小硬币方案，res的范围可取（最大硬币可能，MAX_VALUE)。此题是1元
             // 所以res可取(amount+1,Integer.MAX_VALUE）
             int res = Integer.MAX_VALUE;
