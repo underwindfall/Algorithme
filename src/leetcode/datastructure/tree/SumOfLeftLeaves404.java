@@ -18,23 +18,32 @@ public class SumOfLeftLeaves404 {
     // time O(N)
     // espace O(N)
     class Dfs {
+        int count = 0;
+
         public int sumOfLeftLeaves(TreeNode root) {
-            return root == null ? 0 : dfs(root);
+            if (root == null) {
+                return count;
+            }
+            dfs(root.left, true);
+            dfs(root.right, false);
+            return count;
         }
 
-        int dfs(TreeNode node) {
-            int ans = 0;
-            if (node.left != null) {
-                ans += isLeafNode(node.left) ? node.left.val : dfs(node.left);
+        void dfs(TreeNode node, boolean isFromLeft) {
+            if (node == null) {
+                return;
             }
-            if (node.right != null && !isLeafNode(node.right)) {
-                ans += dfs(node.right);
+            if (isFromLeft) {
+                if (node.left == null && node.right == null) {
+                    count += node.val;
+                } else {
+                    dfs(node.left, true);
+                    dfs(node.right, false);
+                }
+            } else {
+                dfs(node.left, true);
+                dfs(node.right, false);
             }
-            return ans;
-        }
-
-        boolean isLeafNode(TreeNode node) {
-            return node.left == null && node.right == null;
         }
     }
 
