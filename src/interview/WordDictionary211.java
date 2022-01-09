@@ -5,6 +5,8 @@ import java.util.Set;
 
 // https://leetcode-cn.com/problems/design-add-and-search-words-data-structure/
 public class WordDictionary211 {
+    //time O(1)
+    //space O(word.length * character26)
     class WordDictionary {
         class TrieNode {
             TrieNode[] children;
