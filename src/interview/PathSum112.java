@@ -25,7 +25,6 @@ public class PathSum112 {
         return hasPathSum(root.left, sum - root.val) || hasPathSum(root.right, sum - root.val);
     }
 
-    @SuppressWarnings("unchecked")
     // time O(N)
     // space O(logN)
     class DFSInterative {
