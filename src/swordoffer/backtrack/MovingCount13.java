@@ -1,9 +1,12 @@
 package swordoffer.backtrack;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 //https://leetcode-cn.com/problems/ji-qi-ren-de-yun-dong-fan-wei-lcof/
 public class MovingCount13 {
-    //time O(N*M)
-    //espace O(N*M)
+    // time O(N*M)
+    // espace O(N*M)
     public int movingCount(int m, int n, int k) {
         boolean[][] visited = new boolean[m][n];
         int count = 0;
@@ -49,5 +52,55 @@ public class MovingCount13 {
         if (x <= 9)
             return x;
         return x / 10 + x % 10;
+    }
+
+    // time O(n * m)
+    // space O(n * m)
+    class BFS {
+        class Solution {
+            public int movingCount(int m, int n, int k) {
+                if (k == 0) {
+                    return 1;
+                }
+
+                Queue<int[]> q = new LinkedList<>();
+
+                boolean[][] vis = new boolean[m][n];
+
+                q.offer(new int[] { 0, 0 });
+
+                int ans = 0;
+
+                while (!q.isEmpty()) {
+                    int[] cell = q.poll();
+                    int x = cell[0], y = cell[1];
+                    if (!inArea(x, y, vis) || vis[x][y] || sum(x) + sum(y) > k) {
+                        continue;
+                    }
+
+                    vis[x][y] = true;
+                    q.offer(new int[] { x - 1, y });
+                    q.offer(new int[] { x + 1, y });
+                    q.offer(new int[] { x, y + 1 });
+                    q.offer(new int[] { x, y - 1 });
+                    ans++;
+                }
+                return ans;
+            }
+
+            boolean inArea(int row, int col, boolean[][] vis) {
+                return row >= 0 && row < vis.length && col >= 0 && col < vis[0].length;
+            }
+
+            int sum(int x) {
+                int res = 0;
+                while (x != 0) {
+                    res += x % 10;
+                    x /= 10;
+                }
+                return res;
+            }
+        }
+
     }
 }
