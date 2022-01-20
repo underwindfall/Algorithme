@@ -7,50 +7,48 @@ import java.util.Queue;
 
 //https://leetcode-cn.com/problems/walls-and-gates/
 public class WallsAndGates286 {
-     // 每个格子 都有4中方向移动
+    // 每个格子 都有4中方向移动
     // BFS 明显的算法是先遍历其中node的邻居节点 然后把邻居节点加入进去 处理的时候因为是队列的处理方式 所以没差
     // time O(M*N)
     // espace O(mn)
-     class BFS {
-         private static final int EMPTY = Integer.MAX_VALUE;
-         private static final int GATE = 0;
-         private  final List<int[]> DIRECTIONS = Arrays.asList(
-                new int[] { 1,  0},
-                new int[] {-1,  0},
-                new int[] { 0,  1},
-                new int[] { 0, -1}
-         );
+    class BFS {
+        private static final int EMPTY = Integer.MAX_VALUE;
+        private static final int GATE = 0;
+        private final List<int[]> DIRECTIONS = Arrays.asList(
+                new int[] { 1, 0 },
+                new int[] { -1, 0 },
+                new int[] { 0, 1 },
+                new int[] { 0, -1 });
 
-         public void wallsAndGates(int[][] rooms) {
-        
+        public void wallsAndGates(int[][] rooms) {
+
             Queue<int[]> q = new LinkedList<>();
 
-             for (int i = 0; i < rooms.length; i++) {
-                 for (int j = 0; j < rooms[0].length; j++) {
-                     if (rooms[i][j] == GATE) { // 从发现是门的地方开始遍历
-                         q.add(new int[] { i, j});
-                     }
-                 }
-             }
+            for (int i = 0; i < rooms.length; i++) {
+                for (int j = 0; j < rooms[0].length; j++) {
+                    if (rooms[i][j] == GATE) { // 从发现是门的地方开始遍历
+                        q.add(new int[] { i, j });
+                    }
+                }
+            }
 
-             while (!q.isEmpty()) {
-                 int[] point = q.poll();
-                 int row = point[0], col = point[1];
+            while (!q.isEmpty()) {
+                int[] point = q.poll();
+                int row = point[0], col = point[1];
 
-                 for (int[] direction : DIRECTIONS) {
-                     int r = row + direction[0];
-                     int c = col + direction[1];
-                     if (r < 0 || r >= rooms.length || c < 0 || c >= rooms[0].length || rooms[r][c] != EMPTY) {
-                         continue;
-                     }
+                for (int[] direction : DIRECTIONS) {
+                    int r = row + direction[0];
+                    int c = col + direction[1];
+                    if (r < 0 || r >= rooms.length || c < 0 || c >= rooms[0].length || rooms[r][c] != EMPTY) {
+                        continue;
+                    }
 
-                     rooms[r][c] = rooms[row][col] + 1;
-                     q.add(new int[] { r, c });
-                 }
-             }
-         }
+                    rooms[r][c] = rooms[row][col] + 1;
+                    q.add(new int[] { r, c });
+                }
+            }
+        }
 
-    
     }
 
     /**
@@ -62,7 +60,7 @@ public class WallsAndGates286 {
         public void wallsAndGates(int[][] rooms) {
             for (int i = 0; i < rooms.length; i++) {
                 for (int j = 0; j < rooms[0].length; j++) {
-                    if (rooms[i][j] == 0) { //从发现是门的地方开始遍历
+                    if (rooms[i][j] == 0) { // 从发现是门的地方开始遍历
                         dfs(rooms, i, j, 0);
                     }
                 }
@@ -75,17 +73,16 @@ public class WallsAndGates286 {
             }
 
             rooms[row][col] = min;
-            //上
+            // 上
             dfs(rooms, row - 1, col, min + 1);
-            //下
+            // 下
             dfs(rooms, row + 1, col, min + 1);
-            //左
+            // 左
             dfs(rooms, row, col - 1, min + 1);
-            //右
+            // 右
             dfs(rooms, row, col + 1, min + 1);
         }
     }
-
 
     // 每个格子 都有4中方向移动
     // BFS 明显的算法是先遍历其中node的邻居节点 然后把邻居节点加入进去 处理的时候因为是队列的处理方式 所以没差
@@ -129,10 +126,10 @@ public class WallsAndGates286 {
                 int col = point[1];
 
                 for (int[] directions : DIRECTIONS) {
-                    int r = row + directions[0]; //新的r
-                    int c = col + directions[1]; //新的c
+                    int r = row + directions[0]; // 新的r
+                    int c = col + directions[1]; // 新的c
 
-                    if (r < 0 || c < 0 || r >= m || c>= n || rooms[r][c] == WALL || distance[r][c] != 0) {
+                    if (r < 0 || c < 0 || r >= m || c >= n || rooms[r][c] == WALL || distance[r][c] != 0) {
                         continue;
                     }
 
