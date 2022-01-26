@@ -1,4 +1,4 @@
-package interview;
+package interview.datadog;
 
 //https://leetcode-cn.com/problems/binary-tree-maximum-path-sum/
 public class MaxPathSumBinaryTree124 {
