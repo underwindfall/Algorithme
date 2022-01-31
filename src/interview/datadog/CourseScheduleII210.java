@@ -9,8 +9,8 @@ import java.util.Queue;
 
 //https://leetcode-cn.com/problems/course-schedule-ii/
 public class CourseScheduleII210 {
-    // time O(N)
-    // espace O(N)
+    // time O(N + M)
+    // espace O(N + M)
     class BFS {
         public int[] findOrder(int numCourses, int[][] prerequisites) {
             int[] incLinkCounts = new int[numCourses];

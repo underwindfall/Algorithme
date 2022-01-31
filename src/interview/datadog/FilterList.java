@@ -102,6 +102,8 @@ public class FilterList {
         return res;
     }
 
+    // time O(n^3)
+    // space O(n)
     static List<String> filterListLoop(List<String> input, String keyword) {
         String[] keys = keyword.split(",");
         Set<String> res = new HashSet<>();

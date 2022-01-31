@@ -20,7 +20,7 @@ public class PathSumIII437 {
     // 理由 1. 他可以从root开头也可以不开头
     // 理由 2. 每个节点作为根结点时候，都可以通过相加来获取目标值
     // time O(N^2)
-    // espace O(N*logN)
+    // espace O(N)
     public int pathSum(TreeNode root, int sum) {
         if (root == null) {
             return 0;
@@ -42,6 +42,8 @@ public class PathSumIII437 {
         return count;
     }
 
+    //time O(n)
+    //space O(n)
     // https://leetcode-cn.com/problems/path-sum-iii/solution/qian-zhui-he-di-gui-hui-su-by-shi-huo-de-xia-tian/
     class PrefixSum {
         public int pathSum(TreeNode root, int sum) {

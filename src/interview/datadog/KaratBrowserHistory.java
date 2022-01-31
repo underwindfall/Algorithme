@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+// https://leetcode.com/discuss/interview-experience/563835/roblox-karat-phone-screen-april-2020-rejected
 public class KaratBrowserHistory {
     /**
      * We have some clickstream data that we gathered on our client's website. Using
@@ -105,7 +105,6 @@ public class KaratBrowserHistory {
         }
 
         for (int i = endIndex; i < endIndex + max; i++) {
-
             result.add(user2[i]);
         }
 

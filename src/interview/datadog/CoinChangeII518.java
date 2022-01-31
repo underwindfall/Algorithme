@@ -49,7 +49,7 @@ public class CoinChangeII518 {
     }
 
     // time O(n * coins^2)
-    // space O(coins^2)
+    // space O(n * coins)
     class DFS {
         public int change(int amount, int[] coins) {
             Map<String, Integer> cache = new HashMap<>();

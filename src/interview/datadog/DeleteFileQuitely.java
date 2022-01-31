@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class DeleteFileQuitely {
-    static boolean deleteQuietly(File file) {
+    private boolean deleteQuietly(File file) {
         if (file == null || !file.exists())
             return true;
         if (!file.isDirectory())
@@ -32,5 +32,4 @@ public class DeleteFileQuitely {
         }
         return succeededDeletion;
     }
-
 }

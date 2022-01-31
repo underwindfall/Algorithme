@@ -10,8 +10,8 @@ import java.util.Queue;
 
 //https://leetcode-cn.com/problems/path-sum-ii/
 public class PathSumII113 {
-    // time O(N)
-    // espace O(logN)
+    // time O(N^2)
+    // espace O(N)
     List<Integer> path = new ArrayList<>();
 
     public List<List<Integer>> pathSum(TreeNode root, int targetSum) {
@@ -37,8 +37,8 @@ public class PathSumII113 {
         path.remove(path.size() - 1);
     }
 
-    // time O(N)
-    // espace O(logN)
+    // time O(N^2)
+    // espace O(N)
     class DFS {
         public List<List<Integer>> pathSum(TreeNode root, int targetSum) {
             List<List<Integer>> res = new ArrayList<>();
@@ -65,6 +65,8 @@ public class PathSumII113 {
         }
     }
 
+    // timeO(n^2)
+    // space O(n)
     class BFS {
         List<List<Integer>> ret = new LinkedList<List<Integer>>();
         Map<TreeNode, TreeNode> map = new HashMap<TreeNode, TreeNode>();
