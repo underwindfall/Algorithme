@@ -1,12 +1,80 @@
 package interview.datadog;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Queue;
 
 //https://leetcode-cn.com/problems/course-schedule/
 public class CourseSchedule207 {
+    // time O(N+E)
+    // espace O(N+E)
+    class Solution {
+        public boolean canFinish(int numCourses, int[][] prerequisites) {
+            Map<Integer, List<Integer>> graph = new HashMap<>();
+            int[] courses = new int[numCourses];
+            for (int i = 0; i< numCourses; i++) {
+                graph.putIfAbsent(i, new ArrayList<>());
+            }
+            for (int[] p : prerequisites) {
+                graph.get(p[1]).add(p[0]);
+                courses[p[0]]++;
+            }
+
+            /*
+            Queue<Integer> q = new LinkedList<>();
+            
+            for (int i = 0; i < courses.length; i++) {
+                if (courses[i] == 0) {
+                    q.offer(i);
+                }
+            }
+            
+            
+            
+            int learnCourses = 0;
+            while (!q.isEmpty()) {
+                int c = q.poll();
+                learnCourses++;
+                for (int adj : graph.get(c)) {
+                    courses[adj]--;
+                    if (courses[adj] == 0) {
+                        q.offer(adj);
+                    }
+                }
+            }
+            return learnCourses == numCourses;
+            */
+            
+            int[] vis = new int[numCourses];
+            for (int i = 0; i < numCourses; i++) {
+                if (!dfs(graph, vis, i)) {
+                    return false;
+                }
+            }
+            return true;
+            
+        }
+        
+        boolean dfs(Map<Integer, List<Integer>> graph, int[] vis, int startCourse) {
+            if (vis[startCourse] == 1) {
+                return false;
+            }
+            if (vis[startCourse] == -1) {
+                return true;
+            }
+            vis[startCourse] = 1;
+            for (int i : graph.get(startCourse)) {
+                if (!dfs(graph, vis, i)) {
+                    return false;
+                }
+            }
+            vis[startCourse] = -1;
+            return true;
+        }
+    }
     // bfs
     // time O(N+E)
     // espace O(N+E)
