@@ -6,6 +6,7 @@ import java.util.Stack;
 public class LCOF09 {
     // time O(n)
     // space O(n)
+    //stack1只管add队列，stack2只管pop队列
     class CQueue {
         Stack<Integer> stack1;
         Stack<Integer> stack2;
