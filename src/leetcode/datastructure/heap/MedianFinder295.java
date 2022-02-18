@@ -3,7 +3,7 @@ package leetcode.datastructure.heap;
 import java.util.PriorityQueue;
 import java.util.TreeMap;
 
-//https://leetcode-cn.com/problems/find-median-from-data-stream/
+//  
 public class MedianFinder295 {
     // time O(logN)
     // space O(n)
