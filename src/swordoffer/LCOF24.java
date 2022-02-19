@@ -16,6 +16,8 @@ public class LCOF24 {
         }
     }
 
+    //time O(n)
+    //space O(1)
     class DummyNode {
         public ListNode reverseList(ListNode head) {
             ListNode dummy = new ListNode(-1);
