@@ -1,7 +1,7 @@
 package swordoffer;
 
 //https://leetcode-cn.com/problems/he-wei-sde-liang-ge-shu-zi-lcof/
-public class LCOF57 {
+public class LCOF57_I {
     // time O(n)
     // space O(1)
     public int[] twoSum(int[] nums, int target) {
