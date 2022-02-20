@@ -21,7 +21,7 @@ public class LCOF24 {
     class DummyNode {
         public ListNode reverseList(ListNode head) {
             ListNode dummy = new ListNode(-1);
-            while (head.next != null) {
+            while (head != null) {
                 ListNode next = head.next;
                 head.next = dummy.next;
                 dummy.next = head;
