@@ -4,7 +4,7 @@ package swordoffer;
 public class LCOF08 {
     // time O(n)
     // space O(1)
-    // left root right
+    //left root right
     public TreeLinkNode GetNext(TreeLinkNode pNode) {
         if (pNode.right != null) {
             TreeLinkNode node = pNode.right;
