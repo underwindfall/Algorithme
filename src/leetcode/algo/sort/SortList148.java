@@ -53,7 +53,7 @@ public class SortList148 {
                 return head;
             }
             ListNode slow = head;
-            ListNode fast = head.next.next;
+            ListNode fast = head.next;
     
             while (fast != null && fast.next != null) {
                 slow = slow.next;
