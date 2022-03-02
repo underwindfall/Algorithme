@@ -1,7 +1,9 @@
 package leetcode.algo.binarysearch;
 
 import java.util.List;
+import java.util.Map;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 // https://leetcode-cn.com/problems/is-subsequence/
 public class IsSubsequence392 {
@@ -43,49 +45,101 @@ public class IsSubsequence392 {
             return i == s.length();
         }
     }
-    @SuppressWarnings("unchecked")
+
+    // follow uop
     class BinarySearch {
-        // ndex保留t每个字符出现的index
-        // 后遍历s
         public boolean isSubsequence(String s, String t) {
-            List<Integer>[] index = new ArrayList[26];
-            int m = s.length(), n = t.length();
-            for (int i = 0; i < n; i++) {
-                char c = t.charAt(i);
-                if (index[c] == null) {
-                    index[c] = new ArrayList<>();
+            if (s == null || t == null)
+                return false;
+
+            Map<Character, List<Integer>> map = new HashMap<>(); // <character, index>
+
+            // preprocess t
+            for (int i = 0; i < t.length(); i++) {
+                char curr = t.charAt(i);
+                if (!map.containsKey(curr)) {
+                    map.put(curr, new ArrayList<Integer>());
                 }
-                index[c].add(i);
+                map.get(curr).add(i);
             }
-            int j = 0;
-            for (int i = 0; i < m; i++) {
+
+            int prev = -1; // index of previous character
+            for (int i = 0; i < s.length(); i++) {
                 char c = s.charAt(i);
-                // 找不到s上存在的这个字符，在t上 那就false
-                if (index[c] == null)
+
+                if (map.get(c) == null) {
                     return false;
-                int pos = left_bound(index[c], j);
-                // pos返回的是当前j，在list中所能找到的含有数量
-                if (pos == index[c].size())
-                    return false;
-                j = index[c].get(pos) + 1;
+                } else {
+                    List<Integer> list = map.get(c);
+                    prev = binarySearch(prev, list, 0, list.size() - 1);
+                    if (prev == -1) {
+                        return false;
+                    }
+                    prev++;
+                }
             }
+
             return true;
         }
 
-        // 返回的是剩余的大小
-        int left_bound(List<Integer> arr, int tar) {
-            int left = 0, right = arr.size() - 1;
-            while (left <= right) {
-                int mid = (right - left) / 2 + left;
-                if (arr.get(mid) < tar) {
-                    left = mid + 1;
-                } else if (arr.get(mid) > tar) {
-                    right = mid - 1;
+        private int binarySearch(int index, List<Integer> list, int start, int end) {
+            while (start <= end) {
+                int mid = start + (end - start) / 2;
+                if (list.get(mid) < index) {
+                    start = mid + 1;
                 } else {
-                    right = mid - 1;
+                    end = mid - 1;
                 }
             }
-            return left;
+
+            return start == list.size() ? -1 : list.get(start);
+        }
+    }
+
+    /**
+     * KMP思想
+     * 类似于用伪链表（基于idx索引）把相同的字符给链接起来
+     * 举例：abac
+     * 1、算法实现过程如下：
+     *  1.1 填充字符 " " => ' abac'
+     *  1.2 对其中的字符a链表而言（a-z每个字符都执行一次下述操作,共26次）
+     *  dp[3]['a'-'a'] => dp[3][0] = -1
+     *  记录a最近的一次位置为，nexPos = 3
+     *  dp[1]['a'-'a'] => dp[1][0] = 3
+     *  记录a最近的一次位置为，nexPos = 1
+     *  dp[0][0] = 1 (预处理填充的空字符意义所在，否则初始位置的a就找不到了)
+     *
+     * 2、查找子串过程（）
+     *  2.1 初始索引为0,遍历待查找子串
+     *  2.2 查找 aa 的过程如下
+     *  idx = 0 （从idx+1以及之后的位置开始查找）
+     *  idx = dp[0][c-'a'] => idx = dp[0][0] => idx = 1
+     *  idx = dp[idx][c-'a'] => dp[1][0] = 3
+     *  此时 aa 已经遍历完，返回true
+     *  上述过程，只要idx = -1,表示找不到字符，则返回false
+     */
+    class FollowUp {
+        public boolean isSubsequence(String s, String t) {
+            t = " " + t; // 预处理，保证t[0] 也被正确表示，即dp[0][..]
+            int[][] dp = new int[t.length()][26];
+
+            for (int ch = 0; ch < 26; ++ch) {// 每一轮处理一个字符
+                int nexPos = -1;
+                for (int i = t.length() - 1; i >= 0; --i) {
+                    dp[i][ch] = nexPos;
+                    if (t.charAt(i) == ch + 'a')
+                        nexPos = i;
+                }
+            }
+            // 起始位置是空字符（idx = 0）
+            // dp[0][p]表示从0（不包括）下一个位置开始查找p+'a'在t中的位置
+            int idx = 0;
+            for (char c : s.toCharArray()) {
+                idx = dp[idx][c - 'a'];
+                if (idx == -1)
+                    return false;
+            }
+            return true;
         }
     }
 }
