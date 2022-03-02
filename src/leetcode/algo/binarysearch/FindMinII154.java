@@ -2,6 +2,8 @@ package leetcode.algo.binarysearch;
 
 // https://leetcode-cn.com/problems/find-minimum-in-rotated-sorted-array-ii/
 public class FindMinII154 {
+    // time O(logn)
+    // espace O(1)
     public int findMin(int[] numbers) {
         int left = 0, right = numbers.length - 1;
         while (left < right) {
