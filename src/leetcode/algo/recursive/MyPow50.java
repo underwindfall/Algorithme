@@ -2,6 +2,8 @@ package leetcode.algo.recursive;
 
 // https://leetcode-cn.com/problems/powx-n/
 public class MyPow50 {
+    //time O(logn)
+    //space O(logn)
     class Recursive {
         class Binary {
             public double myPow(double x, int n) {
