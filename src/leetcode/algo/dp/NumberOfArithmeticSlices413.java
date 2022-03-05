@@ -10,10 +10,10 @@ public class NumberOfArithmeticSlices413 {
      * 
      * 状态初始化 ： 由于题目要求的等差数列长度不能小于3 ，dp[ 0 ] = 0, dp [ 1 ] = 0;
      * 
-     * 状态转移方程 ： 举栗子 nums = [1,2,3,4,5,7 ] , 
-     * dp[0] = 0, 
-     * dp[1] = 0, 
-     * 对 dp[2] , nums[2] - nums[1] == nums[1] - nums[0] , dp[2] = dp[1] + 1 = 0 + 1; 
+     * 状态转移方程 ： 举栗子 nums = [1,2,3,4,5,7 ] ,
+     * dp[0] = 0,
+     * dp[1] = 0,
+     * 对 dp[2] , nums[2] - nums[1] == nums[1] - nums[0] , dp[2] = dp[1] + 1 = 0 + 1;
      * dp[2] 相对于 dp[1] 多了一个以 nums[2] 结尾的 [1,2,3]
      * 对 dp[3] , nums[3] - nums[2] ==nums[2] - nums[1] ,
      * dp[3] = dp[2] + 1 = 0 + 1; dp[3] 相对于 dp[2] 多了一个以 nums[] 结尾的 [2,3,4]; . . . 对
@@ -23,13 +23,13 @@ public class NumberOfArithmeticSlices413 {
      * 
      * 因为 dp [i] 只和 dp[i-1] 有关， 所以使用一个变量记录状态转移就可以了
      */
-    //time O(n)
-    //space O(n)
+    // time O(n)
+    // space O(n)
     class DP {
         public int numberOfArithmeticSlices(int[] A) {
             int dp[] = new int[A.length];
-            dp[0] = 0; 
-            dp [1] = 0;
+            dp[0] = 0;
+            dp[1] = 0;
             int count = 0;
             for (int i = 2; i < A.length; i++) {
                 if (A[i] - A[i - 1] == A[i - 1] - A[i - 2]) {
@@ -40,6 +40,32 @@ public class NumberOfArithmeticSlices413 {
                 }
             }
             return count;
+        }
+    }
+
+    class DFS {
+        int count = 0;
+
+        public int numberOfArithmeticSlices(int[] nums) {
+            dfs(nums, nums.length - 1);
+            return count;
+        }
+
+        // nums, ---> end
+        int dfs(int[] nums, int end) {
+            if (end < 2) {
+                return 0;
+            }
+            // 7,7,7,7
+            // 7
+            int currCount = 0;
+            if (nums[end] - nums[end - 1] == nums[end - 1] - nums[end - 2]) {
+                currCount = 1 + dfs(nums, end - 1);
+                count += currCount;
+            } else {
+                dfs(nums, end - 1);
+            }
+            return currCount;
         }
     }
 
@@ -66,9 +92,9 @@ public class NumberOfArithmeticSlices413 {
         }
     }
 
-    //https://leetcode-cn.com/problems/arithmetic-slices/solution/fu-xue-ming-zhu-bao-li-shuang-zhi-zhen-d-fc1l/
-    //time O(n^2)
-    //space O(n)
+    // https://leetcode-cn.com/problems/arithmetic-slices/solution/fu-xue-ming-zhu-bao-li-shuang-zhi-zhen-d-fc1l/
+    // time O(n^2)
+    // space O(n)
     public class Recursive {
         int sum = 0;
 

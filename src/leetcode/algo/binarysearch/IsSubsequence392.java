@@ -46,53 +46,64 @@ public class IsSubsequence392 {
         }
     }
 
-    // follow uop
+    // O(k * s * logT)
+    // follow up
     class BinarySearch {
         public boolean isSubsequence(String s, String t) {
-            if (s == null || t == null)
-                return false;
-
-            Map<Character, List<Integer>> map = new HashMap<>(); // <character, index>
-
-            // preprocess t
+            // t index
+            Map<Character, List<Integer>> map = new HashMap<>();
             for (int i = 0; i < t.length(); i++) {
-                char curr = t.charAt(i);
-                if (!map.containsKey(curr)) {
-                    map.put(curr, new ArrayList<Integer>());
+                char c = t.charAt(i);
+                if (!map.containsKey(c)) {
+                    map.put(c, new ArrayList<>());
                 }
-                map.get(curr).add(i);
+                map.get(c).add(i);
             }
 
-            int prev = -1; // index of previous character
+            // O(k * s * logT)
+            // aaabbcc
+            // a 0, 1,2
+            // b 3,4
+            // c 5,6
+            // s1, s2 //aabc
+            // for s
+            // index
+            int prev = 0;
             for (int i = 0; i < s.length(); i++) {
                 char c = s.charAt(i);
-
                 if (map.get(c) == null) {
                     return false;
                 } else {
-                    List<Integer> list = map.get(c);
-                    prev = binarySearch(prev, list, 0, list.size() - 1);
-                    if (prev == -1) {
+                    List<Integer> list = map.get(c); // a 0,1,2 // sort order
+                    // binary search(a, b,c) // leftmost
+                    // a,b,c
+                    // a = list.get(index)
+                    // prev = list.get(index) + 1;
+                    int index = binarySearch(prev, list, 0, list.size() - 1);
+                    if (list.get(index) < prev) {
                         return false;
+                    } else {
+                        prev = list.get(index) + 1;
                     }
-                    prev++;
                 }
             }
-
             return true;
         }
 
-        private int binarySearch(int index, List<Integer> list, int start, int end) {
-            while (start <= end) {
-                int mid = start + (end - start) / 2;
+        // O(logT)
+        // leftmost
+        int binarySearch(int index, List<Integer> list, int left, int right) {
+            while (left < right) {
+                // lower bound
+                int mid = (right - left) / 2 + left;
                 if (list.get(mid) < index) {
-                    start = mid + 1;
+                    left = mid + 1;
                 } else {
-                    end = mid - 1;
+                    right = mid;
                 }
             }
 
-            return start == list.size() ? -1 : list.get(start);
+            return left;
         }
     }
 
@@ -101,22 +112,22 @@ public class IsSubsequence392 {
      * 类似于用伪链表（基于idx索引）把相同的字符给链接起来
      * 举例：abac
      * 1、算法实现过程如下：
-     *  1.1 填充字符 " " => ' abac'
-     *  1.2 对其中的字符a链表而言（a-z每个字符都执行一次下述操作,共26次）
-     *  dp[3]['a'-'a'] => dp[3][0] = -1
-     *  记录a最近的一次位置为，nexPos = 3
-     *  dp[1]['a'-'a'] => dp[1][0] = 3
-     *  记录a最近的一次位置为，nexPos = 1
-     *  dp[0][0] = 1 (预处理填充的空字符意义所在，否则初始位置的a就找不到了)
+     * 1.1 填充字符 " " => ' abac'
+     * 1.2 对其中的字符a链表而言（a-z每个字符都执行一次下述操作,共26次）
+     * dp[3]['a'-'a'] => dp[3][0] = -1
+     * 记录a最近的一次位置为，nexPos = 3
+     * dp[1]['a'-'a'] => dp[1][0] = 3
+     * 记录a最近的一次位置为，nexPos = 1
+     * dp[0][0] = 1 (预处理填充的空字符意义所在，否则初始位置的a就找不到了)
      *
      * 2、查找子串过程（）
-     *  2.1 初始索引为0,遍历待查找子串
-     *  2.2 查找 aa 的过程如下
-     *  idx = 0 （从idx+1以及之后的位置开始查找）
-     *  idx = dp[0][c-'a'] => idx = dp[0][0] => idx = 1
-     *  idx = dp[idx][c-'a'] => dp[1][0] = 3
-     *  此时 aa 已经遍历完，返回true
-     *  上述过程，只要idx = -1,表示找不到字符，则返回false
+     * 2.1 初始索引为0,遍历待查找子串
+     * 2.2 查找 aa 的过程如下
+     * idx = 0 （从idx+1以及之后的位置开始查找）
+     * idx = dp[0][c-'a'] => idx = dp[0][0] => idx = 1
+     * idx = dp[idx][c-'a'] => dp[1][0] = 3
+     * 此时 aa 已经遍历完，返回true
+     * 上述过程，只要idx = -1,表示找不到字符，则返回false
      */
     class FollowUp {
         public boolean isSubsequence(String s, String t) {
