@@ -11,7 +11,7 @@ public class LCOF26 {
     boolean dfs(TreeNode A, TreeNode B) {
         if (B == null)
             return true;
-        if (A != null && A.val != B.val)
+        if (A == null && A.val != B.val)
             return false;
         return dfs(A.left, B.left) && dfs(A.right, B.right);
     }
