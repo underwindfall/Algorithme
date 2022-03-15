@@ -29,4 +29,9 @@ public class SimplifyPath71 {
         }
         return result.length() > 0 ? result.toString() : "/";
     }
+
+    // public static void main(String[] args) {
+    //     String a = "/..//a";
+    //     System.out.println(Arrays.toString(a.split("/")));
+    // }
 }
