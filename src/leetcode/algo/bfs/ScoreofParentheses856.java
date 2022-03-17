@@ -7,7 +7,7 @@ public class ScoreofParentheses856 {
     // time O(n)
     // space O(n)
     public int scoreOfParentheses(String s) {
-        if (s == null) {
+        if (s == null) {    
             return 0;
         }
         int score = 0;
