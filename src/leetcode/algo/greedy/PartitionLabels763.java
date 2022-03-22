@@ -9,6 +9,8 @@ import java.util.List;
 public class PartitionLabels763 {
     //time O(n)
     //space O(1)
+    //题目求解 将s尽可能最最大化划分。 划分条件是 每个部分含有尽可能多同一个字符
+    //思路 就是纪律当前char c的最后位置出现的index 并且通过这个记录划分
     public List<Integer> partitionLabels(String s) {
         int[] map = new int[26];
         Arrays.fill(map, -1);
