@@ -53,6 +53,14 @@ public class NetworlfBecomesIdle2039 {
         int ans = 0;
         for (int i = 1; i < patience.length; i++) {
             int stop = distance[i] * 2;
+            // 那么消息往返一遍的时间就是di = 2 * dist[i]
+            // 假设t = patience[i]，即等待时间
+            // 如果t >= di 这个请求被处理的用时就是di
+            // 若t < di 那么会从t + 1时刻开始重复发包
+            // 我们会发送 1 + (di - 1 - t) / t = (di - 1) / t个包
+            // 那么这些包的最后发送时间是 (di - 1) / t * t
+            // 它的返回时间是 (di - 1) / t * t + di
+            // 遍历所有的结点 取处理时间的最大值返回即可
             int lastSend = (stop - 1) / patience[i] * patience[i];
             ans = Math.max(ans, lastSend + stop);
         }
