@@ -4,6 +4,7 @@ package leetcode.algo.greedy;
 public class WinnerOfGames2038 {
     // time O(n)
     // space O(1)
+    // 贪心原则， B 和 A互不影响
     public boolean winnerOfGame(String colors) {
         char[] cs = colors.toCharArray();
         int n = cs.length;
