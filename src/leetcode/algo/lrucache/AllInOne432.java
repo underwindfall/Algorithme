@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-// https://leetcode.com/problems/all-oone-data-structure/
+// https://leetcode-cn.com/problems/all-oone-data-structure/
 // https://www.youtube.com/watch?v=wYqLisoH80w
 // 数据类型需要被整理成 1: {leetcode, dfs} -> 2:{bfs} -> 5:{dp}
 // 这样从大到小的双向linkedlist形式
