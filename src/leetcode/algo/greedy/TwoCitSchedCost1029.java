@@ -2,7 +2,7 @@ package leetcode.algo.greedy;
 
 import java.util.Arrays;
 
-// https://leetcode.com/problems/two-city-scheduling/
+// https://leetcode-cn.com/problems/two-city-scheduling/
 public class TwoCitSchedCost1029 {
     // A,B只有两种选择机会
     // 所以选择A的论点在于 A-B 的diff这个值尽可能的大 也就以为此时选择A是最好的，不然就只能选择B了
