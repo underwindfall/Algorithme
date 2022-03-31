@@ -33,6 +33,17 @@ public class SplitArray410 {
         }
     }
 
+    /**
+     * dp[i][k] 前缀[0,i]被分成k段的各自和最大值最小值
+     * 
+     * 
+     * dp[j][k-1] 前缀[0,j]被分成k段的各自和最大值最小值
+     * 
+     * dp[i][k] = max(dp[j][k - 1], rangSum(j + 1, i))
+     * 
+     */
+    //time O(n^2*m)
+    //space O(m^2)
     class DPOptimsation {
         public int splitArray(int[] nums, int m) {
             int len = nums.length;
