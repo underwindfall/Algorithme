@@ -1,38 +1,41 @@
 package leetcode.datastructure.hash;
 
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.Map;
-import java.util.TreeMap;
 
-//https://leetcode-cn.com/problems/array-of-doubled-pairs/
+// https://leetcode-cn.com/problems/array-of-doubled-pairs/
 public class CanRecordDoubled954 {
     /**
-     * 1. Count all numbers.
-     * 2. Loop all numbers on the order of its absolute.
-     *    We have counter[x] of x, so we need the same amount of 2x wo match them.
-     *    If c[x] > c[2 * x], then we return false
-     *    If c[x] <= c[2 * x], then we do c[2 * x] -= c[x] to remove matched 2x
+     * 1. Count all numbers. 2. Loop all numbers on the order of its absolute. We have counter[x] of
+     * x, so we need the same amount of 2x wo match them. If c[x] > c[2 * x], then we return false
+     * If c[x] <= c[2 * x], then we do c[2 * x] -= c[x] to remove matched 2x
      */
-    //time O(n)
-    //space O(n)
+    // time O(n)
+    // space O(n)
     public boolean canReorderDoubled(int[] arr) {
-        Map<Integer, Integer> count = new TreeMap<>();
-        for (int i : arr) {
-            count.put(i, count.getOrDefault(i, 0) + 1);
+        Map<Integer, Integer> count = new HashMap<>();
+        for (int x : arr) {
+            count.put(x, count.getOrDefault(x, 0) + 1);
         }
-        for (int x: count.keySet()) {
-            if (count.get(x) == 0) continue;
-            //x < 0 时候 去的是 -x/2
-            int want = x < 0 ? x / 2 : x * 2;
-            //没有根
-            if (x < 0 && x % 2 != 0 ) {
-                return false;
-            }
-            //如果want的个数小于能生成的个数
-            if (count.getOrDefault(want, 0) < count.get(x)) {
-                return false;
-            }
+        // B = A as Integer[], sorted by absolute value
+        Integer[] B = new Integer[arr.length];
+        for (int i = 0; i < arr.length; i++) {
+            B[i] = arr[i];
+        }
+        Arrays.sort(B, Comparator.comparingInt(Math::abs));
 
-            count.put(want, count.get(want) - count.get(x));
+        for (int x : B) {
+            // If this can't be consumed, skip
+            if (count.get(x) == 0)
+                continue;
+            // If this doesn't have a doubled partner, the answer is false
+            if (count.getOrDefault(2 * x, 0) <= 0)
+                return false;
+            // Write x, 2*x
+            count.put(x, count.get(x) - 1);
+            count.put(2 * x, count.get(2 * x) - 1);
         }
         return true;
     }
