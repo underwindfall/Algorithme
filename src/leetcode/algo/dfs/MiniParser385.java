@@ -56,8 +56,8 @@ public class MiniParser385 {
         }
     }
 
-    // time
-    // space
+    // time O(n)
+    // space O(n)
     class StackSolution {
         public NestedInteger deserialize(String s) {
             if (s.charAt(0) != '[')
