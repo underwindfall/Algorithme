@@ -50,7 +50,7 @@ public class KthSmallestBST230 {
 
     // time :O(H+K) h = tree height k = kth number
     // espace :O(H+K)
-    class Recursive {
+    class Iterative {
         public int kthSmallest(TreeNode root, int k) {
             LinkedList<TreeNode> stack = new LinkedList<>();
             while (true) {
