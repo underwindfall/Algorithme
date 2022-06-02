@@ -34,6 +34,9 @@ public class LCOF37 {
         // space O(n)
         // Decodes your encoded data to tree.
         public TreeNode deserialize(String data) {
+            if (data.isEmpty()) {
+                return null;
+            }
             // 将字符串转化成列表
             LinkedList<String> nodes = new LinkedList<>();
             for (String s : data.split(SEP)) {
