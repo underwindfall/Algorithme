@@ -5,6 +5,8 @@ import java.util.Map;
 
 // https://leetcode-cn.com/problems/two-sum/
 public class TwoSum1 {
+    // time O(n)
+    // space O(n)
     class Hash {
         public int[] twoSum(int[] nums, int target) {
             Map<Integer, Integer> map = new HashMap<>();
@@ -18,6 +20,8 @@ public class TwoSum1 {
         }
     }
 
+    // time O(n^2)
+    // space O(1)
     class DoubleIndex {
         public int[] twoSum(int[] nums, int target) {
             int index = 0;
