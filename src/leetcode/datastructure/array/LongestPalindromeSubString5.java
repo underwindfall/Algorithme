@@ -29,6 +29,7 @@ public class LongestPalindromeSubString5 {
             // 枚举左边界，左边界的上限设置可以宽松一些
             for (int i = 0; i < len; i++) {
                 // 由 L 和 i 可以确定右边界，即 j - i + 1 = L 得
+                //L = 3 i = 0 j = 2        0 1 2
                 int j = L + i - 1;
                 // 如果右边界越界，就可以退出当前循环
                 if (j >= len) {
@@ -38,6 +39,11 @@ public class LongestPalindromeSubString5 {
                 if (charArray[i] != charArray[j]) {
                     dp[i][j] = false;
                 } else {
+                    //char i == char j 
+                    // L - 1 < 3
+                    // L <= 3
+                    // i...j -> 中间字符串 <= 1
+                    // 考虑头尾去掉以后没有字符剩余，或者剩下一个字符的时候，肯定是回文串
                     if (j - i < 3) {
                         dp[i][j] = true;
                     } else {
