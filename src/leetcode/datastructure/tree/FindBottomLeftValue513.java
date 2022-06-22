@@ -43,4 +43,27 @@ public class FindBottomLeftValue513 {
         }
         return root.val;
     }
+
+    // time O(logN)
+    // espace O(N)
+    class DFS {
+        int maxDepth = 0, ans = 0;
+
+        public int findBottomLeftValue(TreeNode root) {
+            dfs(root, 1);
+            return ans;
+        }
+
+        void dfs(TreeNode node, int depth) {
+            if (node == null) {
+                return;
+            }
+            if (depth > maxDepth) {
+                maxDepth = depth;
+                ans = node.val;
+            }
+            dfs(node.left, depth + 1);
+            dfs(node.right, depth + 1);
+        }
+    }
 }
