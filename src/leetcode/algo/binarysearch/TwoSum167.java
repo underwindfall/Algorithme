@@ -42,7 +42,7 @@ class TwoSum167 {
                 // 那意味着你的起点太低了，需要提升你的起点
                 // left++
                 // 但是如果过小意味你的起点挺高，动你的目标点就好了
-                // right--
+                // right-- 
                 if (numbers[left] + numbers[right] == target) {
                     // 这一步单纯为了凑数 其实题目变化的没必要做
                     return new int[] { left + 1, right + 1 };

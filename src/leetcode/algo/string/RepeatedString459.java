@@ -5,6 +5,8 @@ public class RepeatedString459 {
     // 1 假设存在一个string 是 s的子串 并且重复
     // s.length % string.length == 0
     // s.charAt(i) = s.charAt(i - string.length)
+    // time O(N^2)
+    // space O(1)
     class Loop {
         public boolean repeatedSubstringPattern(String s) {
             int n = s.length();
