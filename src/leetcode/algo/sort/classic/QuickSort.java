@@ -1,4 +1,4 @@
-package leetcode.algo.sort;
+package leetcode.algo.sort.classic;
 
 import java.util.Arrays;
 
