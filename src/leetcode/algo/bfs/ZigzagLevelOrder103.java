@@ -65,7 +65,7 @@ public class ZigzagLevelOrder103 {
                 res.add(new ArrayList<Integer>());
             }
 
-            if ((level & 1) == 1) {
+            if (level % 2 == 1) {
                 res.get(level).add(0, root.val);
             } else {
                 res.get(level).add(root.val);
