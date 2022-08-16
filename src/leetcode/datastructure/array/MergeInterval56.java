@@ -49,7 +49,7 @@ public class MergeInterval56 {
         //logN 的时间和空间复杂度
         Arrays.sort(intervals, (a, b) -> a[0] - b[0]);
         List<int[]> merged = new ArrayList<int[]>();
-        for (int i = 0; i < intervals.length - 1; i++) {
+        for (int i = 0; i < intervals.length; i++) {
             int L = intervals[i][0], R = intervals[i][1];
             // 不merge状况，因为他的右边R比新的左边L要小
             if (merged.size() == 0 || merged.get(merged.size() - 1)[1] < L) {

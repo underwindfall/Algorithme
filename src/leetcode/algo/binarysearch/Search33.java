@@ -27,7 +27,7 @@ public class Search33 {
                         left = mid + 1;
                     }
                 } else {
-                    if (nums[mid] < target && nums[right] >= target) {
+                    if (nums[mid] < target && nums[nums.length - 1] >= target) {
                         left = mid + 1;
                     } else {
                         right = mid - 1;
