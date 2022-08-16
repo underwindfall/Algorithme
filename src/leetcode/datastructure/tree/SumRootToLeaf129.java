@@ -51,7 +51,7 @@ public class SumRootToLeaf129 {
                 TreeNode node = nodeQueue.poll();
                 int num = nodeNum.poll();
                 if (node.left == null && node.right == null) {
-                    sum += node.val;
+                    sum += num;
                 } else {
                     if (node.left != null) {
                         nodeQueue.offer(node.left);
