@@ -2,6 +2,38 @@ package leetcode.algo.dp.subsquence;
 
 // https://leetcode-cn.com/problems/longest-increasing-subsequence/
 public class LengthOfLIS300 {
+
+    // https://leetcode.cn/problems/longest-increasing-subsequence/solution/zui-chang-shang-sheng-zi-xu-lie-dong-tai-gui-hua-2/
+    // time O(n logN)
+    // space O(N)
+    // bineary serach + greedy
+    public int lengthOfLIS(int[] nums) {
+        int len = 1, n = nums.length;
+        if (n == 0) {
+            return 0;
+        }
+        int[] d = new int[n + 1];
+        d[len] = nums[0];
+        for (int i = 1; i < n; ++i) {
+            if (nums[i] > d[len]) {
+                d[++len] = nums[i];
+            } else {
+                int l = 1, r = len, pos = 0; // 如果找不到说明所有的数都比 nums[i] 大，此时要更新 d[1]，所以这里将 pos 设为 0
+                while (l <= r) {
+                    int mid = (l + r) >> 1;
+                    if (d[mid] < nums[i]) {
+                        pos = mid;
+                        l = mid + 1;
+                    } else {
+                        r = mid - 1;
+                    }
+                }
+                d[pos + 1] = nums[i];
+            }
+        }
+        return len;
+    }
+
     // time O(n^2)
     // espace O(N)
     class DP {
@@ -91,40 +123,6 @@ public class LengthOfLIS300 {
             }
             return size;
         }
-    }
-
-    // bineary serach
-    public int lengthOfLIS(int[] nums) {
-        int n = nums.length;
-        if (n <= 1) {
-            return n;
-        }
-
-        // 表示最长的长度
-        int size = 1;
-        // 一个数组
-        int[] arr = new int[n];
-        arr[0] = nums[0];
-
-        for (int i = 1; i < n; i++) {
-            if (nums[i] > arr[size - 1]) {
-                arr[size++] = nums[i];
-            } else {
-                // 利用二分法查找nums[i]在数组arr中的大于等于它的元素的位置
-                int left = 0, right = size - 1;
-                while (left <= right) {
-                    int mid = (left + right) / 2;
-                    if (arr[mid] >= nums[i]) {
-                        right = mid - 1;
-                    } else {
-                        left = mid + 1;
-                    }
-                }
-                arr[right + 1] = nums[i];
-            }
-        }
-
-        return size;
     }
 
     // 重复计算过多所以不适合
