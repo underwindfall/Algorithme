@@ -7,22 +7,21 @@ public class SelectSort {
      * 每次选择未排序序列中的最小值与未排序序列的第一个位置交换
      * 超时！
      */
-    public int selectSort(int[] nums, int k) {
+    // time O(N^2)
+    public void selectSort(int[] nums, int k) {
         int min = 0;
-        for (int i = 0; i < nums.length; i++) {
-            min = nums[i];
-            int tempIndex = -1;
-            for (int j = i; j < nums.length; j++) {
-                if (nums[j] <= min) {
-                    min = nums[j];
-                    tempIndex = j;
+        for (int i = 0; i < nums.length - 1; i++) {
+            min = i;
+            // 循环查找最小值
+            for (int j = i + 1; j < nums.length; j++) {
+                if (nums[min] > nums[j]) {
+                    min = j;
                 }
             }
-            if (tempIndex == -1)
-                break;
-            swap(nums, i, tempIndex);
+            if (min != i) {
+                swap(nums, i, min);
+            }
         }
-        return nums[nums.length - k];
     }
 
     void swap(int[] nums, int i, int j) {

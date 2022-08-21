@@ -13,10 +13,10 @@ import java.util.Arrays;
  * 递归地（recursive）把小于基准值元素的子数列和大于基准值元素的子数列排序；
  */
 public class QuickSort {
-    public int[] sort(int[] sourceArray) {
+    public void sort(int[] sourceArray) {
         // 对arr 进行拷贝 不改变参数内容
         int[] arr = Arrays.copyOf(sourceArray, sourceArray.length);
-        return quickSort(arr, 0, arr.length - 1);
+        quickSort(arr);
     }
 
     // public int[] sort2(int[] sourceArray) {
@@ -25,13 +25,32 @@ public class QuickSort {
     //     return quickSort2(arr, 0, arr.length - 1);
     // }
 
-    int[] quickSort(int[] arr, int left, int right) {
-        if (left < right) {
-            int partitionIndex = partition(arr, left, right);
-            quickSort(arr, left, partitionIndex - 1);
-            quickSort(arr, partitionIndex + 1, right);
+    void quickSort(int[] arr) {
+        qsort(arr, 0, arr.length - 1);
+    }
+
+    void qsort(int[] arr, int low, int high) {
+        if (low >= high)
+            return;
+        int pivot = partition(arr, low, high); // 将数组分为两部分
+        qsort(arr, low, pivot - 1); // 递归排序左子数组
+        qsort(arr, pivot + 1, high); // 递归排序右子数组
+    }
+
+    int partition(int[] arr, int low, int high) {
+        int pivot = arr[low]; // 基准
+        while (low < high) {
+            while (low < high && arr[high] >= pivot)
+                --high;
+            arr[low] = arr[high]; // 交换比基准大的记录到左端
+            while (low < high && arr[low] <= pivot)
+                ++low;
+            arr[high] = arr[low]; // 交换比基准小的记录到右端
         }
-        return arr;
+        // 扫描完成，基准到位
+        arr[low] = pivot;
+        // 返回的是基准的位置
+        return low;
     }
 
     // int[] quickSort2(int[] arr, int left, int right) {
@@ -62,19 +81,19 @@ public class QuickSort {
      * correct position in sorted array, and places all smaller (smaller than pivot)
      * to left of pivot and all greater elements to right of pivot
      */
-    int partition(int[] arr, int left, int right) {
-        // 设置基准值
-        int pivot = left;
-        int index = pivot + 1;
-        for (int i = index; i <= right; i++) {
-            if (arr[i] < arr[pivot]) {
-                swap(arr, i, index);
-                index++;
-            }
-        }
-        swap(arr, pivot, index - 1);
-        return index - 1;
-    }
+    // int partition(int[] arr, int left, int right) {
+    //     // 设置基准值
+    //     int pivot = left;
+    //     int index = pivot + 1;
+    //     for (int i = index; i <= right; i++) {
+    //         if (arr[i] < arr[pivot]) {
+    //             swap(arr, i, index);
+    //             index++;
+    //         }
+    //     }
+    //     swap(arr, pivot, index - 1);
+    //     return index - 1;
+    // }
 
     void swap(int[] arr, int i, int j) {
         int tmp = arr[i];
@@ -85,8 +104,8 @@ public class QuickSort {
     public static void main(String[] args) {
         int[] test = new int[] { 3, 4, 2, 7, 9, 2 };
         QuickSort quickSort = new QuickSort();
-        System.out.println(Arrays.toString(quickSort.sort(test)));
-
+        quickSort.sort(test);
+        System.out.println(Arrays.toString(test));
         // System.out.println(Arrays.toString(quickSort.sort2(test)));
     }
 }

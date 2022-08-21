@@ -18,6 +18,9 @@ public class HeapSort {
 
     /**
      * 堆排序的主要入口方法，共两步。
+     * Parent(i) = floor((i-1)/2)，i 的父节点下标
+     * Left(i) = 2i + 1，i 的左子节点下标
+     * Right(i) = 2(i + 1)，i 的右子节点下标
      */
     public void sort() {
         /*
@@ -30,7 +33,7 @@ public class HeapSort {
             maxHeapify(i, len);
         }
         
-        System.out.println(Arrays.toString(arr));
+        // System.out.println(Arrays.toString(arr));
         
         /*
          * 第二步：对堆化数据排序 每次都是移出最顶层的根节点A[0]，与最尾部节点位置调换，同时遍历长度 - 1。
