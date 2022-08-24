@@ -2,6 +2,54 @@ package leetcode.algo.doubleindex;
 
 // https://leetcode.com/problems/next-permutation/
 public class NextPermutation31 {
+    //time O(N)
+    //space O(1)
+    class LooTwice {
+        public void nextPermutation(int[] nums) {
+                //1. 1,2,3 ==> 1,3,2
+                //1. 倒序遍历, 找到第一个数, 这个数比后面的数小;
+                //2. 继续倒序遍历, 找到一个比上面的数大的数;
+                //3. 交换
+                //4. 把1中的这个数后面的数全部递增排列, 因为在1后面的数时递减排列的, 所以首尾交换即可获得升序排列       
+                int len = nums.length;
+                int i = len - 2; //i = len - 2 是为了防止下面nums[i + 1]越界!
+                
+                //1. 倒序遍历, 找到第一个数, 这个数比后面的数小;
+                while(i >= 0){
+                    if(nums[i] < nums[i + 1])break;
+                    --i;
+                }
+            
+                //2. 继续倒序遍历, 找到一个上面的数大的数
+                if(i >= 0){
+                    int j = len - 1;
+                    while(j >= 0){
+                        if(nums[j] > nums[i])break;
+                        --j;
+                    }
+                    //3. 交换i和j
+                    swap(nums, i, j); //交换i和j的位置
+                }
+                
+                //4. 将 i后面的数升序排列, 只需要对撞双指针交换即可(因为i后面的数时降序的)
+                reverse(nums, i + 1, len - 1);
+            }
+
+            void swap(int[] nums, int left, int right){
+                int temp = nums[left];
+                nums[left] = nums[right];
+                nums[right] = temp;
+            }
+
+            void reverse(int[] nums, int left, int right){
+                while(left < right){
+                    swap(nums, left, right);
+                    ++left;
+                    --right;
+                }
+            }
+    }
+
     //time O(n)
     //space O(1)
     /*0*/ public void nextPermutation(int[] nums) {
