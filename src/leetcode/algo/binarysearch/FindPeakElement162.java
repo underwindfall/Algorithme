@@ -43,16 +43,24 @@ public class FindPeakElement162 {
     // espace O(1)
     class Iterative {
         public int findPeakElement(int[] nums) {
-            int left = 0, right = nums.length - 1;
-            while (left < right) {
-                int mid = (right - left) / 2 + left;
+            /*
+             * 根据题目描述，给出的数据中必定存在峰值，假设数据中只存在一个峰值，那么峰值不在数据的中间，就在数据的左侧或右侧。
+             * 当存在一个峰值时，数据的结构一定为nums[0]<...<nums[i-1]<nums[i]>nums[i+1]>...>nums[len]，
+             * 则存在当nums[mid]<nums[mid+1]时证明峰值在mid的右侧，所以l=mid+1，
+             * 当nums[mid]>nums[mid+1]时，证明当前mid是峰值点或峰值点在mid的左侧，
+             * 所以r=mid;
+             * 存在多个峰值点的情况证明与之类似。
+             */
+            int l = 0, r = nums.length - 1;
+            while (l < r) {
+                int mid = l + (r - l) / 2;
                 if (nums[mid] > nums[mid + 1]) {
-                    right = mid;
+                    r = mid;
                 } else {
-                    left = mid + 1;
+                    l = mid + 1;
                 }
             }
-            return left;
+            return l;
         }
     }
 
