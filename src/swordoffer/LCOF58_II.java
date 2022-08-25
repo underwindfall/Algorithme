@@ -27,4 +27,27 @@ public class LCOF58_II {
             return res.toString();
         }
     }
+
+    // time O(n)
+    // space O(n)
+    class ReverseMultiple {
+        public String reverseLeftWords(String s, int n) {
+            int len = s.length();
+            StringBuilder sb = new StringBuilder(s);
+            reverse(sb, 0, n - 1);
+            reverse(sb, n, len - 1);
+            reverse(sb, 0, len - 1);
+            return sb.toString();
+        }
+
+        void reverse(StringBuilder word, int left, int right) {
+            while (left < right) {
+                char c = word.charAt(left);
+                word.setCharAt(left, word.charAt(right));
+                word.setCharAt(right, c);
+                left++;
+                right--;
+            }
+        }
+    }
 }

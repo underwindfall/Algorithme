@@ -11,6 +11,8 @@ import java.util.Set;
 
 // https://leetcode-cn.com/problems/all-nodes-distance-k-in-binary-tree/
 public class DistanceK863 {
+    // time O(n)
+    // space O(n)
     /**
      * dfs 简历graph
      * bfs 从target出发寻找到k的node
