@@ -37,6 +37,8 @@ public class MaximumRepeatedSubArray718 {
         }
     }
 
+    // time O(min(n^2, m^2))
+    // space O(1)
     // 思路是通过两个数组滑动比较出两个数组之间的公共数字部分
     class SlidingWindow {
         public int findLength(int[] A, int[] B) {

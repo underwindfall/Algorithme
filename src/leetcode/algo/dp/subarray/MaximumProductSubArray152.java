@@ -21,6 +21,8 @@ public class MaximumProductSubArray152 {
         }
     }
 
+    // time O(n)
+    // space O(n)
     class DP {
 
         public int maxProduct(int[] nums) {
