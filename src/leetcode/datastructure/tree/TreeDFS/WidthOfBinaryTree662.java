@@ -4,8 +4,6 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Queue;
 
-import kotlin.Pair;
-
 // https://leetcode-cn.com/problems/maximum-width-of-binary-tree/
 public class WidthOfBinaryTree662 {
     // time O(n)
@@ -78,6 +76,24 @@ public class WidthOfBinaryTree662 {
 
         TreeNode(int x) {
             val = x;
+        }
+    }
+
+    class Pair<Key, Value> {
+        public Key key;
+        public Value value;
+
+        Pair(Key key, Value value) {
+            this.key = key;
+            this.value = value;
+        }
+
+        Key getFirst() {
+            return key;
+        }
+
+        Value getSecond() {
+            return value;
         }
     }
 }
