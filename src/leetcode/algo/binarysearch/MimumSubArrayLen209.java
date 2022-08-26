@@ -8,7 +8,7 @@ public class MimumSubArrayLen209 {
         public int minSubArrayLen(int target, int[] nums) {
             int left = 1, right = nums.length, ans = Integer.MAX_VALUE;
             while (left <= right) {
-                int mid  = (right + left) / 2;
+                int mid = (right + left) / 2;
                 if (windowExist(mid, target, nums)) {
                     right = mid - 1;
                     ans = right;
@@ -51,6 +51,37 @@ public class MimumSubArrayLen209 {
                 }
                 fast++;
             }
+            return ans == Integer.MAX_VALUE ? 0 : ans;
+        }
+    }
+
+    // time O(logN)
+    // espace O(1)
+    class PrefixSumBinarySearch {
+        public int minSubArrayLen(int target, int[] nums) {
+            int n = nums.length, ans = Integer.MAX_VALUE;
+            int[] sum = new int[n + 1];
+            for (int i = 1; i <= n; i++) {
+                sum[i] = sum[i - 1] + nums[i - 1];
+            }
+            for (int i = 1; i <= n; i++) {
+                int prefixSum = sum[i], diff = prefixSum - target;
+                int left = 0, right = i;
+                while (left < right) {
+                    int mid = (right - left) / 2 + left + 1;
+                    // int mid = left + right + 1 >> 1;
+                    if (sum[mid] <= diff) {
+                        left = mid;
+                    } else {
+                        right = mid - 1;
+                    }
+                }
+
+                if (sum[right] <= diff) {
+                    ans = Math.min(ans, i - right);
+                }
+            }
+
             return ans == Integer.MAX_VALUE ? 0 : ans;
         }
     }
