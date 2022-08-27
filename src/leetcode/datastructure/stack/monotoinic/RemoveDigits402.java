@@ -44,6 +44,8 @@ public class RemoveDigits402 {
         return sb.length() > 0 ? sb.toString() : "0";
     }
 
+    // time O(n)
+    // space O(n)
     class Optmization {
         public String removeKdigits(String num, int k) {
             Deque<Integer> stack = new ArrayDeque<>();
