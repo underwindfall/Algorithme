@@ -1,4 +1,4 @@
-package leetcode.algo.binarysearch;
+ package leetcode.algo.binarysearch;
 
 //https://leetcode-cn.com/problems/divide-two-integers/
 public class Divide29 {
