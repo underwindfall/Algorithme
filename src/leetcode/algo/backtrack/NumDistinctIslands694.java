@@ -5,6 +5,8 @@ import java.util.Set;
 
 // https://leetcode-cn.com/problems/number-of-distinct-islands/
 public class NumDistinctIslands694 {
+    // time O(n * m)
+    // space O(n * m)
     Set<String> set = new HashSet<>();
 
     public int numDistinctIslands(int[][] grid) {
