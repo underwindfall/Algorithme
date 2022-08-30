@@ -12,9 +12,9 @@ import java.util.Set;
 // https://leetcode-cn.com/problems/word-break/
 public class WordBreak139 {
 
-    //前缀树有点DFS的味道
-    //如果wordDict含有当前的文字
-    //如果如果wordDict的node是最后一个字符那就还一个字符比较
+    // 前缀树有点DFS的味道
+    // 如果wordDict含有当前的文字
+    // 如果如果wordDict的node是最后一个字符那就还一个字符比较
     class PrefixTree {
         class TrieNode {
             boolean isEnd = false;
@@ -108,6 +108,44 @@ public class WordBreak139 {
         }
     }
 
+    // https://leetcode.cn/problems/word-break/solution/by-lfool-jjq9/
+    // time O(wordDict * s.length)
+    // space O(wordDict * s.length)
+    public boolean wordBreak(String s, List<String> wordDict) {
+        Queue<Integer> queue = new LinkedList<>();
+        queue.add(0);
+
+        int slength = s.length();
+        boolean[] visited = new boolean[slength + 1];
+
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            for (int i = 0; i < size; i++) {
+                int start = queue.poll().intValue();
+                for (String word : wordDict) {
+                    int nextStart = start + word.length();
+                    if (nextStart > slength || visited[nextStart]) {
+                        continue;
+                    }
+
+                    if (s.indexOf(word, start) == start) {
+                        if (nextStart == slength) {
+                            return true;
+                        }
+
+                        queue.add(nextStart);
+                        visited[nextStart] = true;
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
+
+    // https://leetcode.cn/problems/word-break/solution/by-lfool-jjq9/
+    // time O(wordDict * s.length)
+    // space O(wordDict * s.length)
     @SuppressWarnings("unused")
     class BFS {
         public boolean wordBreak(String s, List<String> wordDict) {
@@ -139,11 +177,12 @@ public class WordBreak139 {
         }
     }
 
-    //time O(wordDict * s.length)
-    //space O(wordDict * s.length)
+    // https://leetcode.cn/problems/word-break/solution/by-lfool-jjq9/
+    // time O(wordDict * s.length)
+    // space O(wordDict * s.length)
     class DFSOpti {
         public boolean wordBreak(String s, List<String> wordDict) {
-            Map<String,Boolean> map = new HashMap<>();
+            Map<String, Boolean> map = new HashMap<>();
             for (String w : wordDict) {
                 map.put(w, true);
             }
@@ -152,17 +191,17 @@ public class WordBreak139 {
             return canBreak(0, s, map, memo);
         }
 
-    boolean canBreak(int start, String s, Map<String,Boolean> map, int[] memo) {
+        boolean canBreak(int start, String s, Map<String, Boolean> map, int[] memo) {
             if (s.length() == start) {
                 return true;
             }
             if (memo[start] != -1) {
                 return memo[start] == 1 ? true : false;
             }
-            for (int i = start ; i < s.length(); i++) {
+            for (int i = start; i < s.length(); i++) {
                 String prefix = s.substring(start, i + 1);
                 if (map.containsKey(prefix) && canBreak(i + 1, s, map, memo)) {
-                    memo[start] = 1; 
+                    memo[start] = 1;
                     return true;
                 }
             }
