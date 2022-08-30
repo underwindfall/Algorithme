@@ -4,9 +4,9 @@ import java.util.Stack;
 
 // https://leetcode-cn.com/problems/string-compression/
 public class Compress443 {
+    // time O(n)
+    // space O(1)
     class DoubleIndex {
-        // time O(n)
-        // space O(1)
         public int compress(char[] chars) {
             int n = chars.length;
             int write = 0, left = 0;

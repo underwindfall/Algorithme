@@ -7,6 +7,15 @@ import java.util.Map;
 
 // https://leetcode-cn.com/problems/find-all-anagrams-in-a-string/
 public class FindAnagrams438 {
+    // 时间复杂度：O(m+(n−m)×Σ)，
+    // 其中 n 为字符串 s 的长度，m 为字符串 p 的长度，Σ 为所有可能的字符数。
+    // 我们需要 O(m) 来统计字符串
+    // p 中每种字母的数量；需要 O(m) 来初始化滑动窗口；
+    // 需要判断 n−m+1 个滑动窗口中每种字母的数量是否与字符串 p
+    // 中每种字母的数量相同，每次判断需要 O(Σ) 。因为 s 和 p 仅包含小写字母，所以 Σ=26。
+
+    // 空间复杂度：O(Σ)。用于存储字符串 p 和滑动窗口中每种字母的数量。
+
     public List<Integer> findAnagrams(String s, String p) {
         List<Integer> ans = new ArrayList<>();
         Map<Character, Integer> need = new HashMap<>();
