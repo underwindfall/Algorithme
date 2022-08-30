@@ -3,7 +3,7 @@ package leetcode.datastructure.linkdlist;
 import java.util.Stack;
 
 // https://leetcode-cn.com/problems/add-two-numbers-ii/description/
-public class AddTwoNumbers445 {
+public class AddTwoNumbersII445 {
     public class ListNode {
         int val;
         ListNode next;
@@ -46,8 +46,8 @@ public class AddTwoNumbers445 {
     }
 
     public static void main(String[] args) {
-        AddTwoNumbers445 addTwoNumbers445 = new AddTwoNumbers445();
-        AddTwoNumbers445.ListNode node = addTwoNumbers445.addTwoNumbers(addTwoNumbers445.new ListNode(5),
+        AddTwoNumbersII445 addTwoNumbers445 = new AddTwoNumbersII445();
+        AddTwoNumbersII445.ListNode node = addTwoNumbers445.addTwoNumbers(addTwoNumbers445.new ListNode(5),
                 addTwoNumbers445.new ListNode(5));
         while (node != null) {
             System.out.println(node.val);
@@ -55,7 +55,12 @@ public class AddTwoNumbers445 {
         }
     }
 
-    // 题目的难点在于对于进位的把控，但是如果是按照数学逻辑运算的花，两数相加都是从低位到高位。 那我们翻转链表 然后计算， 最后结果翻转链表输出即可。
+    // time O(n + m)
+    // space O(1)
+    // 题目的难点在于对于进位的把控，
+    // 但是如果是按照数学逻辑运算的花，
+    // 两数相加都是从低位到高位。
+    // 那我们翻转链表 然后计算， 最后结果翻转链表输出即可。
     class Solution {
         public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
             // reverse list
@@ -65,6 +70,8 @@ public class AddTwoNumbers445 {
             return reverse(recurisvie(newL1, newL2, 0));
         }
 
+        // time O(n + m)
+        // space O(1)
         ListNode recurisvie(ListNode l1, ListNode l2, int prefixPlus) {
             if (l1 == null && l2 == null && prefixPlus == 0) {
                 return null;
@@ -79,6 +86,8 @@ public class AddTwoNumbers445 {
             return node;
         }
 
+        // time O(n)
+        // space O(1)
         ListNode reverse(ListNode head) {
             if (head == null || head.next == null) {
                 return head;
