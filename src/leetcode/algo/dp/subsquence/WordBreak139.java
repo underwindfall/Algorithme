@@ -87,8 +87,11 @@ public class WordBreak139 {
         }
     }
 
+    // time O(N^2)
+    // space O(N)
     // 可以看作wordDict 都是可选的单词选项
     // 然后每个字符逐个遍历
+    // dp[i] 表示字符串 s 前 i 个字符组成的字符串 s[0..i-1] 是否能被空格拆分成若干个字典中出现的单词。
     class DP {
         public boolean wordBreak(String s, List<String> wordDict) {
             int N = s.length();

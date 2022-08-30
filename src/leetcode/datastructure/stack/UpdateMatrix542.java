@@ -141,7 +141,7 @@ public class UpdateMatrix542 {
 
     // time O(M*N)
     // espace (M*N)
-    class Solution {
+    class BFS {
         // 首先将所有的 0 都入队，并且将 1 的位置设置成 -1，表示该位置是 未被访问过的 1
         // bfs
         public int[][] updateMatrix(int[][] mat) {
@@ -155,7 +155,7 @@ public class UpdateMatrix542 {
                     if (mat[r][c] == 0) {
                         queue.add(new int[] { r, c });
                     } else {
-                        mat[r][c] = -1;
+                        mat[r][c] = Integer.MIN_VALUE;
                     }
                 }
             }
@@ -166,22 +166,22 @@ public class UpdateMatrix542 {
                     int[] node = queue.poll();
                     int row = node[0], col = node[1];
 
-                    if (isValid(mat, row + 1, col) && mat[row + 1][col] == -1) {
+                    if (isValid(mat, row + 1, col) && mat[row + 1][col] == Integer.MIN_VALUE) {
                         mat[row + 1][col] = mat[row][col] + 1;
                         queue.add(new int[] { row + 1, col });
                     }
 
-                    if (isValid(mat, row - 1, col) && mat[row - 1][col] == -1) {
+                    if (isValid(mat, row - 1, col) && mat[row - 1][col] == Integer.MIN_VALUE) {
                         mat[row - 1][col] = mat[row][col] + 1;
                         queue.add(new int[] { row - 1, col });
                     }
 
-                    if (isValid(mat, row, col + 1) && mat[row][col + 1] == -1) {
+                    if (isValid(mat, row, col + 1) && mat[row][col + 1] == Integer.MIN_VALUE) {
                         mat[row][col + 1] = mat[row][col] + 1;
                         queue.add(new int[] { row, col + 1 });
                     }
 
-                    if (isValid(mat, row, col - 1) && mat[row][col - 1] == -1) {
+                    if (isValid(mat, row, col - 1) && mat[row][col - 1] == Integer.MIN_VALUE) {
                         mat[row][col - 1] = mat[row][col] + 1;
                         queue.add(new int[] { row, col - 1 });
                     }
