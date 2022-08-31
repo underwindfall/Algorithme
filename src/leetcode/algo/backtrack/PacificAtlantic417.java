@@ -19,6 +19,7 @@ public class PacificAtlantic417 {
     boolean[][] pVisited;
     boolean[][] aVisited;
     List<List<Integer>> result;
+    private static final int[][] dirs = new int[][] { { -1, 0 }, { 1, 0 }, { 0, 1 }, { 0, -1 } };
 
     public List<List<Integer>> pacificAtlantic(int[][] heights) {
         result = new ArrayList<>();
@@ -51,20 +52,15 @@ public class PacificAtlantic417 {
             result.add(tmp);
         }
 
-        if (row - 1 >= 0 && heights[row - 1][col] >= heights[row][col]) {
-            dfs(heights, visited, row - 1, col);
-        }
+        for (int[] dir : dirs) {
+            int newR = dir[0] + row, newC = dir[1] + col;
+            if (isValid(heights, newR, newC) && heights[newR][newC] >= heights[row][col]) {
+                dfs(heights, visited, newR, newC);
+            }
+        }   
+    }
 
-        if (row + 1 < heights.length && heights[row + 1][col] >= heights[row][col]) {
-            dfs(heights, visited, row + 1, col);
-        }
-
-        if (col - 1 >= 0 && heights[row][col - 1] >= heights[row][col]) {
-            dfs(heights, visited, row, col - 1);
-        }
-
-        if (col + 1 < heights[0].length && heights[row][col + 1] >= heights[row][col]) {
-            dfs(heights, visited, row, col + 1);
-        }
+    boolean isValid(int[][] height, int r, int c) {
+        return r >= 0 && r < height.length && c >= 0 && c < height[0].length;
     }
 }
