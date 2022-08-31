@@ -38,9 +38,9 @@ public class LargestRectangleArea84 {
     class IncreStack {
         public int largestRectangleArea(int[] heights) {
             int n = heights.length;
-            //left左边小于height【i】 最靠近的位置
+            //left左边小于height【i】 最靠近的位置 nextSmaller
             int[] left = new int[n];
-            //right右边小于height【i】 最靠近的位置
+            //right右边小于height【i】 最靠近的位置 prevSmaller
             int[] right = new int[n];
 
             Stack<Integer> mono_stack = new Stack<Integer>();

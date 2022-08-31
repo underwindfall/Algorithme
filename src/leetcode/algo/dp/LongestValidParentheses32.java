@@ -4,13 +4,14 @@ import java.util.Stack;
 
 // https://leetcode-cn.com/problems/longest-valid-parentheses/
 public class LongestValidParentheses32 {
-
+    // https://leetcode.cn/problems/longest-valid-parentheses/solution/shou-hua-tu-jie-zhan-de-xiang-xi-si-lu-by-hyj8/
     // time O(N)
     //espace O(N)
     class StackSolution {
         public int longestValidParentheses(String s) {
             int ans = 0;
             Stack<Integer> stack = new Stack<>();
+            stack.push(-1);
             for (int i = 0; i < s.length(); i++) {
                 if (s.charAt(i) == '(') {
                     stack.push(i);

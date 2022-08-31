@@ -50,7 +50,7 @@ public class TrapRainWater42 {
     // https://leetcode-cn.com/problems/trapping-rain-water/solution/trapping-rain-water-by-ikaruga/
     // time O(n)
     // space O(n)
-    class IncrementStack {
+    class DecrementStack {
         public int trap(int[] height) {
             int res = 0;
             Stack<Integer> stack = new Stack<>();
