@@ -15,12 +15,12 @@ public class LongestValidParentheses32 {
             for (int i = 0; i < s.length(); i++) {
                 if (s.charAt(i) == '(') {
                     stack.push(i);
-                }else{
-                    //匹配到了 ） 字符
+                } else {
+                    // 匹配到了 ） 字符
                     stack.pop();
                     if (stack.empty()) {
-                        //滞留的 ） 字符
-                        //因为要连续的所以不用
+                        // 滞留的 ） 字符
+                        // 因为要连续的所以不用
                         stack.push(i);
                     } else {
                         ans = Math.max(ans, i - stack.peek());
