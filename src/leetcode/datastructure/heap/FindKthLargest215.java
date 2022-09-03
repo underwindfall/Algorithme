@@ -32,18 +32,17 @@ public class FindKthLargest215 {
         }
 
         void maxHeapify(int[] arr, int index, int len) {
-            int left = index * 2 + 1;
-            int right = left + 1;
-            int cMax = left;
-            if (left > len) {
-                return;
+            int left = index * 2 + 1, right = index * 2 + 1 + 1;
+            int largetst = index;
+            if (left < len && arr[left] > arr[largetst]) {
+                largetst = left;
             }
-            if (right <= len && arr[right] > arr[left]) {
-                cMax = right;
+            if (right < len && arr[right] > arr[largetst]) {
+                largetst = right;
             }
-            if (arr[cMax] > arr[index]) {
-                swap(arr, cMax, index);
-                maxHeapify(arr, cMax, len);
+            if (largetst != index) {
+                swap(arr, index, largetst);
+                maxHeapify(arr, largetst, len);
             }
         }
 
