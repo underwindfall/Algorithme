@@ -9,25 +9,27 @@ public class LongestValidParentheses32 {
     //espace O(N)
     class StackSolution {
         public int longestValidParentheses(String s) {
-            int ans = 0;
+            char[] arr = s.toCharArray();
             Stack<Integer> stack = new Stack<>();
-            stack.push(-1);
-            for (int i = 0; i < s.length(); i++) {
-                if (s.charAt(i) == '(') {
+            int max = 0;
+            int start = 0;
+            for (int i = 0; i < arr.length; i++) {
+                if (arr[i] == '(') {
                     stack.push(i);
                 } else {
-                    // 匹配到了 ） 字符
-                    stack.pop();
-                    if (stack.empty()) {
-                        // 滞留的 ） 字符
-                        // 因为要连续的所以不用
-                        stack.push(i);
+                    if (stack.isEmpty()) {
+                        start = i + 1;
                     } else {
-                        ans = Math.max(ans, i - stack.peek());
+                        stack.pop();
+                        if (stack.isEmpty()) {
+                            max = Math.max(max, i - start + 1);
+                        } else {
+                            max = Math.max(max, i - stack.peek());
+                        }
                     }
                 }
             }
-            return ans;
+            return max;
         }
     }
 
