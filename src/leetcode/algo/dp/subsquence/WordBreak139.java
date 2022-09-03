@@ -1,11 +1,10 @@
 package leetcode.algo.dp.subsquence;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
-import java.util.Arrays;
 import java.util.Queue;
 import java.util.Set;
 
@@ -185,16 +184,13 @@ public class WordBreak139 {
     // space O(wordDict * s.length)
     class DFSOpti {
         public boolean wordBreak(String s, List<String> wordDict) {
-            Map<String, Boolean> map = new HashMap<>();
-            for (String w : wordDict) {
-                map.put(w, true);
-            }
+            Set<String> dict = new HashSet<>(wordDict);
             int[] memo = new int[s.length()];
             Arrays.fill(memo, -1);
-            return canBreak(0, s, map, memo);
+            return canBreak(0, s, dict, memo);
         }
 
-        boolean canBreak(int start, String s, Map<String, Boolean> map, int[] memo) {
+        boolean canBreak(int start, String s, Set<String> dict, int[] memo) {
             if (s.length() == start) {
                 return true;
             }
@@ -203,7 +199,7 @@ public class WordBreak139 {
             }
             for (int i = start; i < s.length(); i++) {
                 String prefix = s.substring(start, i + 1);
-                if (map.containsKey(prefix) && canBreak(i + 1, s, map, memo)) {
+                if (dict.contains(prefix) && canBreak(i + 1, s, dict, memo)) {
                     memo[start] = 1;
                     return true;
                 }

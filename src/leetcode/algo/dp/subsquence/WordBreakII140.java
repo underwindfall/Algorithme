@@ -13,6 +13,31 @@ public class WordBreakII140 {
 
     // time O(wordDict * s.length)
     // space O(wordDict * s.length)
+    public List<String> wordBreak(String s, List<String> wordDict) {
+        List<String> ans = new ArrayList<>();
+        Set<String> dict = new HashSet<>(wordDict);
+        dfs(s, 0, new LinkedList<>(), dict, ans);
+        return ans;
+    }
+
+    void dfs(String source, int startIndex, LinkedList<String> path, Set<String> dict, List<String> ans) {
+        if (startIndex == source.length()) {
+            ans.add(String.join(" ", path));
+            return;
+        }
+        for (int i = startIndex; i < source.length(); i++) {
+            String word = source.substring(startIndex, i + 1);
+            if (!dict.contains(word)) {
+                continue;
+            }
+            path.addLast(word);
+            dfs(source, i + 1, path, dict, ans);
+            path.removeLast();
+        }
+    }
+
+    // time O(wordDict * s.length)
+    // space O(wordDict * s.length)
     class BacktrackMemo {
         public List<String> wordBreak(String s, List<String> wordDict) {
             Map<Integer, List<List<String>>> map = new HashMap<Integer, List<List<String>>>();
@@ -49,31 +74,6 @@ public class WordBreakII140 {
                 map.put(index, levels);
             }
             return map.get(index);
-        }
-    }
-
-    // time O(wordDict * s.length)
-    // space O(wordDict * s.length)
-    public List<String> wordBreak(String s, List<String> wordDict) {
-        List<String> ans = new ArrayList<>();
-        Set<String> dict = new HashSet<>(wordDict);
-        dfs(s, 0, new LinkedList<>(), dict, ans);
-        return ans;
-    }
-
-    void dfs(String source, int startIndex, LinkedList<String> path, Set<String> dict, List<String> ans) {
-        if (startIndex == source.length()) {
-            ans.add(String.join(" ", path));
-            return;
-        }
-        for (int i = startIndex; i < source.length(); i++) {
-            String word = source.substring(startIndex, i + 1);
-            if (!dict.contains(word)) {
-                continue;
-            }
-            path.addLast(word);
-            dfs(source, i + 1, path, dict, ans);
-            path.removeLast();
         }
     }
 
