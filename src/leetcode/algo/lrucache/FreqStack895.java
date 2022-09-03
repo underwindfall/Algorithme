@@ -7,6 +7,8 @@ import java.util.Stack;
 // https://leetcode-cn.com/problems/maximum-frequency-stack/
 // https://mp.weixin.qq.com/s?__biz=MzU4NDE3MTEyMA==&mid=2247486856&idx=1&sn=59b2ed57e4a75eac0e63fc0cf08bed5d
 public class FreqStack895 {
+    // time O(1)
+    // space O(N)
     Map<Integer, Integer> freq;
     Map<Integer, Stack<Integer>> group;
     int maxFreq;
