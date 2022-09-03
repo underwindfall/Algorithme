@@ -5,6 +5,8 @@ import java.util.Map;
 
 // https://leetcode-cn.com/problems/minimum-window-substring/
 public class MinWindow76 {
+    // time O(N * s.length + t.length)
+    // space O(N)
     public String minWindow(String s, String t) {
         Map<Character, Integer> need = new HashMap<>();
         Map<Character, Integer> window = new HashMap<>();
