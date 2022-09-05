@@ -5,8 +5,37 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+// https://leetcode.cn/problems/find-duplicate-subtrees/
 public class FindDuplicatesSubtrees652 {
-    public class TreeNode {
+    // 记录所有子树以及出现的次数
+    Map<String, Integer> memo = new HashMap<>();
+    // 记录重复的子树根节点
+    List<TreeNode> res = new LinkedList<>();
+
+    // 可以序列化二叉树
+    // time O(N^2) N 是二叉树上节点的数量
+    // espace O(N^2)
+    public List<TreeNode> findDuplicateSubtrees(TreeNode root) {
+        traverse(root);
+        return res;
+    }
+
+    private String traverse(TreeNode node) {
+        if (node == null) {
+            return "#";
+        }
+        String left = traverse(node.left);
+        String right = traverse(node.right);
+        String subTree = left + "," + right + "," + node.val;
+
+        memo.put(subTree, memo.getOrDefault(subTree, 0) + 1);
+        if (memo.get(subTree) == 2) {
+            res.add(node);
+        }
+        return subTree;
+    }
+
+    class TreeNode {
         int val;
         TreeNode left;
         TreeNode right;
@@ -23,34 +52,5 @@ public class FindDuplicatesSubtrees652 {
             this.left = left;
             this.right = right;
         }
-    }
-
-    // 记录所有子树以及出现的次数
-    Map<String, Integer> memo = new HashMap<>();
-    // 记录重复的子树根节点
-    List<TreeNode> res = new LinkedList<>();
-
-    // 可以序列化二叉树
-    // time O(N^2) N 是二叉树上节点的数量
-    // espace O(N^2)
-    public List<TreeNode> findDuplicateSubtrees(TreeNode root) {
-        traverse(root);
-        return res;
-    }
-
-    private String traverse(TreeNode root) {
-        if (root == null) {
-            return "#";
-        }
-        String left = traverse(root.left);
-        String right = traverse(root.right);
-
-        String subTree = left + "," + right + "," + root.val;
-        int freq = memo.getOrDefault(subTree, 0);
-        if (freq == 1) {
-            res.add(root);
-        }
-        memo.put(subTree, freq + 1);
-        return subTree;
     }
 }
