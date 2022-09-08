@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 // 数学
 // https://leetcode-cn.com/problems/beautiful-arrangement-ii/
-public class BeatifulArrangment667 {
+public class BeatifulArrangmentII667 {
     public int[] constructArray(int n, int k) {
         int[] ret = new int[n];
         ret[0] = 1;
