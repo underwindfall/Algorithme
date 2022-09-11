@@ -1,26 +1,7 @@
 package leetcode.datastructure.linkdlist;
 
+// https://leetcode.cn/problems/reverse-nodes-in-k-group/
 public class ReverseNodesInKGroup25 {
-
-    static class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode() {
-            this(0);
-        }
-
-        ListNode(int val) {
-            this.val = val;
-        }
-
-        ListNode(int val, ListNode next) {
-            this.val = val;
-            this.next = next;
-        }
-    }
-
-
     // 普通的方法通过设置每次补全的方式进行操作
     // [prev][1(start),2,3(end)][next] <->[prev] ->[3(end),2,1(start)]->[next]
     // 通过更细记录prev end 遍历操作即可
@@ -138,6 +119,24 @@ public class ReverseNodesInKGroup25 {
         head.next.next = head;
         head.next = null;
         return newHead;
+    }
+
+    static class ListNode {
+        int val;
+        ListNode next;
+
+        ListNode() {
+            this(0);
+        }
+
+        ListNode(int val) {
+            this.val = val;
+        }
+
+        ListNode(int val, ListNode next) {
+            this.val = val;
+            this.next = next;
+        }
     }
 
 }
