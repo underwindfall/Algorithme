@@ -55,7 +55,7 @@ public class RemoveNthFromEnd19 {
                 count++;
                 dummy = dummy.next;
             }
-
+            dummy = head;
             for (int i = 0; i <= count - n - 1; i++) {
                 dummy = dummy.next;
             }

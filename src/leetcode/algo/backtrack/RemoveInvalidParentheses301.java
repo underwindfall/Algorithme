@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Set;
 
 //https://leetcode.com/problems/remove-invalid-parentheses/
+// time O(n * 2 ^n)
+// space O(n^2)
 public class RemoveInvalidParentheses301 {
     // count maxString len
     int maxLen = 0;
