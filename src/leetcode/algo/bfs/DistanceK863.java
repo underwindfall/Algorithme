@@ -14,7 +14,7 @@ public class DistanceK863 {
     // time O(n)
     // space O(n)
     /**
-     * dfs 简历graph
+     * dfs build graph
      * bfs 从target出发寻找到k的node
      */
     class Solution {

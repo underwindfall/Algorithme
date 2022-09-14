@@ -24,7 +24,7 @@ public class NextPermutation31 {
                 if(i >= 0){
                     int j = len - 1;
                     while(j >= 0){
-                        if(nums[j] > nums[i])break;
+                        if (nums[j] > nums[i])break;
                         --j;
                     }
                     //3. 交换i和j

@@ -2,24 +2,6 @@ package leetcode.datastructure.tree;
 
 // https://leetcode-cn.com/problems/balanced-binary-tree/description/
 public class ISBalancedTree110 {
-    public class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode() {
-        }
-
-        TreeNode(int val) {
-            this.val = val;
-        }
-
-        TreeNode(int val, TreeNode left, TreeNode right) {
-            this.val = val;
-            this.left = left;
-            this.right = right;
-        }
-    }
 
     // time O(N*logN) logN 是高度 因为个体Height会被调用H height次
     // espace O(N)
@@ -68,6 +50,26 @@ public class ISBalancedTree110 {
             } else {
                 return Math.max(leftH, rightH) + 1;
             }
+        }
+    }
+
+
+    class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode() {
+        }
+
+        TreeNode(int val) {
+            this.val = val;
+        }
+
+        TreeNode(int val, TreeNode left, TreeNode right) {
+            this.val = val;
+            this.left = left;
+            this.right = right;
         }
     }
 }
