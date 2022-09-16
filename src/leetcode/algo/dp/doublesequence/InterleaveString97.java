@@ -2,7 +2,8 @@ package leetcode.algo.dp.doublesequence;
 
 // https://leetcode-cn.com/problems/interleaving-string/
 public class InterleaveString97 {
-
+    // time O(M N)
+    // space O(M N)
     public boolean isInterleave(String s1, String s2, String s3) {
         int len1 = s1.length(), len2 = s2.length(), len3 = s3.length();
         if (len1 + len2 != len3)
@@ -27,6 +28,8 @@ public class InterleaveString97 {
         return dp[len1][len2];
     }
 
+    // time O(NM)
+    // space O(NM)
     class Dfs {
         int l1, l2, l3;
         String s1, s2, s3;
