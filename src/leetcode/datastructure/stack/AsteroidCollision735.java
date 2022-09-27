@@ -26,6 +26,7 @@ public class AsteroidCollision735 {
                 stack.push(asteroids[p]);
             }
             else if (stack.peek() <= -asteroids[p]) {
+                //栈顶的恒星爆炸
                 if (stack.pop() < -asteroids[p]) {
                     continue;
                 }

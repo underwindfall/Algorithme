@@ -5,15 +5,6 @@ import java.util.Queue;
 
 // https://leetcode-cn.com/problems/serialize-and-deserialize-binary-tree/
 public class SeraializeDeserializeTree297 {
-    public class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode(int x) {
-            val = x;
-        }
-    }
 
     class BFS {
         // 用于区分每个节点
@@ -244,6 +235,16 @@ public class SeraializeDeserializeTree297 {
             // // 列表最左侧就是根节点
 
             // }
+        }
+    }
+
+    class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode(int x) {
+            val = x;
         }
     }
 }
