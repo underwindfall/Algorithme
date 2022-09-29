@@ -58,4 +58,20 @@ public class SumOfDistancesInTree834 {
             preOrder(neighbor, root);
         }
     }
+
+//     nodeNum[i]：
+//     状态：以节点i为根节点的子树的节点数  
+//     初始化：nodeNum = [1] * N
+//     状态转移：nodeNum[root] += nodeNum[neibor]
+// dp[i]：
+//     状态：在第一次dfs（后序）里表示节点i到它的子孙节点的距离和
+//     初始化：dp = [0] * N
+//     状态转移：dp[root] += dp[neibor] + nodeNum[neibor]
+//         节点i的dp值等于i的所有孩子的dp值加上i的所有子孙的数量
+//     状态：在第二次dfs（先序）里表示节点i到其他所有节点的距离和
+//     初始化：第一次dfs后的状态
+//     状态转移：dp[neibor] = dp[root] - nodeNum[neibor] + (N - nodenum[neibor]) = dp[root] + N - 2 * nodeNum[neibor]
+//         dp[neibor] = dp[root] - ？？？：从当前父节点root推当前子节点neibor的dp值，即由所有节点到root推所有节点到neibor的距离
+//         - nodeNum[neibor]：neibor的子节点原来是要走到root，现在只需要走到neibor，那么neibor的子节点需要走的距离少了1
+//         + (N - nodenum[neibor])：不是neibor的子节点原来是要走到root，现在需要多走一步才能到neibor，它们要走的距离多了1
 }
